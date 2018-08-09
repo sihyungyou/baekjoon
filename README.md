@@ -6,14 +6,14 @@
 
 ## HISTORY
 
-> success
+###success
 
-1. 1026 treasure
-2. 1110 sum cycle
-3. 1759 password
-4. 10819 the biggest difference
-5. 11399 atm
+> 1110 sum cycle
+> 1759 password
+> 10819 the biggest difference
+> 11399 atm
 
-> in progress
+###in progress
 
-1. 11724 connected component
+> 11724 connected component
+> 1026 treasure
