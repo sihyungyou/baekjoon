@@ -1,2 +1,2 @@
 # baekjoon
-## algorithm practice
+> algorithm practice
