@@ -7,7 +7,7 @@
 위의 예는 4번만에 원래 숫자로 돌아올 수 있다. 따라서 26의 사이클의 길이는 4이다.
 N이 주어졌을 때, N의 사이클의 길이를 구하는 프로그램을 작성하시오.
 */
-
+//success
 #include <iostream>
 using namespace std;
 
