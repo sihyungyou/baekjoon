@@ -1,8 +1,8 @@
 # baekjoon algorithm practice
 
-<hr/>
-
 ## [baekjoon online judge] https://www.acmicpc.net/
+
+<hr/>
 
 ## HISTORY
 
