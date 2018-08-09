@@ -1,40 +1,54 @@
 //180806 1026 treasure
 #include <iostream>
-#include <array>
+#include <vector>
 
 using namespace std;
+
 void swap(int &a, int &b);
 int main() {
   //find max index of B array and put A's min number to the index
-  array <int, 5> arr_A = {1,1,1,6,0};
-  array <int, 5> arr_B = {2,7,8,3,6};
-  int maxidx, minidx;
-  int max = 0;
+  vector<int> arr_A;
+  vector<int> arr_B;
+  vector<int> arr_C;
+  int c, num, maxidx, minidx;
+  int max, sum = 0;
   int min = 100;
   int i, j = 0;
 
-  while(j < arr_A.size()){
+  cin >> num;
+  for (i = 0; i < num; i++){
+    cin >> c;
+    arr_A.push_back(c);
+  }
+  for (i = 0; i < num; i++){
+    cin >> c;
+    arr_B.push_back(c);
+    arr_C.push_back(c);
+  }
+
+  while(j < num){
     //find B's max
-    for (i = 0; i < arr_B.size(); i++){
+    for (i = 0; i < num; i++){
       if (arr_B[i] >= max) {
         max = arr_B[i];
       }
     }
     //get index of B's max
-    for (i = 0; i < arr_B.size(); i++){
+    for (i = 0; i < num; i++){
       if (max == arr_B[i]){
         maxidx = i;
         break;
       }
     }
+    arr_B[maxidx] = -1;
     //find A's min
-    for (i = 0; i < arr_A.size(); i++){
+    for (i = 0; i < num; i++){
       if (arr_A[i] <= min) {
         min = arr_A[i];
       }
     }
     //get index of A's min
-    for (i = 0; i < arr_A.size(); i++){
+    for (i = 0; i < num; i++){
       if (min == arr_A[i]){
         minidx = i;
         break;
@@ -45,13 +59,19 @@ int main() {
     j++;
   }
 
-  for(i = 0; i < arr_A.size(); i++){
+  //display
+  for(i = 0; i < num; i++){
     cout << arr_A[i] << " ";
   }
   cout << endl;
-  for(i = 0; i < arr_B.size(); i++){
+  for(i = 0; i < num; i++){
     cout << arr_B[i] << " ";
   }
+
+  for (i = 0; i < num; i++){
+    sum += arr_A[i]*arr_C[i];
+  }
+  cout << sum << endl;
   return 0;
 }
 
