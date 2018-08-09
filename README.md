@@ -14,10 +14,10 @@ success
 
 > 10819 the biggest difference
 
-> 11399 atm
-
 in progress
 
 > 11724 connected component
+
+> 11399 atm
 
 > 1026 treasure
