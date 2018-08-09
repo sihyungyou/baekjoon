@@ -13,12 +13,10 @@ int main() {
   vector<int> sums;
 
   //ask user how many numbers to put in vector/array
-  cout << "how many numbers? ";
   cin >> num;
 
   //get numbers from user
   for(i = 0; i < num; i++){
-    cout << "type integer: ";
     cin >> temp;
     nums.push_back(temp);
   }
@@ -28,10 +26,6 @@ int main() {
 
   //get sums of each cases of order sequence
   do {
-    //display list
-    for (vector<int>::iterator i = nums.begin(); i != nums.end(); i++){
-      cout << *i << " ";
-    }
     //calculate sums
     temp = 0;
     for(i = 0; i < num-1; i++){
@@ -42,10 +36,8 @@ int main() {
         temp += calc;
       }
     }
-
     //put sum into sums vector
     sums.push_back(temp);
-    cout << temp << endl;
     cnt++;
   } while(next_permutation(nums.begin(), nums.end()));
 
@@ -57,7 +49,6 @@ int main() {
     }
   }
 
-  cout << "there are " << cnt << " cases" << endl;
-  cout << "max sum case is " << max << endl;
+  cout << max << endl;
   return 0;
 }
