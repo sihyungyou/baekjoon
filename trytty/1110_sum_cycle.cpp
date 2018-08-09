@@ -17,9 +17,11 @@ int main(){
   int d = -1; //user's input will be 0~99
 
   //get number from user
-  cout << "number: ";
+  cout << "type integer: ";
   cin >> x;
   temp = x;
+
+  //until d == x, keep calculating
   while(d != x){
     a = temp % 10;
     b = temp / 10;
@@ -28,6 +30,7 @@ int main(){
     temp = d;
     cnt++;
   }
+
   cout << "count: " << cnt << endl;
 
   return 0;
