@@ -9,7 +9,7 @@ int main() {
   //find max index of B array and put A's min number to the index
   vector<int> arr_A;
   vector<int> arr_B;
-  vector<int> arr_C;
+  // vector<int> arr_C;
   int c, num, maxidx, minidx;
   int max, sum = 0;
   int min = 100;
