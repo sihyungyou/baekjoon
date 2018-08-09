@@ -17,7 +17,6 @@ int main(){
   int d = -1; //user's input will be 0~99
 
   //get number from user
-  cout << "type integer: ";
   cin >> x;
   temp = x;
 
@@ -31,7 +30,7 @@ int main(){
     cnt++;
   }
 
-  cout << "count: " << cnt << endl;
+  cout << cnt << endl;
 
   return 0;
 }

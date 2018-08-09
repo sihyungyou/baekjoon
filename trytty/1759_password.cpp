@@ -8,6 +8,7 @@ C개의 문자들이 모두 주어졌을 때, 가능성 있는 암호들을 모�
 첫째줄에 두 정수 L, C가 주어진다. (3≤L≤C≤15) 다음 줄에는 C개의 문자들이 공백으로 구분되어 주어진다. 주어지는 문자들은 알파벳 소문자이며, 중복되는 것은 없다.
 */
 
+//시간초과
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -24,13 +25,9 @@ int main() {
 
   //get alphabets
   //L is password length, C is number of possible alphabets for password
-  cout << "how long is the password? ";
-  cin >> length;
-  cout << "how many alphabets possible? ";
-  cin >> num;
+  cin >> length >> num;
 
   for (i = 0; i < num; i++){
-    cout << "password: ";
     cin >> c;
     pwd.push_back(c);
   }
