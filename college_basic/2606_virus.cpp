@@ -20,7 +20,6 @@
 
 //run time error
 #include <iostream>
-#include <array>
 #include <vector>
 #include <algorithm>
 
