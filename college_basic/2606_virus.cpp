@@ -22,6 +22,7 @@
 #include <iostream>
 #include <array>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 bool checkthesame(int , vector<int>);
@@ -29,6 +30,7 @@ int main() {
 
   int i, k, coms, sets, a, b, cnt;
   vector<int> infected;
+  vector<int> temp;
   cin >> coms >> sets;
 
   //initialize array of vector<int> with the sets of connected computers
@@ -38,32 +40,23 @@ int main() {
     com_array[a].push_back(b);
   }
 
-  // cout << "==============" << endl;
-  // for(i = 0; i < coms; i++){
-  //   for (vector<int>::iterator j = com_array[i].begin(); j != com_array[i].end(); j++){
-  //     cout << *j << " ";
-  //   }
-  //   cout << endl;
-  // }
-
   //since number 1 computer is infected fist, put connected computer to 1 into infected vector
+  infected.push_back(1);
   for(i = 0; i < com_array[1].size(); i++){
     infected.push_back(com_array[1][i]);
   }
+
   //put the infected computer into infected vector. before putting it in, check if there is same number.
   for(i = 0; i < infected.size(); i++){
       for (k = 0; k < com_array[infected[i]].size(); k++){
-        //check there's no same number
-        if (checkthesame(com_array[infected[i]][k], infected)){
-          infected.push_back(com_array[infected[i]][k]);
-        }
+        temp.push_back(com_array[infected[i]][k]);
       }
   }
-  for(vector<int>::iterator l = infected.begin(); l != infected.end(); l++){
-    cout << *l << " ";
-  }
-  cout << endl;
-  cout << infected.size() << endl;
+
+  sort(temp.begin(), temp.end());
+  temp.erase(unique(temp.begin(), temp.end()), temp.end());
+
+  cout << temp.size() << endl;
   return 0;
 }
 
