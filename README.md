@@ -8,6 +8,8 @@
 
 success
 
+> 1764 first met
+
 > 1110 sum cycle
 
 > 1759 password
