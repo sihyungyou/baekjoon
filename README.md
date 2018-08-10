@@ -20,6 +20,8 @@ success
 
 in progress
 
+> 1652 hotel
+
 > 2606 virus
 
 > 11724 connected component
