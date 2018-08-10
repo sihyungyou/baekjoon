@@ -25,7 +25,6 @@
 #include <algorithm>
 
 using namespace std;
-bool checkthesame(int , vector<int>);
 int main() {
 
   int i, k, coms, sets, a, b, cnt;
@@ -58,13 +57,4 @@ int main() {
 
   cout << temp.size() << endl;
   return 0;
-}
-
-bool checkthesame(int x, vector<int> vect){
-  for(vector<int>::iterator i = vect.begin(); i != vect.end(); i++){
-    if (x == *i) {
-      return false; //there is same number
-    }
-  }
-  return true;  //no same number
 }
