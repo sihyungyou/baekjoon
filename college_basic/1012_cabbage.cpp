@@ -15,11 +15,25 @@
 
 #include <iostream>
 #include <vector>
+#include <queue>
+#include <array>
+
 using namespace std;
 
+void dobfs(int x);
+
+typedef struct cabbage {
+  int x;
+  int y;
+}cabbage;
+
+int cases, w, h, n, x, y, i, j, k, cnt = 0;
+int dy[4] = { -1, 1, 0, 0 };
+int dx[4] = { 0, 0, -1, 1 };
+vector<vector<int> > vec;
+queue<cabbage> q;
+
 int main() {
-  int cases, w, h, n, x, y, i, j, k;
-  vector<vector<int> > vec;
 
   //number of test cases
   cin >> cases;
@@ -33,6 +47,13 @@ int main() {
       vec[x][y] = 1;
     }
   }
+  cout << "initialize complete" << endl;
+
+  //check every cabbage if it's 0 or 1
+  for(i = 0; i < h; i++){
+    dobfs(i);
+  }
+  cout << "bfs complete" << endl;
 
   //display vector
   for(i = 0; i < h; i++){
@@ -41,9 +62,32 @@ int main() {
     }
     cout << endl;
   }
-
-
-
-
+  cout << "display complete" << endl;
   return 0;
+}
+
+void dobfs(int x){
+  //x goes up to height, so every x, need to check up to width value
+  for(y = 0; y < w; i++){
+    //make object
+    cabbage cab = {x, y};
+    //check if [x][y] == 1
+    if(vec[cab.x][cab.y] == 1){
+      //if it's 1, push to queue and check four way
+      q.push(cab);
+      //pop from queue (which means it's cabbage)
+      while(!q.empty()){
+        //pop from queue
+
+        //check four ways and it it's 1, push to queue
+        for(i = 0; i < 4; i++){
+          cabbage temp = {x+dx[i], y+dy[i]};
+          if (vec[temp.x][temp.y] == 1){
+            q.push(temp);
+          }
+        }
+      }
+      cnt++;
+    }
+  }
 }
