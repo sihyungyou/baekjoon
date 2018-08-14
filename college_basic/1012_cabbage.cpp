@@ -14,6 +14,7 @@
 */
 
 //run time error
+//fix global variables to local
 #include <iostream>
 #include <vector>
 #define SIZE 2500
