@@ -1,5 +1,5 @@
 //180806 11399 atm
-//in progress
+//success
 
 #include <iostream>
 #include <vector>
@@ -8,7 +8,7 @@
 using namespace std;
 
 int main() {
-  int i, j, sum, num, c = 0;
+  int i, j, sum, num, c, min = 0;
   vector<int> v;
   cin >> num;
   for(i = 0; i < num; i++){
@@ -16,20 +16,15 @@ int main() {
     v.push_back(c);
   }
   sort(v.begin(), v.end());
-  //3 1 4 3 2
-  //1 2 3 3 4
-  /*
-  1
-  1+2
-  1+2+3
-  1+2+3+3
-  1+2+3+3+4
-  */
+  
   for (i = 0; i < num; i++){
+    sum = 0;
     for(j = 0; j <= i; j++){
       sum += v[j];
     }
+    min += sum;
   }
-  cout << sum << endl;
+
+  cout << min << endl;
   return 0;
 }
