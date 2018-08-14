@@ -24,6 +24,10 @@ success
 
 in progress
 
+> 1260 dfs and bfs
+
+> 2667 apartment
+
 > 1652 hotel
 
 > 2606 virus
