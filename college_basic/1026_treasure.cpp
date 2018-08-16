@@ -9,7 +9,6 @@ using namespace std;
 int main() {
   vector<int> arr_A;
   vector<int> arr_B;
-  vector<int> arr_C;
 
   int i, N, c, sum = 0;
 
@@ -22,12 +21,11 @@ int main() {
   for(i = 0; i < N; i++){           //arr 2 inputs
     cin >> c;
     arr_B.push_back(c);
-    arr_C.push_back(c);
   }
   sort(arr_A.begin(), arr_A.end());
-  sort(arr_C.begin(), arr_C.end());
+  sort(arr_B.begin(), arr_B.end());
   for(i = 0; i < N; i++){
-    sum += arr_A[i]*arr_C[N-i-1];
+    sum += arr_A[i]*arr_B[N-i-1];
   }
   cout << sum << endl;
 
