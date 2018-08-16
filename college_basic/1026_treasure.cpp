@@ -11,21 +11,34 @@ int main() {
   vector<int> arr_A;
   vector<int> arr_B;
   // vector<int> arr_C;
+  int arr[50] = { 0 };
+  int arr2[50] = { 0 };
+  int N;
+
   int c, num, maxidx, minidx;
   int max, sum = 0;
   int min = 100;
   int i, j = 0;
 
-  cin >> num;
-  for (i = 0; i < num; i++){
-    cin >> c;
-    arr_A.push_back(c);
+  cin >> N;
+  for(i = 0; i < N; i++){
+    cin >> arr[i];
   }
-  for (i = 0; i < num; i++){
-    cin >> c;
-    arr_B.push_back(c);
-    arr_C.push_back(c);
+
+  for(i = 0; i < N; i++){
+    cin >> arr2[i];
   }
+
+  // for (i = 0; i < num; i++){
+  //   cin >> c;
+  //   arr_A.push_back(c);
+  // }
+
+  // for (i = 0; i < num; i++){
+  //   cin >> c;
+  //   arr_B.push_back(c);
+  //   arr_C.push_back(c);
+  // }
 
   while(j < num){
     //find B's max
