@@ -8,6 +8,8 @@
 
 success
 
+> 1026 treasure
+
 > 11399 ATM
  
 > 1012 cabbage
@@ -33,8 +35,6 @@ in progress
 > 2606 virus
 
 > 11724 connected component
-
-> 1026 treasure
 
 ---
 
