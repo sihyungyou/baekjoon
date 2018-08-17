@@ -10,24 +10,32 @@ N이 주어졌을 때, fibonacci(N)을 호출했을 때, 0과 1이 각각 몇 �
 
 시간제한 0.25초, 재귀함수로 풀 경우 시간초과!
 */
+
+//3, 0 1 3
 #include <iostream>
 using namespace std;
 
 int fibonacci(int n);
 int memo[40] = {1,1,};
+int one = 0;
+int zero = 1;
 
 int main() {
-  int N, T, i;
+  int T, i;
+  int N[40];
 
   cin >> T;
+  for(i = 0; i < T; i++){
+    cin >> N[i];
+  }
 
   for(i = 0; i < T; i++){
-    cin >> N;
-    if (N == 0) cout << "1 0\n";
-    else if (N == 1) cout << "1 0\n";
+    if (N[i] == 0) cout << "1 0\n";
+    else if (N[i] == 1) cout << "0 1\n";
     else {
-      fibonacci(N);
-      cout << memo[N-2] << " " << memo[N-1];
+      fibonacci(N[i]);
+      // cout << fibonacci(N[i]-2) << " " << fibonacci(N[i]-1);  //normal fibonacci, not counting 0s and 1s
+      cout << zero << " " << one << endl;
     }
   }
 
@@ -35,9 +43,14 @@ int main() {
 }
 
 int fibonacci(int n) {
-    if (n <= 1) memo[n];
-    else if (!memo[n]) return memo[n];
-    else{
-      return memo[n] = fibonacci(n-1) + fibonacci(n-2);
+    if (n == 0) {
+      zero++;
+      return 0;
     }
+    if (n == 1 || n == 2) {
+      one++;
+      return 1;
+    }
+    if (memo[n] > 0) return memo[n];
+    return memo[n] = fibonacci(n-1) + fibonacci(n-2);
 }
