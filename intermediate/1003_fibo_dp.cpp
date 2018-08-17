@@ -9,9 +9,9 @@ N이 주어졌을 때, fibonacci(N)을 호출했을 때, 0과 1이 각각 몇 �
 각 테스트 케이스마다 0이 출력되는 횟수와 1이 출력되는 횟수를 공백으로 구분해서 출력한다.
 
 시간제한 0.25초, 재귀함수로 풀 경우 시간초과!
+dynamic programming
 */
 
-//3, 0 1 3
 #include <iostream>
 using namespace std;
 
