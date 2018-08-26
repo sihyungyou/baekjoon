@@ -24,6 +24,8 @@ success
 
 in progress
 
+> 1427 sort inside
+
 > 1260 dfs and bfs
 
 > 1003 fibonacci (with dp)
