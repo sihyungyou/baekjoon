@@ -1,4 +1,5 @@
 /*
+180826 1427 sort inside
 문제
 배열을 정렬하는 것은 쉽다. 수가 주어지면, 그 수의 각 자리수를 내림차순으로 정렬해보자.
 
@@ -7,14 +8,31 @@
 
 출력
 첫째 줄에 자리수를 내림차순으로 정렬한 수를 출력한다.
+ex) 2143 -> 4321
 */
-
-
+//runtime error
 #include <iostream>
+#include <vector>
+
+using namespace std;
 
 int main() {
+  int N, n, i;
+  vector<int> num;
+  cin >> N;
 
+  while(1){
+    if(N == 0) break;
+    n = N%10;
+    N /= 10;
+    num.push_back(n);
+  }
 
+  sort(num.begin(), num.end(), greater<int>());
 
+  for(vector<int>::iterator i = num.begin(); i != num.end(); i++){
+    cout << *i;
+  }
+  cout << endl;
   return 0;
 }
