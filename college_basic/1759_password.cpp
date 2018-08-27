@@ -10,57 +10,28 @@ C개의 문자들이 모두 주어졌을 때, 가능성 있는 암호들을 모�
 
 //over time!
 #include <iostream>
-#include <algorithm>
-#include <vector>
 #include <string>
 
 using namespace std;
 
+int L, C, cnt, vow, con;  //vow 모음, con 자음,
+string result;
+string a[16];
+bool isvow(string s);
 int main() {
-  int length, num, i, flag;
-  char c;
-  string str;
-  vector<char> pwd;
-  vector<string> keys;
-
-  //get alphabets
-  //L is password length, C is number of possible alphabets for password
-  cin >> length >> num;
-
-  for (i = 0; i < num; i++){
-    cin >> c;
-    pwd.push_back(c);
+  //L은 pwd의 length, C는 주어지는 가능성있는 알파벳들의 수
+  cin >> L >> C;
+  for(int i = 0; i < C; i++){
+    cin >> a[i];
   }
+  sort(a,a+C);
 
-  //sort and permutate the sequence
-  sort(pwd.begin(), pwd.end());
 
-  do {
-    flag = 1;
-    str="";
-    //check if it's in alphabetical order. if not, don't display
-    for(i = 0; i < length-1; i++){
-      if(pwd[i] > pwd[i+1]){
-        flag = 0;
-      }
-    }
-    //put all qualified possibilities in string vector
-    if (flag == 1){
-      for(i = 0; i < length; i++){
-        str += pwd[i];
-      }
-      keys.push_back(str);
-    }
-
-  } while(next_permutation(pwd.begin(), pwd.end()));
-
-  //erase duplicated passwords
-  keys.erase(unique(keys.begin(), keys.end()), keys.end());
-
-  //if all the requirements are satisfied, that is a possible password. display
-  for(vector<string>::iterator i = keys.begin(); i != keys.end(); i++){
-    cout << *i << endl;
-  }
 
   return 0;
+}
+
+bool isvow(string s){
+  if(s == "a" || s == "e" || s == "i" || s == "o" || s == "u") return true;
+  else return false;
 }
