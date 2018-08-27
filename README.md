@@ -22,9 +22,9 @@ success
 
 > 10819 the biggest difference
 
-in progress
-
 > 1427 sort inside
+
+in progress
 
 > 1260 dfs and bfs
 
