@@ -10,10 +10,10 @@
 첫째 줄에 자리수를 내림차순으로 정렬한 수를 출력한다.
 ex) 2143 -> 4321
 */
-//runtime error
+//success
 #include <iostream>
 #include <vector>
-
+#include <algorithm>
 using namespace std;
 
 int main() {
