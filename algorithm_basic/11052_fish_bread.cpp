@@ -16,30 +16,29 @@
 
 출력
 해빈이가 얻을 수 있는 최대 수익을 출력한다.
+
+DP problem
+
+sum[1] = fish[1]
+sum[2] = fish[2] vs. sum[1] + fish[1]
+sum[3] = fish[3] vs. sum[2] + fish[1] vs. sum[1] + fish[2]
+sum[4] = fish[4] vs. sum[3] + fish[1] vs. sum[2] + fish[2] vs. sum[1] + fish[3]
+...
+sum[N] = compare(fish[N], sum[N-j] + fish[j]);
 */
-//DP problem
 
 #include <iostream>
 #include <algorithm>
 using namespace std;
-// int comp(int x, int y);
 
 int N, fish[1001], sum[1001] = { 0, };
 
 int main() {
-  scanf("%d", &N);
+  cin >> N;
   for(int i = 1; i <= N; i++){
-    scanf("%d", &fish[i]);
+    cin >> fish[i];
   }
   sum[1] = fish[1];
-  /*
-  sum[1] = fish[1]
-  sum[2] = fish[2] vs. sum[1] + fish[1]
-  sum[3] = fish[3] vs. sum[2] + fish[1] vs. sum[1] + fish[2]
-  sum[4] = fish[4] vs. sum[3] + fish[1] vs. sum[2] + fish[2] vs. sum[1] + fish[3]
-  ...
-  sum[N] = compare(fish[N], sum[N-j] + fish[j]);
-  */
   for(int i = 1; i <= N; i++){
     for(int j = 1; j <= i; j++){
       sum[i] = max(fish[i], sum[i-j] + fish[j]);
@@ -49,7 +48,3 @@ int main() {
 
   return 0;
 }
-// int comp(int x, int y){
-//   if (x >= y) return x;
-//   else return y;
-// }

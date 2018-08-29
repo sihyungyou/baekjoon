@@ -20,13 +20,15 @@ success
 
 > 1110 sum cycle
 
-> 1759 password
-
 > 10819 the biggest difference
 
 > 1427 sort inside
 
 in progress
+
+> 1759 password
+
+> 11052 fish bread
 
 > 1260 dfs and bfs
 
