@@ -6,6 +6,8 @@
 
 success
 
+> 10867 sort without duplicated elements
+
 > 1026 treasure
 
 > 11399 ATM
