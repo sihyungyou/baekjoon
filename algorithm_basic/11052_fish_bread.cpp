@@ -26,7 +26,7 @@ sum[4] = fish[4] vs. sum[3] + fish[1] vs. sum[2] + fish[2] vs. sum[1] + fish[3]
 ...
 sum[N] = compare(fish[N], sum[N-j] + fish[j]);
 */
-
+//success
 #include <iostream>
 #include <algorithm>
 using namespace std;
@@ -38,10 +38,10 @@ int main() {
   for(int i = 1; i <= N; i++){
     cin >> fish[i];
   }
-  sum[1] = fish[1];
+
   for(int i = 1; i <= N; i++){
-    for(int j = 1; j < i; j++){
-      sum[i] = max(fish[i], sum[i-j] + fish[j]);
+    for(int j = 1; j <= i; j++){
+      sum[i] = max(sum[i], sum[i-j] + fish[j]);
     }
   }
   cout << sum[N] << endl;
