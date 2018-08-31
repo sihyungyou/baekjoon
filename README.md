@@ -6,6 +6,8 @@
 
 success
 
+> 11052 fish bread
+
 > 10867 sort without duplicated elements
 
 > 1026 treasure
@@ -27,8 +29,6 @@ success
 in progress
 
 > 1759 password
-
-> 11052 fish bread
 
 > 1260 dfs and bfs
 
