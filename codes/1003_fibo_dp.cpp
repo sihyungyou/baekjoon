@@ -34,7 +34,7 @@ int main() {
     else if (N[i] == 1) cout << "0 1\n";
     else {
       fibonacci(N[i]);
-      // cout << fibonacci(N[i]-2) << " " << fibonacci(N[i]-1);  //normal fibonacci, not counting 0s and 1s
+      cout << fibonacci(N[i]-2) << " " << fibonacci(N[i]-1);  //normal fibonacci, not counting 0s and 1s
       cout << zero << " " << one << endl;
     }
   }
