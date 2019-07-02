@@ -18,6 +18,7 @@ using namespace std;
 
 int main () {
     int N, i, j, lowers, uppers, numbers, spaces;
+    char c;
 
     for(j = 0; j < 100; j++) {
         string temp;
@@ -30,10 +31,11 @@ int main () {
         if (temp.length() == 0) break;
 
         for(i = 0; i < temp.length(); i++) {
-            if(temp[i] == ' ') spaces++;
-            else if ('A' <= temp[i] && temp[i] <= 'Z') uppers++;
-            else if ('a' <= temp[i] && temp[i] <= 'z') lowers++;
-            else if ('0' <= temp[i] && temp[i] <= '9') numbers++;
+            c = temp[i];
+            if (isupper(c)) uppers++;
+            else if (islower(c)) lowers++;
+            else if (isdigit(c)) numbers++;
+            else if (isspace(c)) spaces++;
         }
         printf("%d %d %d %d\n",lowers, uppers, numbers, spaces);
     }
