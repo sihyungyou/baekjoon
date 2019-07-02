@@ -12,46 +12,33 @@
 
 #include <iostream>
 #include <cstdio>
-#include <vector>
 #include <string>
 
 using namespace std;
 
 int main () {
-    int N, i, lowers, uppers, numbers, spaces;
-    string temp;
-    vector<string> strings;
+    int N, i, j, lowers, uppers, numbers, spaces;
+    char c, dump;
+    cin >> N >> dump;
 
-    scanf("%d ", &N);
-
-    for(i = 0; i < N; i++) {
-        getline(cin, temp);
-        strings.push_back(temp);
-    }
-
-    while(strings.size()) {
-        // init variables
+    for(j = 0; j < N; j++) {
+        string temp;
         lowers = 0;
         uppers = 0;
         numbers = 0;
         spaces = 0;
-        // for length of each string, go into loop
-        if (strings[0].length() == 0) break;
-        for (char c : strings[0]) {
-            // check each character and decide it's type, accumulate them
-            if (isupper(c)) uppers++;
-            if (islower(c)) lowers++;
-            if (isdigit(c)) numbers++;
-            if (isspace(c)) spaces++;
-        }
-        // print lower, upper, number, whitespace
-        printf("%d %d %d %d\n",lowers, uppers, numbers, spaces);
-        // erase from vector so that size can decrease
-        strings.erase(strings.begin() + 0);
         
-    }
+        getline(cin, temp);
+        if (temp.length() == 0) break;
 
+        for(i = 0; i < temp.length(); i++) {
+            if(temp[i] == ' ') spaces++;
+            else if ('A' <= temp[i] && temp[i] <= 'Z') uppers++;
+            else if ('a' <= temp[i] && temp[i] <= 'z') lowers++;
+            else if ('0' <= temp[i] && temp[i] <= '9') numbers++;
+        }
+        printf("%d %d %d %d\n",lowers, uppers, numbers, spaces);
+    }
     return 0;
 }
 
-// cin 은 공백문자를 기준으로 입력을 끊어서 getline을 썼어야 함
