@@ -18,10 +18,8 @@ using namespace std;
 
 int main () {
     int N, i, j, lowers, uppers, numbers, spaces;
-    char c, dump;
-    cin >> N >> dump;
 
-    for(j = 0; j < N; j++) {
+    for(j = 0; j < 100; j++) {
         string temp;
         lowers = 0;
         uppers = 0;
