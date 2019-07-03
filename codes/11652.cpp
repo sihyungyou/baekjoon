@@ -13,60 +13,39 @@
 */
 
 #include <cstdio>
-// #include <climits>
-#include <iostream>
-#include <vector>
 #include <algorithm>
+#include <map>
+#include <vector>
 
 using namespace std;
+typedef long long l;
+
+bool sortbysec(const pair<l, int> &a, const pair<l, int> &b) {
+    if (a.second == b.second) return (a.first < b.first);
+    return (a.second > b.second);   // desc
+}
 
 int main() {
-    int N, i, temp, max;
-    int tcnt, anscnt;
-    long long ans, input;
-    vector <long long> v;
+    int N, i;
+    l ans, input;
+    map<l,int> m;
+    vector<pair<l, int> > v;
 
     scanf("%d", &N);
-    max = 0;
-
 
     for(i = 0; i < N; i++) {
         scanf("%lld", &input);
-        v.push_back(input);
+        m[input]++;
     }
 
-    sort(v.begin(), v.end());
+    copy(m.begin(), m.end(), back_inserter(v));
 
-    // for(vector<long long>::iterator it = v.begin(); it != v.end(); it++) {
-    //     if (ans == *it) continue;
-    //     if (ans != *it) temp = count(v.begin(), v.end(), *it);
-    //     if (temp > max) { 
-    //         max = temp;
-    //         ans = *it;
-    //     }
-    //     if (temp == max) {
-    //         if (*it < ans) ans = *it;
-    //     }
+    sort(v.begin(), v.end(), sortbysec);
+
+    // for(i = 0; i < N; i++) {
+    //     printf("<%lld, %d>\n", v[i].first, v[i].second);
     // }
-    
-    for(vector<long long> :: iterator iter = v.begin(); iter != v.end(); iter++) {
-        cout << ">> " << *iter << endl;
-    }
-    
-    anscnt = 0;
-    tcnt = 1;
 
-    for (i = 1; i < N; i++) {
-        if (v[i] == v[i-1]) {
-            tcnt++;
-        }
-        else if ( (v[i] != v[i-1]) && (tcnt > anscnt) ) {
-            ans = v[i-1];
-            anscnt = tcnt;
-            tcnt = 1;
-        }
-    }
-    printf("%lld\n", ans);
-
+    printf("%lld\n", v[0].first);
     return 0;
 }

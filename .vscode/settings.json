@@ -10,7 +10,8 @@
         "utility": "cpp",
         "algorithm": "cpp",
         "list": "cpp",
-        "climits": "cpp"
+        "climits": "cpp",
+        "map": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
