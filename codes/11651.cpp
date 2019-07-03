@@ -10,9 +10,10 @@
 첫째 줄부터 N개의 줄에 점을 정렬한 결과를 출력한다.
 */
 
-#include <iostream>
 #include <vector>
+#include <algorithm>
 #include <utility>
+#include <cstdio>
 
 using namespace std;
 
@@ -25,16 +26,19 @@ int main() {
     int N, i, j, k;
     vector< pair<int, int> > v;
 
-    cin >> N;
+    // cin >> N;
+    scanf("%d ", &N);
 
     for(i = 0; i < N; i++) {
-        cin >> j >> k;
+        // cin >> j >> k;
+        scanf("%d %d", &j, &k);
         v.push_back(pair<int, int>(j, k));
     }
     sort(v.begin(), v.end(), sortbysec);
 
     for(i = 0; i < N; i++) {
-        cout << v[i].first << " " << v[i].second << endl;
+        // cout << v[i].first << " " << v[i].second << endl;
+        printf("%d %d\n", v[i].first, v[i].second);
     }
 
     return 0;
