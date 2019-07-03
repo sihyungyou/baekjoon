@@ -6,6 +6,10 @@
         "iosfwd": "cpp",
         "string": "cpp",
         "vector": "cpp",
-        "istream": "cpp"
-    }
+        "istream": "cpp",
+        "utility": "cpp",
+        "algorithm": "cpp",
+        "list": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }
