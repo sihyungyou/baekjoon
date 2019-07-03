@@ -11,7 +11,8 @@
         "algorithm": "cpp",
         "list": "cpp",
         "climits": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "cstdio": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
