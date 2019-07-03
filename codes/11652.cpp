@@ -13,21 +13,21 @@
 */
 
 #include <cstdio>
-#include <climits>
+// #include <climits>
+#include <iostream>
 #include <vector>
 #include <algorithm>
 
 using namespace std;
 
 int main() {
-    char flush;
     int N, i, temp, max;
+    int tcnt, anscnt;
     long long ans, input;
     vector <long long> v;
 
     scanf("%d", &N);
     max = 0;
-    ans = __LONG_LONG_MAX__;
 
 
     for(i = 0; i < N; i++) {
@@ -37,18 +37,35 @@ int main() {
 
     sort(v.begin(), v.end());
 
-    for(vector<long long>::iterator it = v.begin(); it != v.end(); it++) {
-        if (ans == *it) continue;
-        if (ans != *it) temp = count(v.begin(), v.end(), *it);
-        if (temp > max) { 
-            max = temp;
-            ans = *it;
+    // for(vector<long long>::iterator it = v.begin(); it != v.end(); it++) {
+    //     if (ans == *it) continue;
+    //     if (ans != *it) temp = count(v.begin(), v.end(), *it);
+    //     if (temp > max) { 
+    //         max = temp;
+    //         ans = *it;
+    //     }
+    //     if (temp == max) {
+    //         if (*it < ans) ans = *it;
+    //     }
+    // }
+    
+    for(vector<long long> :: iterator iter = v.begin(); iter != v.end(); iter++) {
+        cout << ">> " << *iter << endl;
+    }
+    
+    anscnt = 0;
+    tcnt = 1;
+
+    for (i = 1; i < N; i++) {
+        if (v[i] == v[i-1]) {
+            tcnt++;
         }
-        if (temp == max) {
-            if (*it < ans) ans = *it;
+        else if ( (v[i] != v[i-1]) && (tcnt > anscnt) ) {
+            ans = v[i-1];
+            anscnt = tcnt;
+            tcnt = 1;
         }
     }
-
     printf("%lld\n", ans);
 
     return 0;
