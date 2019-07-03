@@ -9,7 +9,8 @@
         "istream": "cpp",
         "utility": "cpp",
         "algorithm": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "climits": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
