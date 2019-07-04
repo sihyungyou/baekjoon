@@ -16,7 +16,6 @@ P $	$라는 문자를 커서 왼쪽에 추가함
 출력
 첫째 줄에 모든 명령어를 수행하고 난 후 편집기에 입력되어 있는 문자열을 출력한다.
 */
-
 #include <cstdio>
 #include <list>
 #include <iterator>
@@ -34,7 +33,7 @@ void printlist(list<char> l) {
 int main () {
     string str, input;
     list<char> l;
-    int N, i, head, tail;
+    int N, i;
     char buf;
 
     cin >> str;
@@ -44,11 +43,9 @@ int main () {
     }
     
     list<char>::iterator iter = l.end();
-
     
     for (i = 0; i < N; i++) {
         getline(cin, input);
-        iter == l.begin() ? head = 1 : head = 0;
         if (input[0] == 'L') {
             if (iter != l.begin()) iter--;
         }
@@ -56,7 +53,7 @@ int main () {
             if (iter != l.end()) iter++;
         }
         else if (input[0] == 'B') {
-            if (head == 0) iter = l.erase(--iter);
+            if (iter != l.begin()) iter = l.erase(--iter);
         }
         else {
             l.insert(iter, input[2]);
