@@ -16,6 +16,7 @@
 
 #include <cstdio>
 #include <algorithm>
+#include <vector>
 #include <cstdlib>
 
 using namespace std;
@@ -29,9 +30,17 @@ void min_heapify(int i) {
 	int r = i*2 + 1;
 	int min;
 	int temp;
+
 	if ( l <= heapsize && abs(arr[l]) < abs(arr[i])) min = l;
+    else if ( l <= heapsize && abs(arr[l]) == abs(arr[i]) ) {
+        if (arr[l] < arr[i]) min = l;
+    }
 	else min = i;
-	if ( r <= heapsize && abs(arr[r]) < abs(arr[min]) ) min = r;
+	
+    if ( r <= heapsize && abs(arr[r]) < abs(arr[min]) ) min = r;
+    else if ( l <= heapsize && abs(arr[r]) == abs(arr[min]) ) {
+        if (arr[r] < arr[min]) min = r;
+    }
 
 	if (min != i) {
 		temp = arr[i];
@@ -69,7 +78,14 @@ void insert_to_heap(int val) {
             parent = parent / 2;
         }
         else if (abs(arr[child]) == abs(arr[parent]) ) {
-            
+            if (arr[child] < arr[parent]) {
+                temp = arr[parent];
+                arr[parent] = arr[child];
+                arr[child] = temp;
+                child = parent;
+                parent = parent / 2;
+            }
+            else break;
         }
         else break;
     }
@@ -77,27 +93,21 @@ void insert_to_heap(int val) {
 
 int main() {
     int N, temp, i, j;
-
+    vector<int> v;
     scanf("%d", &N);
 
     for (i = 1; i <= N; i++) {
         scanf("%d", &temp);
         if (temp == 0) {
-            // pop from heap and adjust
-            // if arr length is 0, print 0
-            printf("%d\n", extract_min());
+            v.push_back(extract_min());
         }
         else {
-            // insert temp to arr
             insert_to_heap(temp);
         }
     }
 
+    for(vector<int>::iterator it = v.begin(); it != v.end(); it++) printf("%d\n", *it);
+
     return 0;
 }
 
-        // else if (temp == 99) {
-        //     printf("input is 99\n");
-        //     for(j = 1; j <= heapsize; j++) printf("%d ", arr[j]);
-        //     printf("\n");
-        // }
