@@ -106,7 +106,7 @@ int main() {
         }
     }
 
-    for(vector<int>::iterator it = v.begin(); it != v.end(); it++) printf("%d\n", *it);
+    for(vector<int>::iterator it = v.begin(); it != v.end(); it++) printf(">> %d\n", *it);
 
     return 0;
 }
