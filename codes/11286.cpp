@@ -29,9 +29,9 @@ void min_heapify(int i) {
 	int r = i*2 + 1;
 	int min;
 	int temp;
-	if ( (l <= heapsize) && ( abs(arr[l]) < abs(arr[i])) ) min = l;
+	if ( l <= heapsize && abs(arr[l]) < abs(arr[i])) min = l;
 	else min = i;
-	if ( (r <= heapsize) && ( abs(arr[r]) < abs(arr[min])) ) min = r;
+	if ( r <= heapsize && abs(arr[r]) < abs(arr[min]) ) min = r;
 
 	if (min != i) {
 		temp = arr[i];
@@ -39,15 +39,12 @@ void min_heapify(int i) {
 		arr[min] = temp;
 		min_heapify(min);
 	}
-
 }
 
 int extract_min() {
-    printf("extract min\n");
 	int min;
 	if (heapsize < 1) return 0;
 	min = arr[1];
-    printf("extract min : %d\n", min);
 	arr[1] = arr[heapsize];
 	heapsize--;
 	min_heapify(1);
@@ -55,22 +52,26 @@ int extract_min() {
 }
 
 void insert_to_heap(int val) {
-    int i, j, temp;
+    int parent, child, temp;
 
     heapsize++;
     arr[heapsize] = val;
-    
-    i = heapsize / 2;   // new value's parent
-    j = heapsize;       // new value
 
-    while(i > 0) {
-        if (abs(arr[j]) < abs(arr[i]) ) {
-            temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-            j = i;
-            i /= 2;
+    parent = heapsize / 2;
+    child = heapsize;
+
+    while(parent != 0) {
+        if ( abs(arr[child]) < abs(arr[parent]) ) {
+            temp = arr[parent];
+            arr[parent] = arr[child];
+            arr[child] = temp;
+            child = parent;
+            parent = parent / 2;
         }
+        else if (abs(arr[child]) == abs(arr[parent]) ) {
+            
+        }
+        else break;
     }
 }
 
@@ -86,10 +87,6 @@ int main() {
             // if arr length is 0, print 0
             printf("%d\n", extract_min());
         }
-        else if (temp == 99) {
-            for(j = 1; j <= heapsize; j++) printf("%d ", arr[j]);
-            printf("\n");
-        }
         else {
             // insert temp to arr
             insert_to_heap(temp);
@@ -98,3 +95,9 @@ int main() {
 
     return 0;
 }
+
+        // else if (temp == 99) {
+        //     printf("input is 99\n");
+        //     for(j = 1; j <= heapsize; j++) printf("%d ", arr[j]);
+        //     printf("\n");
+        // }
