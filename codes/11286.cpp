@@ -16,97 +16,33 @@
 
 #include <cstdio>
 #include <algorithm>
-#include <vector>
+#include <queue>
 #include <cstdlib>
 
 using namespace std;
 
-int heapsize = 0;
-int arr[100001];
-
-
-void min_heapify(int i) {
-	int l = i*2;
-	int r = i*2 + 1;
-	int min;
-	int temp;
-
-	if ( l <= heapsize && abs(arr[l]) < abs(arr[i])) min = l;
-    else if ( l <= heapsize && abs(arr[l]) == abs(arr[i]) ) {
-        if (arr[l] < arr[i]) min = l;
-    }
-	else min = i;
-	
-    if ( r <= heapsize && abs(arr[r]) < abs(arr[min]) ) min = r;
-    else if ( l <= heapsize && abs(arr[r]) == abs(arr[min]) ) {
-        if (arr[r] < arr[min]) min = r;
-    }
-
-	if (min != i) {
-		temp = arr[i];
-		arr[i] = arr[min];
-		arr[min] = temp;
-		min_heapify(min);
-	}
-}
-
-int extract_min() {
-	int min;
-	if (heapsize < 1) return 0;
-	min = arr[1];
-	arr[1] = arr[heapsize];
-	heapsize--;
-	min_heapify(1);
-	return min;
-}
-
-void insert_to_heap(int val) {
-    int parent, child, temp;
-
-    heapsize++;
-    arr[heapsize] = val;
-
-    parent = heapsize / 2;
-    child = heapsize;
-
-    while(parent != 0) {
-        if ( abs(arr[child]) < abs(arr[parent]) ) {
-            temp = arr[parent];
-            arr[parent] = arr[child];
-            arr[child] = temp;
-            child = parent;
-            parent = parent / 2;
-        }
-        else if (abs(arr[child]) == abs(arr[parent]) ) {
-            if (arr[child] < arr[parent]) {
-                temp = arr[parent];
-                arr[parent] = arr[child];
-                arr[child] = temp;
-                child = parent;
-                parent = parent / 2;
-            }
-            else break;
-        }
-        else break;
-    }
-}
-
+typedef pair <int, int> pi;
 int main() {
-    int N, temp, i, j;
-    vector<int> v;
+    int N, num, i;
+    pi temp;
+    priority_queue<pi, vector<pi>, greater<pi> > q;
+
     scanf("%d", &N);
 
-    for (i = 1; i <= N; i++) {
-        scanf("%d", &temp);
-        if (temp == 0) {
-            v.push_back(extract_min());
+    for(i = 0; i < N; i++) {
+        scanf("%d", &num);
+        if (num == 0) {
+            if (q.empty()) printf("0\n");
+            else {
+                temp = q.top();
+                printf("%d\n", temp.second);
+                q.pop();
+            }
         }
         else {
-            insert_to_heap(temp);
+            q.push(make_pair(abs(num), num));
         }
     }
-
-    for(vector<int>::iterator it = v.begin(); it != v.end(); it++) printf(">> %d\n", *it);
 
     return 0;
 }
