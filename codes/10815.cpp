@@ -19,37 +19,41 @@
 
 #include <algorithm>
 #include <cstdio>
-#include <vector>
 
 using namespace std;
 
-int bsearch(vector<int> v, int l, int r, int val) {
-    if (r >= 1) {
-        int mid = (r - 1) / 2;
+int a1[500001];
+int a2[500001];
+
+int bsearch(int l, int r, int val) {
+    if (r >= l) {
+        int mid = l + (r - l) / 2;
+        if (a1[mid] == val) return mid;
+        else if (a1[mid] < val) return bsearch(mid + 1, r, val);
+        else if (a1[mid] > val) return bsearch(l, mid - 1, val);
     }
     return -1;
 }
 
 int main () {
     int N, M, i, temp, result;
-    vector<int> v1, v2;
 
     scanf("%d", &N);
     for (i = 0; i < N; i++) {
         scanf("%d", &temp);
-        v1.push_back(temp);
+        a1[i] = temp;
     }
 
     scanf("%d", &M);
     for (i = 0; i < M; i++) {
         scanf("%d", &temp);
-        v2.push_back(temp);
+        a2[i] = temp;
     }
 
-    sort(v1.begin(), v1.end());
+    sort(a1, a1 + N);
 
-    for (vector<int>::iterator it = v2.begin(); it != v2.end(); it++) {
-        result = bsearch(v1, 0, N-1, *it);
+    for (i = 0; i < M; i++) {
+        result = bsearch(0, N-1, a2[i]);
         result == -1 ? printf("0 ") : printf("1 ");
     }
 
