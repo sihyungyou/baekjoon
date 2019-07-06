@@ -1,5 +1,5 @@
 /*
-180810 2606 virus
+문제
 신종 바이러스인 웜 바이러스는 네트워크를 통해 전파된다.
 한 컴퓨터가 웜 바이러스에 걸리면 그 컴퓨터와 네트워크 상에서 연결되어 있는 모든 컴퓨터는 웜 바이러스에 걸리게 된다.
 예를 들어 7대의 컴퓨터가 <그림 1>과 같이 네트워크 상에서 연결되어 있다고 하자.
@@ -18,42 +18,57 @@
 1번 컴퓨터가 웜 바이러스에 걸렸을 때, 1번 컴퓨터를 통해 웜 바이러스에 걸리게 되는 컴퓨터의 수를 첫째 줄에 출력한다.
 */
 
-//run time error
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <cstdio>
+#include <queue>
+#include <set>
 
 using namespace std;
-int main() {
 
-  int i, k, coms, sets, a, b, cnt;
-  vector<int> infected;
-  vector<int> temp;
-  cin >> coms >> sets;
+int main()
+{
+  int N, M, num1, num2, i, j, node, cnt = 0;
+  scanf("%d %d", &N, &M);
+  queue<int> q;
+  set<int> s;
+  int arr[N+1][N+1];
 
-  //initialize array of vector<int> with the sets of connected computers
-  vector<int>* com_array = new vector<int>[coms];
-  for (i = 0; i < sets; i++){
-    cin >> a >> b;
-    com_array[a].push_back(b);
+  for(i = 0; i <= N; i++) {
+    for (j = 0; j <= N; j++) {
+      arr[i][j] = 0;
+    }
   }
 
-  //since number 1 computer is infected fist, put connected computer to 1 into infected vector
-  infected.push_back(1);
-  for(i = 0; i < com_array[1].size(); i++){
-    infected.push_back(com_array[1][i]);
+  for (i = 0; i < M; i++) {
+    scanf("%d %d", &num1, &num2);
+    arr[num1][num2] = 1;
+    arr[num2][num1] = 1;
   }
 
-  //put the infected computer into infected vector. before putting it in, check if there is same number.
-  for(i = 0; i < infected.size(); i++){
-      for (k = 0; k < com_array[infected[i]].size(); k++){
-        temp.push_back(com_array[infected[i]][k]);
+  set<int>::iterator it;
+  q.push(1);
+  s.insert(1);
+
+  while(!q.empty()) {
+    node = q.front();
+    q.pop();
+    for (i = 1; i <= N; i++) {
+      if (arr[node][i] == 1) {
+        it = s.find(i);
+        if (it == s.end()) {
+          cnt++;
+          q.push(i);
+          s.insert(i);
+          arr[node][i] = 0;
+        }
+        else {
+          arr[node][i] = 0;
+        }
       }
+      else continue;
+    }
   }
 
-  sort(temp.begin(), temp.end());
-  temp.erase(unique(temp.begin(), temp.end()), temp.end());
+  printf("%d\n", cnt);
 
-  cout << temp.size() << endl;
   return 0;
 }
