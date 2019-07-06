@@ -16,21 +16,17 @@ using namespace std;
 int main() {
   int n, m, i, cnt;
   string str;
-  vector<string> names;
-  vector<string> duplicated;
+  vector<string> names, duplicated;
 
   cin >> n >> m;
 
-  //get names
   for (i = 0; i < n+m; i++){
     cin >> str;
     names.push_back(str);
   }
 
-  //sort
   sort(names.begin(), names.end());
 
-  //find duplicated names
   cnt = 0;
   for(i = 0; i < n+m; i++){
     if (!names[i].compare(names[i+1])) {
@@ -40,7 +36,6 @@ int main() {
     }
   }
 
-  //print dupliated list
   cout << cnt << endl;
   for(vector<string>::iterator i = duplicated.begin(); i != duplicated.end(); i++){
     cout << *i << endl;
