@@ -42,6 +42,6 @@ int main () {
     }
 
     for(set<string>::reverse_iterator rit = s.rbegin(); rit != s.rend(); rit++) {
-        cout << *rit << endl;
+        cout << *rit << '\n';
     }
 }
