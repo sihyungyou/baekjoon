@@ -13,3 +13,16 @@ N명의 학생들을 키 순서대로 줄을 세우려고 한다. 각 학생의 
 첫째 줄부터 앞에서부터 줄을 세운 결과를 출력한다. 답이 여러 가지인 경우에는 아무거나 출력한다.
 */
 
+#include <cstdio>
+#include <queue>
+#include <vector>
+
+using namespace std;
+
+int main () {
+
+    
+
+
+    return 0;
+}
