@@ -18,31 +18,37 @@ a와 b는 n 이하의 자연수또는 0이며 같을 수도 있다.
 
 using namespace std;
 
+int p[1000001];
+
+int find(int x) {
+    if (x == p[x]) return x;
+    else return p[x] = find(p[x]);
+}
+
 int main () {
     int n, m, i, a, b, op;
 
     scanf("%d %d", &n, &m);
-    int p[n+1];
+
     for (i = 0; i <= n; i++) p[i] = i;
 
     for (i = 0; i < m; i++) {
         scanf("%d %d %d", &op, &a, &b);
+
         if (op == 0) {
-            // union
-            if (p[a] == p[b]) continue;
-            else if (p[a] > p[b]) {
-                p[a] = b;
-            }
-            else if (p[a] < p[b]) {
-                p[b] = a;
-            }
+            a = find(a);
+            b = find(b);
+            if (a > b) p[a] = b;
+            else if (a < b) p[b] = a;
         }
+
         else if (op == 1) {
-            // 교집합 확인
-            
+            a = find(a);
+            b = find(b);
+            if (a == b) printf("YES\n");
+            else printf("NO\n");
         }
     }
-
 
     return 0;
 }
