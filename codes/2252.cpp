@@ -20,22 +20,22 @@ using namespace std;
 
 int main () {
 
-    int N, M, a, b, i, temp;
+    int N, M, a, b, i, j, temp;
     queue<int> q;
 
     scanf("%d %d", &N, &M);
     int indegree[N+1];
-    int graph[N+1];
+    int graph[N+1][N+1];
     
-    for (i = 0; i < N+1; i++) {
-        indegree[i] = 0;
-        graph[i] = 0;
-    }
+    for (i = 0; i < N+1; i++) indegree[i] = 0;
+    for (i = 0; i < N+1; i++)
+        for (j = 0; j < N+1; j++)
+            graph[i][j] = 0;
 
     for (i = 0; i < M; i++) {
         scanf("%d %d", &a, &b);
         indegree[b]++;
-        graph[a] = b;
+        graph[a][b] = 1;
     }
 
     for (i = 1; i <= N; i++) {
@@ -44,18 +44,26 @@ int main () {
             indegree[i]--;
         }
     }
-    
+    i = 0;
+    j = 0;
     while(!q.empty()) {
         temp = q.front();
-        printf("%d ", temp);
         q.pop();
-        if (!graph[temp]) continue;
-        indegree[temp]--;
-        indegree[graph[temp]]--;
+        
+        printf("%d ", temp);
+        
         for (i = 1; i <= N; i++) {
-            if (!indegree[i]) { 
-                q.push(i); 
-                indegree[i]--;
+            if (graph[temp][i] == 1) {
+                graph[temp][i] = 0;
+                break;
+            }
+        }
+        // if (i == N) continue;
+        indegree[i]--;
+        for (j = 1; j <= N; j++) {
+            if (!indegree[j]) {
+                q.push(j);
+                indegree[j]--;
             }
         }
     }
