@@ -15,14 +15,52 @@ N명의 학생들을 키 순서대로 줄을 세우려고 한다. 각 학생의 
 
 #include <cstdio>
 #include <queue>
-#include <vector>
 
 using namespace std;
 
 int main () {
 
-    
+    int N, M, a, b, i, temp;
+    queue<int> q;
 
+    scanf("%d %d", &N, &M);
+    int indegree[N+1];
+    int graph[N+1];
+    
+    for (i = 0; i < N+1; i++) {
+        indegree[i] = 0;
+        graph[i] = 0;
+    }
+
+    for (i = 0; i < M; i++) {
+        scanf("%d %d", &a, &b);
+        indegree[b]++;
+        graph[a] = b;
+    }
+
+    for (i = 1; i <= N; i++) {
+        if (!indegree[i]) {
+            q.push(i);
+            indegree[i]--;
+        }
+    }
+    
+    while(!q.empty()) {
+        temp = q.front();
+        printf("%d ", temp);
+        q.pop();
+        if (!graph[temp]) continue;
+        indegree[temp]--;
+        indegree[graph[temp]]--;
+        for (i = 1; i <= N; i++) {
+            if (!indegree[i]) { 
+                q.push(i); 
+                indegree[i]--;
+            }
+        }
+    }
+
+    printf("\n");
 
     return 0;
 }
