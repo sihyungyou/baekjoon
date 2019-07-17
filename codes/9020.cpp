@@ -21,6 +21,7 @@ using namespace std;
 int main () {
 
     int T, n, i, j, k, p1, p2;
+    bool flag = false;
     bool arr[10001];
 
     scanf("%d", &T);
@@ -28,7 +29,6 @@ int main () {
     for(i = 0; i < T; i++) {
         scanf("%d", &n);
 
-        // 에라토스테네스의 체
         for (j = 2; j <= n; j++) arr[j] = true;
 
         for (j = 2; j <= sqrt(n); j++) {
@@ -40,11 +40,17 @@ int main () {
                 }
             }
         }
+
+        p1 = p2 = n/2;
         
-        // for (j = 2; j <= n; j++) {
-        //     printf("%d : %d\n", j, arr[j]);
-        // }
-        
+        while(1) {
+            if ( (p1 + p2 == n) && arr[p1] && arr[p2]) {
+                printf("%d %d\n", p1, p2);
+                break;
+            }
+            p1--;
+            p2++;
+        }
 
     }
     
