@@ -14,11 +14,39 @@
 */
 
 #include <cstdio>
+#include <cmath>
 
 using namespace std;
 
 int main () {
 
+    int T, n, i, j, k, p1, p2;
+    bool arr[10001];
 
+    scanf("%d", &T);
+
+    for(i = 0; i < T; i++) {
+        scanf("%d", &n);
+
+        // 에라토스테네스의 체
+        for (j = 2; j <= n; j++) arr[j] = true;
+
+        for (j = 2; j <= sqrt(n); j++) {
+            if (arr[j]) {
+                for (k = j+j; k <= n; k += j) {
+                    if (arr[k]) {
+                        arr[k] = false;
+                    }
+                }
+            }
+        }
+        
+        // for (j = 2; j <= n; j++) {
+        //     printf("%d : %d\n", j, arr[j]);
+        // }
+        
+
+    }
+    
     return 0;
 }
