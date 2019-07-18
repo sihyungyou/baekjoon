@@ -19,31 +19,13 @@ int main() {
     int N, i, j;
 
     scanf("%d", &N);
-    bool arr[N+1];
 
-    for (i = 2; i <= N; i++) arr[i] = true;
     for (i = 2; i <= sqrt(N); i++) {
-        if (arr[i]) {
-            for (j = i + i; j <= N; j += i) {
-                if (arr[j]) {
-                    arr[j] = false;
-                }
-            }
+        while(N%i == 0) {
+            printf("%d\n", i);
+            N /= i;
         }
     }
-
-    while (!arr[N]) {
-        for (i = 2; i <= N; i++) {
-            if (arr[i] && N%i == 0) {
-                printf("%d\n", i);
-                N /= i;
-                break;
-            }
-        }
-    }
-
-    printf("%d\n", N);
-    
-
+    if (N != 1) printf("%d\n", N);
     return 0;
 }
