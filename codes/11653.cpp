@@ -17,12 +17,11 @@ using namespace std;
 int main() {
     
     int N, i, j;
-    bool arr[10000001];
 
-    scanf("%d\n", &N);
+    scanf("%d", &N);
+    bool arr[N+1];
 
     for (i = 2; i <= N; i++) arr[i] = true;
-
     for (i = 2; i <= sqrt(N); i++) {
         if (arr[i]) {
             for (j = i + i; j <= N; j += i) {
@@ -33,14 +32,17 @@ int main() {
         }
     }
 
-    if (arr[N]) printf("%d\n", N);
-    else {
-        while (!arr[N]) {
-            
+    while (!arr[N]) {
+        for (i = 2; i <= N; i++) {
+            if (arr[i] && N%i == 0) {
+                printf("%d\n", i);
+                N /= i;
+                break;
+            }
         }
-        
     }
-    
+
+    printf("%d\n", N);
     
 
     return 0;
