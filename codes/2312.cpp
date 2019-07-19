@@ -15,6 +15,7 @@
 using namespace std;
 
 int main() {
+
     int N, i, j, num, orig;
     int arr[100001] = {0, };
     
