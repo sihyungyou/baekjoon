@@ -14,12 +14,35 @@ A: 10, B: 11, ..., F: 15, ..., Y: 34, Z: 35
 */
 
 #include <cstdio>
+#include <stack>
 
 using namespace std;
 
 int main () {
 
-    
+    int N, B, i;
+    char A = 'A';
+    char arr[36];
+    stack <int> s;
+
+    scanf("%d %d", &N, &B);
+
+    for (i = 10; i < B; i++) {
+        arr[i] = A;
+        A++;
+    }
+
+    while(N != 0) {
+        s.push(N%B);
+        N /= B;
+    }
+
+    while(!s.empty()) {
+        printf("%c", arr[s.top()]);
+        s.pop();
+    }
+
+    printf("\n");
 
     return 0;
 }
