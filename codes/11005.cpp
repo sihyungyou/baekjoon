@@ -20,8 +20,7 @@ using namespace std;
 
 int main () {
 
-    int N, B, i;
-    char A = 'A';
+    int N, B;
     stack <int> s;
 
     scanf("%d %d", &N, &B);
