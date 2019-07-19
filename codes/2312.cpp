@@ -16,7 +16,7 @@ using namespace std;
 
 int main() {
     int N, i, j, k, num, orig;
-    int arr[100000] = {0, };
+    int arr[100001] = {0, };
     
     scanf("%d", &N);
 
