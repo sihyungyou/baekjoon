@@ -22,23 +22,18 @@ int main () {
 
     int N, B, i;
     char A = 'A';
-    char arr[36];
     stack <int> s;
 
     scanf("%d %d", &N, &B);
 
-    for (i = 10; i < B; i++) {
-        arr[i] = A;
-        A++;
-    }
-
-    while(N != 0) {
+    while(1) {
+        if (N == 0) break;
         s.push(N%B);
         N /= B;
     }
 
     while(!s.empty()) {
-        printf("%c", arr[s.top()]);
+        s.top() < 10 ? printf("%d", s.top()) : printf("%c", s.top() + 55);
         s.pop();
     }
 
