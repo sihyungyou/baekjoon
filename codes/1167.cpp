@@ -16,7 +16,14 @@
 using namespace std;
 
 int main() {
+    
+    int V, i;
 
+    scanf("%d", &V);
+
+    for (i = 0; i < V; i++) {
+        
+    }
 
 
     return 0;
