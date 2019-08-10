@@ -35,53 +35,23 @@ fibonacci(3)은 fibonacci(2)와 fibonacci(1)의 결과를 얻고, 2를 리턴한
 */
 
 #include <cstdio>
-
-int fibonacci(int);
-
-int dp[41] = {0, };
-int one, zero;
+using namespace std;
 
 int main() {
 
   int T, N, i = 0;
-  one = 0;
-  zero = 0;
-  dp[1] = 1;
+  int dp[41] = {0, 1, 1};
+  
+  for (i = 3; i < 41; i++) dp[i] = dp[i-1] + dp[i-2];
+
   scanf("%d", &T);
   
   for (i = 0; i < T; i++) {
     scanf("%d", &N);
-    
-    if (N > 2) {
-      printf("%d %d\n", 1, 2);
-    } else {
-
-    }
-    printf("> %d %d\n", zero, one);
-    fibonacci(N);
-    // for (int j = 0; j < 41; j++) {
-    //   printf("%d ", dp[j]);
-    // }
-    // printf("\n");
-    printf(">> %d %d\n", zero, one);
-    one = 0;
-    zero = 0;
+    if(N == 0) printf("%d %d\n", 1, 0);
+    else if (N == 1) printf("%d %d\n", 0, 1);
+    else printf("%d %d\n", dp[N-1], dp[N]);
   }
 
   return 0;
-}
-
-int fibonacci(int n) {
-  if (n == 0) {
-    return 0;
-  }
-  else if (n == 1) {
-    return 1;
-  }
-  else if (dp[n] != 0){
-    return dp[n];
-  }
-  else {
-    return dp[n] = fibonacci(n-1) + fibonacci(n-2);
-  }
 }
