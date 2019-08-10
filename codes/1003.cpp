@@ -13,44 +13,10 @@ dynamic programming
 */
 
 #include <iostream>
-using namespace std;
-
-int fibonacci(int n);
-int memo[40] = {1,1,};
-int one = 0;
-int zero = 1;
 
 int main() {
-  int T, i;
-  int N[40];
 
-  cin >> T;
-  for(i = 0; i < T; i++){
-    cin >> N[i];
-  }
 
-  for(i = 0; i < T; i++){
-    if (N[i] == 0) cout << "1 0\n";
-    else if (N[i] == 1) cout << "0 1\n";
-    else {
-      fibonacci(N[i]);  //return 되고 있지 않음
-      // cout << fibonacci(N[i]-2) << " " << fibonacci(N[i]-1);  //normal fibonacci, not counting 0s and 1s
-      cout << zero << " " << one << endl;
-    }
-  }
 
   return 0;
-}
-
-int fibonacci(int n) {
-    if (n == 0) {
-      zero++;
-      return 0;
-    }
-    if (n == 1 || n == 2) {
-      one++;
-      return 1;
-    }
-    if (memo[n] > 0) return memo[n];
-    return memo[n] = fibonacci(n-1) + fibonacci(n-2);
 }
