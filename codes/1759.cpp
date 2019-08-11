@@ -15,20 +15,3 @@ C개의 문자들이 모두 주어졌을 때, 가능성 있는 암호들을 모�
 출력
 각 줄에 하나씩, 사전식으로 가능성 있는 암호를 모두 출력한다.
 */
-
-#include <cstdio>
-
-using namespace std;
-
-int main() {
-
-  int L, C, i;
-
-  scanf("%d %d", &L, &C);
-  
-  for(i = 0; i < C; i++) {
-
-  }
-
-  return 0;
-}
