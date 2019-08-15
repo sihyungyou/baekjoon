@@ -62,7 +62,11 @@
         "type_traits": "cpp",
         "typeinfo": "cpp",
         "set": "cpp",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "__hash_table": "cpp",
+        "complex": "cpp",
+        "sstream": "cpp",
+        "unordered_map": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
