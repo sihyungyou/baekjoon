@@ -13,9 +13,9 @@ N개의 수로 된 수열 A[1], A[2], …, A[N] 이 있다. 이 수열의 i번�
 using namespace std;
 
 int main() {
-    int N, M, i, l, h, cnt, sum;
-    l = 0, h = 0, cnt = 0, sum = 0;
-    int arr[10001];
+    int N, M, i;
+    int l = 0, h = 0, cnt = 0, sum = 0;
+    int arr[10000];
 
     scanf("%d %d", &N, &M);
 
@@ -24,19 +24,13 @@ int main() {
     }
 
     while(1) {
-        if (l == N) break;
-        else if (sum > M) {
-            sum -= arr[--h];
-            sum -= arr[l++];
-        }
-        else if (sum < M) {
-            sum += arr[h++];
-        }
-        else if (sum == M) {
-            cnt++;
-        }
+        if (sum >= M) sum -= arr[l++];
+        else if (h == N) break;
+        else sum += arr[h++];
         
+        if (sum == M) cnt++;
     }
 
+    printf("%d\n", cnt);
     return 0;
 }
