@@ -23,7 +23,18 @@ int main() {
         scanf(" %d", &arr[i]);
     }
 
-    while(l < N) {
+    while(1) {
+        if (l == N) break;
+        else if (sum > M) {
+            sum -= arr[--h];
+            sum -= arr[l++];
+        }
+        else if (sum < M) {
+            sum += arr[h++];
+        }
+        else if (sum == M) {
+            cnt++;
+        }
         
     }
 
