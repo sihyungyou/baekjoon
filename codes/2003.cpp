@@ -18,7 +18,6 @@ int main() {
     int arr[10000];
 
     scanf("%d %d", &N, &M);
-
     for (i = 0; i < N; i++) {
         scanf(" %d", &arr[i]);
     }
