@@ -24,17 +24,6 @@ int main() {
     int n, i;
 
     scanf("%d", &n);
-    
-    int memo[n];
-    memo[0] = 0;
-    memo[1] = 1;
-    
-    for(i = 2; i <= n; i++) {
-        memo[i] = memo[i-1] + memo[i-2];
-    }
-    printf(">> %d\n", memo[n]);
-    printf(">> %d\n", memo[n]%1000000007);
-
 
 
     return 0;
