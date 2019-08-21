@@ -20,7 +20,10 @@ n이 주어졌을 때, n번째 피보나치 수를 구하는 프로그램을 작
 #include <cstdio>
 
 int main() {
+    int n;
 
+    scanf("%d", &n);
+    
 
     return 0;
 }
