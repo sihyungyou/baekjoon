@@ -35,6 +35,8 @@ int main() {
     int T, M, N, i, j, flag, cnt;
 
     scanf("%d", &T);
+    int cnts[T];
+
     for (i = 0; i < T; i++) {
         cnt = 0;
         scanf("%d %d", &N, &M);
@@ -47,17 +49,18 @@ int main() {
             flag = 0;
             if (nations.find(edges[j].first) != nations.end()) { 
                 nations.erase(edges[j].first);
-                flag = 1;
+                flag++;
             }
             if (nations.find(edges[j].second) != nations.end()) {
                 nations.erase(edges[j].second);
-                flag = 1;
+                flag++;
             }
-            if (flag) cnt++;
+            if (flag > 0) cnt++;
             j++;
         }
-        printf("%d\n", cnt);
+        cnts[i] = cnt;
     }
 
+    for(i = 0; i < T; i++) printf("%d\n", cnts[i]);
     return 0;
 }
