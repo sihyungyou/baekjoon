@@ -47,6 +47,11 @@ int main() {
         j = 0;
         while(!nations.empty()) {
             flag = 0;
+            for(set<int>::iterator it = nations.begin(); it != nations.end(); it++) {
+                printf("nations : %d\n", *it);
+            }
+            printf("edge : %d %d\n", edges[j].first, edges[j].second);
+
             if (nations.find(edges[j].first) != nations.end()) { 
                 nations.erase(edges[j].first);
                 flag++;
