@@ -23,63 +23,64 @@
 */
 
 #include <cstdio>
-#include <utility>
-#include <set>
+// #include <utility>
+// #include <set>
 
 using namespace std;
 
 int main() {
 
-    pair <int, int> edges[10000];
-    set <int> nations;
-    int T, M, N, i, j, flag, cnt;
+    // pair <int, int> edges[10000];
+    // set <int> nations;
+    // int T, M, N, i, j, flag, cnt;
+    int T, M, N, temp, temp2, i;
 
     scanf("%d", &T);
     int cnts[T];
 
     for (i = 0; i < T; i++) {
-        cnt = 0;
+        // cnt = 0;
         scanf("%d %d", &N, &M);
+        cnts[i] = N - 1;
+        // for(j = 1; j <= N; j++) nations.insert(j);        
+        // for(set<int>::iterator it = nations.begin(); it != nations.end(); it++) {
+        //         printf("nations : %d\n", *it);
+        //     }
 
-        for(j = 1; j <= N; j++) nations.insert(j);
-        
-        for(set<int>::iterator it = nations.begin(); it != nations.end(); it++) {
-                printf("nations : %d\n", *it);
-            }
-
-        for(j = 0; j < M; j++) {
-            scanf("%d %d", &edges[j].first, &edges[j].second);
+        for(int j = 0; j < M; j++) {
+            // scanf("%d %d", &edges[j].first, &edges[j].second);
+            scanf("%d %d", &temp, &temp2);
         }
 
-        j = 0;
+        // j = 0;
         
-        while(!nations.empty()) {
-            flag = 0;
+        // while(!nations.empty()) {
+        //     flag = 0;
             
-            printf("edge : %d %d\n", edges[j].first, edges[j].second);
-            for(set<int>::iterator it = nations.begin(); it != nations.end(); it++) {
-                printf("before nations : %d\n", *it);
-            }
+        //     printf("edge : %d %d\n", edges[j].first, edges[j].second);
+        //     for(set<int>::iterator it = nations.begin(); it != nations.end(); it++) {
+        //         printf("before nations : %d\n", *it);
+        //     }
 
-            if (nations.find(edges[j].first) != nations.end()) {
-                printf("found %d\n", edges[j].first);
-                nations.erase(edges[j].first);
-                flag++;
-            }
-            if (nations.find(edges[j].second) != nations.end()) {
-                printf("found %d\n", edges[j].second);
-                nations.erase(edges[j].second);
-                flag++;
-            }
+        //     if (nations.find(edges[j].first) != nations.end()) {
+        //         printf("found %d\n", edges[j].first);
+        //         nations.erase(edges[j].first);
+        //         flag++;
+        //     }
+        //     if (nations.find(edges[j].second) != nations.end()) {
+        //         printf("found %d\n", edges[j].second);
+        //         nations.erase(edges[j].second);
+        //         flag++;
+        //     }
 
-            for(set<int>::iterator it = nations.begin(); it != nations.end(); it++) {
-                printf("after nations : %d\n", *it);
-            }
-            
-            if (flag > 0) cnt++;
-            j++;
-        }
-        cnts[i] = cnt;
+            // for(set<int>::iterator it = nations.begin(); it != nations.end(); it++) {
+            //     printf("after nations : %d\n", *it);
+            // }
+
+            // if (flag > 0) cnt++;
+            // j++;
+        // }
+        // cnts[i] = cnt;
     }
 
     for(i = 0; i < T; i++) printf("%d\n", cnts[i]);
