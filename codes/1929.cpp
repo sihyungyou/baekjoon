@@ -17,27 +17,23 @@ using namespace std;
 int main() {
 
     int M, N, i, j;
-    int arr[1000001];
+    bool arr[1000001];
 
     scanf("%d %d", &M, &N);
 
-    for(i = 0; i <= N; i++) arr[i] = 1;
+    for(i = 2; i <= N; i++) arr[i] = true;
 
-    for (i = 2; i < sqrt(M); i++) {
-        if (arr[i] == 0) continue;
-        for (j = i+i; j <= M; j += i) {
-            arr[j] = 0;
-        }
-    }
-
-    for (i = 2; i < sqrt(N); i++) {
-        if (arr[i] == 0) continue;
-        for (j = i+i; j <= N; j += i) {
-            arr[j] = 0;
+    for (i = 2; i <= sqrt(N); i++) {
+        if (arr[i]) {
+            for (j = i+i; j <= N; j += i) {
+                if (arr[j]) arr[j] = false;
+            }
         }
     }
     
-    for (i = M; i <= N; i++) if (arr[i] == 1) printf("%d\n", i);
+    for (i = M; i <= N; i++) {
+        if (arr[i]) printf("%d\n", i);
+    }
 
     return 0;
 }
