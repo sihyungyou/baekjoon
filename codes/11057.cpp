@@ -24,25 +24,25 @@ DP[i][j]라는 이차원 배열에서 수의길이가 i이고, j값의 오르막
 using namespace std;
 
 int main() {
-    int DP[1001][10];
-    int ans, i, j, k, N;
+    int DP[1001][10] = {};
+    int ans, N;
     ans = 0;
 
     scanf("%d", &N);
 
-    for (i = 0; i < 10; i++) { 
+    for (int i = 0; i < 10; i++) { 
         DP[1][i] = 1;
     }
 
-    for (i = 2; i <= N; i++) {
-        for (j = 0; j < 10; j++) {
-            for (k = j; k < 10; k++) {
+    for (int i = 2; i <= N; i++) {
+        for (int j = 0; j < 10; j++) {
+            for (int k = j; k < 10; k++) {
                 DP[i][j] = (DP[i][j] + DP[i-1][k]) % 10007;
             }
         }
     }
 
-    for (i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++) {
         ans = (ans + DP[N][i]) % 10007;
     }
 
