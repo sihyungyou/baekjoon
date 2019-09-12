@@ -16,11 +16,14 @@
 
 using namespace std;
 
+int max (int a, int b) {
+    return a > b ? a : b;
+}
+
 int main() {
     int arr[10] = {0, };
     char str[1000000];
-    int i, temp;
-    int max = 0;
+    int i, temp, ans;
     scanf("%s", str);
 
     int len = strlen(str);
@@ -30,10 +33,11 @@ int main() {
         arr[temp]++;
     }
 
-    for (i = 0; i < 10; i++) if (i != 9 && i != 6 && arr[i] > max) max = arr[i];
+    ans  = 0;
+    for (i = 0; i < 10; i++) if (i != 9 && i != 6) ans = max(ans, arr[i]);
 
-
-    printf("%d\n", max);
+    ans = max((arr[6] + arr[9] + 1) / 2, ans);
+    printf("%d\n", ans);
     
 
     return 0;
