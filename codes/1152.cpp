@@ -16,20 +16,18 @@ using namespace std;
 
 int main() {
     
-    int pos, cnt = 0;
-    string input, token;
-    string delimiter = " ";
+    int cnt = 1;
+    char str[1000001];
     
-    getline(cin, input);
+    cin.getline(str, 1000001);
 
-    while ((pos = input.find(delimiter)) != string::npos) {
-        token = input.substr(0, pos);
-        cout << token << endl;
-        cnt++;
-        input.erase(0, pos + delimiter.length());
+    if (str[0] == ' ') cnt = 0;
+    for (int i = 0; i < strlen(str); i++) {
+        if (str[i] == ' ') cnt++;
     }
-    printf("%d\n", cnt);
+    if (str[strlen(str)-1] == ' ') cnt--;
 
+    cout << cnt << endl;
 
     return 0;
 }
