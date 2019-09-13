@@ -11,3 +11,43 @@
 첫째 줄에 그룹 단어의 개수를 출력한다.
 */
 
+#include <cstdio>
+#include <cstring>
+
+using namespace std;
+
+int main() {
+
+    int N, i, j, k, cnt, check;
+    cnt = 0;
+    int arr[26] = {0, };
+    char str[100][100];
+
+    scanf("%d", &N);
+
+    for (i = 0; i < N; i++) {
+        for (k = 0; k < 26; k++) arr[k] = 0;
+        check = 'Z';
+
+        scanf("%s", str[i]);
+        int len = strlen(str[i]);
+
+        for (j = 0; j < len; j++) {
+            if (str[i][j] == check) {
+                printf("if : %c\n", str[i][j]);
+                continue;
+            }
+            else {
+                printf("else : %c\n", str[i][j]);
+                check = str[i][j];
+                if (arr[str[i][j] - 97]) break;
+                else arr[str[i][j] - 97] = 1;
+            }
+        }
+        if (j == len) cnt++;
+    }
+
+    printf("%d\n", cnt);
+
+    return 0;
+}
