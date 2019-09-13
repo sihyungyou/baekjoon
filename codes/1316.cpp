@@ -34,11 +34,9 @@ int main() {
 
         for (j = 0; j < len; j++) {
             if (str[i][j] == check) {
-                printf("if : %c\n", str[i][j]);
                 continue;
             }
             else {
-                printf("else : %c\n", str[i][j]);
                 check = str[i][j];
                 if (arr[str[i][j] - 97]) break;
                 else arr[str[i][j] - 97] = 1;
