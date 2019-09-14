@@ -19,11 +19,10 @@
 using namespace std;
 
 int main() {
-
+    int i, ans;
+    int j = 0;
     int sum = 0;
-    int i, j = 0;
     int temp = 0;
-    bool flag = false;
     int arr[25] = {0, };
     char str[51];
 
@@ -33,22 +32,30 @@ int main() {
 
     for (i = 0; i < len; i++) {
         if (str[i] == '-') {
+            sum += temp;
             arr[j] = sum;
             j++;
+            temp = 0;
             sum = 0;
         }
         else if (str[i] == '+') {
-            
+            sum += temp;
+            temp = 0;
         }
         else {
-            sum *= 10;
-            sum += int(str[i] - '0');
+            temp *= 10;
+            temp += (str[i] - '0');
         }
-        printf("sum : %d\n", sum);
     }
 
-    for (i = 0; i < 25; i++) printf("%d ", arr[i]);
-    printf("\n");
+    sum += temp;
+    arr[j] = sum;
+
+    ans = arr[0];
+    for (i = 1; i < 25; i++) {
+        ans -= arr[i];
+    }
+    printf("%d\n", ans);
 
     return 0;
 }
