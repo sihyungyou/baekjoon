@@ -18,7 +18,7 @@ n개의 길이가 같은 DNA가 주어져 있을 때(이 DNA를 a1a2a3a4...이�
 */
 
 #include <cstdio>
-#include <map>
+#include <vector>
 
 using namespace std;
 
@@ -28,8 +28,27 @@ int get_diff(char * a, char * b, int len) {
     return diff;
 }
 
+char get_max(int * a) {
+    char c;
+    int i, maxidx;
+    int max = 0;
+
+    for (i = 0; i < 4; i++) {
+            if (a[i] > max) {
+            max = a[i];
+            maxidx = i;
+            a[i] = 0;
+        }
+    }
+    
+    if (maxidx == 0) return 'A';
+    else if (maxidx == 1) return 'C';
+    else if (maxidx == 2) return 'G';
+    else return 'T';
+}
+
 int main() {
-    map <char, int> m;
+    int cache[4] = {0, };
     int N, M, i, j, diff = 0;
 
     scanf("%d %d", &N, &M);
@@ -38,22 +57,18 @@ int main() {
     char dna[N][M];
     for (i = 0; i < N; i++) scanf("%s", dna[i]);
 
-    // make s
     for (j = 0; j < M; j++) {
         for (i = 0; i < N; i++) {
-            // std::map<char, int>::iterator search = m.find(dna[i][j]);
-            // if (search == m.end()) {
-            //     m.insert(make_pair(dna[i][j], 0));
-            // } else {
-            //     search->second++;
-            // }
+            if (dna[i][j] == 'A') cache[0]++;
+            else if (dna[i][j] == 'C') cache[1]++;
+            else if (dna[i][j] == 'G') cache[2]++;
+            else cache[3]++;
         }
-
+        s[j] = get_max(cache);
     }
-
     for (i = 0; i < N; i++) diff += get_diff(s, dna[i], M);
     
-    printf("%s\n%d\n", s, diff);
-
+    for (i = 0; i < M; i++) printf("%c", s[i]);
+    printf("\n%d\n", diff);
     return 0;
 }
