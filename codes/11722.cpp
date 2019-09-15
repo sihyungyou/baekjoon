@@ -17,24 +17,30 @@
 
 using namespace std;
 
+int get_max(int a, int b) {
+    return a > b ? a : b;
+}
+
 int main() {
 
-    int N, i, temp, pos = 0;
+    int N, i, max = 0;
     int arr[1001] = {0, };
-    
+    int memo[1001] = {0, };
+
     scanf("%d", &N);
 
-    for (i = 0; i < N; i++) {
-        scanf("%d", &temp);
-        if (temp > arr[pos]) arr[pos] = temp;
-        else if (temp < arr[pos]) arr[++pos] = temp;
+    for (i = 0; i < N; i++) scanf("%d", &arr[i]);
+    
+    memo[0] = 1;
+    
+    for (i = 1; i < N; i++) {
+        if (arr[i] < arr[i-1]) memo[i] = memo[i-1] + 1;
+        else memo[i] = memo[i-1];
     }
 
-    for (i = 0; i <= pos; i++) {
-        printf("%d ", arr[i]);
-    }
+    for (i = 0; i < N; i++) printf("%d ", memo[i]);
     printf("\n");
-
+    // printf("%d\n", max);
 
     return 0;
 }
