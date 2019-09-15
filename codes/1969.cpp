@@ -18,8 +18,6 @@ n개의 길이가 같은 DNA가 주어져 있을 때(이 DNA를 a1a2a3a4...이�
 */
 
 #include <cstdio>
-#include <vector>
-
 using namespace std;
 
 int get_diff(char * a, char * b, int len) {
@@ -37,8 +35,8 @@ char get_max(int * a) {
             if (a[i] > max) {
             max = a[i];
             maxidx = i;
-            a[i] = 0;
         }
+        a[i] = 0;
     }
     
     if (maxidx == 0) return 'A';
@@ -48,7 +46,7 @@ char get_max(int * a) {
 }
 
 int main() {
-    int cache[4] = {0, };
+    int arr[4] = {0, };
     int N, M, i, j, diff = 0;
 
     scanf("%d %d", &N, &M);
@@ -59,13 +57,14 @@ int main() {
 
     for (j = 0; j < M; j++) {
         for (i = 0; i < N; i++) {
-            if (dna[i][j] == 'A') cache[0]++;
-            else if (dna[i][j] == 'C') cache[1]++;
-            else if (dna[i][j] == 'G') cache[2]++;
-            else cache[3]++;
+            if (dna[i][j] == 'A') arr[0]++;
+            else if (dna[i][j] == 'C') arr[1]++;
+            else if (dna[i][j] == 'G') arr[2]++;
+            else arr[3]++;
         }
-        s[j] = get_max(cache);
+        s[j] = get_max(arr);
     }
+
     for (i = 0; i < N; i++) diff += get_diff(s, dna[i], M);
     
     for (i = 0; i < M; i++) printf("%c", s[i]);
