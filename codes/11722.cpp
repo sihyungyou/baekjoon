@@ -23,7 +23,7 @@ int get_max(int a, int b) {
 
 int main() {
 
-    int N, i, max = 0;
+    int N, i, max = 0, ans= 0;
     int arr[1001] = {0, };
     int memo[1001] = {0, };
 
@@ -32,15 +32,25 @@ int main() {
     for (i = 0; i < N; i++) scanf("%d", &arr[i]);
     
     memo[0] = 1;
+    max = arr[0];
     
     for (i = 1; i < N; i++) {
-        if (arr[i] < arr[i-1]) memo[i] = memo[i-1] + 1;
-        else memo[i] = memo[i-1];
+        if (arr[i] < arr[i-1]) {
+            memo[i] = memo[i-1] + 1;
+        }
+        else if (arr[i] > max) {
+            memo[i] = 1;
+            max = arr[i];
+        }
+        else {
+            memo[i] = memo[i-1];
+        }
     }
 
-    for (i = 0; i < N; i++) printf("%d ", memo[i]);
-    printf("\n");
-    // printf("%d\n", max);
+    for (i = 0; i < N; i++) ans = get_max(ans, memo[i]);
+    
+    printf("%d\n", ans);
+
 
     return 0;
 }
