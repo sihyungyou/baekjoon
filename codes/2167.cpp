@@ -13,26 +13,25 @@ K개의 줄에 순서대로 배열의 합을 출력한다. 배열의 합은 32bi
 
 int main() {
 
-    int N, M, K, i, j, x, y, a, b, sum = 0;
-    int arr[300][300] = {0, };
-    int dp[300][300] = {0, };
+    int t, i, j, x, y, sum, N, M, K;
+    int arr[301][301] = { 0, };
+    int dp[301][301]= { 0, };
 
     scanf("%d %d", &N, &M);
     
-    
-    for (a = 0; a < N; a++) {
-        for (b = 0; b < M; b++) { 
-            scanf("%d", &arr[a][b]);
-            dp[a][b] = arr[a][b];
+    for (i = 1; i <= N; i++) {
+        for (j = 1; j <= M; j++) {
+            scanf("%d", &arr[i][j]);
+            dp[i][j] = dp[i-1][j] + dp[i][j-1] + arr[i][j] - dp[i-1][j-1];
         }
     }
+    
+    scanf("%d", &K);
 
-    for (b = 0; b < M; b++) {
-        for (a = 1; a < N; a++) {
-            dp[a][b] += dp[a-1][b];
-        }
+    for (t = 0; t < K; t++) {
+        scanf("%d %d %d %d", &x, &y, &i, &j);
+        printf("%d\n", dp[i][j] - dp[i][y-1] - dp[x-1][j] + dp[x-1][y-1]);
     }
-    
 
     return 0;
 }
