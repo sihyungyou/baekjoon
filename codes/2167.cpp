@@ -9,3 +9,30 @@
 K개의 줄에 순서대로 배열의 합을 출력한다. 배열의 합은 32bit-int 범위를 초과하지 않는다.
 */
 
+#include <cstdio>
+
+int main() {
+
+    int N, M, K, i, j, x, y, a, b, sum = 0;
+    int arr[300][300] = {0, };
+    int dp[300][300] = {0, };
+
+    scanf("%d %d", &N, &M);
+    
+    
+    for (a = 0; a < N; a++) {
+        for (b = 0; b < M; b++) { 
+            scanf("%d", &arr[a][b]);
+            dp[a][b] = arr[a][b];
+        }
+    }
+
+    for (b = 0; b < M; b++) {
+        for (a = 1; a < N; a++) {
+            dp[a][b] += dp[a-1][b];
+        }
+    }
+    
+
+    return 0;
+}
