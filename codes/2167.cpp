@@ -19,6 +19,7 @@ int main() {
 
     scanf("%d %d", &N, &M);
     
+    
     for (i = 1; i <= N; i++) {
         for (j = 1; j <= M; j++) {
             scanf("%d", &arr[i][j]);
