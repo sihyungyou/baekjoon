@@ -17,6 +17,7 @@ int main() {
             temp *= 2;
         }
         sum += cnt;
+        printf("sum : %.0Lf, N : %.0Lf\n", sum, N);
     }
 
     printf("%d\n", cnt);
