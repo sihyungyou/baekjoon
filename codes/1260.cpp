@@ -11,71 +11,69 @@
 첫째 줄에 DFS를 수행한 결과를, 그 다음 줄에는 BFS를 수행한 결과를 출력한다. V부터 방문된 점을 순서대로 출력하면 된다.
 */
 
-#include <iostream>
+#include <cstdio>
 #include <queue>
 
 using namespace std;
-void do_dfs(int a[][1000] , bool c[] , int v);
-void do_bfs(int a[][1000], bool c[], int v);
-int main() {
-  int N, M, V, i, v1, v2;
-  int map[1000][1000];
-  bool check[1000] = { false };
 
-  //stdin
-  cin >> N >> M >> V;
+int arr[1001][1001] = { 0, };
+bool vi[1001] = { false, };
+int N, M, V;
 
-  //check the edges
-  for(i = 0; i < M; i++){
-    cin >> v1 >> v2;
-    map[v1][v2] = 1;
-    map[v2][v1] = 1;
-  }
-
-  //dfs
-  do_dfs(map, check, V);
-
-  //re-initialize check array with false
-  for(int i = 0; i < 1000; i++){
-    check[i] = false;
-  }
-
-  cout << endl;
-
-  //bfs
-  do_bfs(map, check, V);
-
-
-  return 0;
+void init() { 
+  for (int i = 0; i <= 1000; i++) vi[i] = false; 
 }
 
-void do_dfs(int a[][1000], bool c[], int v){
-  int n = sizeof a[0] / sizeof(int);        //get size (length) of map array
-  c[v] = true;                              //mark true c[v] since calling dfs function means map[v] is checked
-  cout << v << " ";                         //print which vertex is connected
-  for(int i = 1; i < n; i++){
-    if(a[v][i]==1 && !c[i]) {               //check a[v]'s all connected vertex
-      do_dfs(a,c,i);                        //if find one && it hasn't been checked, do dfs again starting that vertex
-    }
-  }
+void dfs(int s) {
+  int i = 0;
+
+  printf("%d ", s);
+  vi[s] = true;
+
+  for(i = 1; i <= N; i++) if (arr[s][i] && !vi[i]) dfs(i);
+  if (i == N) return;
 }
 
-void do_bfs(int a[][1000], bool c[], int v){
-  queue<int> q;
-  int n = sizeof a[0] / sizeof(int);
-  c[v] = true;
-  q.push(v);
-
-  //check if a[v][i]==1, it it's 1 push to queue
-  while(!q.empty()){
-    v = q.front();                        //get one vertex which is one from queue
-    q.pop();                              //get rid of that vertex from queue
-    cout << v << " ";
-    for(int i = 1; i < n; i++){           //check rest of array's elements if they are 1 and hasn't been checked
-      if(a[v][i]==1 && !c[i]){
-        q.push(i);                        //push to queue if both standards are satisfied
-        c[i] = true;                      //don't forget to mark true in checking array
+void bfs(int s) {
+  queue <int> q;
+  int i = 0;
+  
+  q.push(s);
+  vi[s] = true;
+  
+  while(!q.empty()) {
+    int news = q.front();
+    vi[news] = true;
+    printf("%d ", news);
+    q.pop();
+    
+    for (i = 1; i <= N; i++) {
+      if(arr[news][i] && !vi[i]) {
+        vi[i] = true;
+        q.push(i);
       }
     }
   }
+}
+
+int main() {
+  int i, j, src, dest;
+
+  scanf("%d %d %d", &N, &M, &V);
+
+  for (i = 1; i <= M; i++) {
+    scanf("%d %d", &src, &dest);
+    arr[src][dest] = 1;
+    arr[dest][src] = 1;
+  }
+
+  dfs(V);
+  printf("\n");
+
+  init();
+  bfs(V);
+  printf("\n");
+
+
+  return 0;
 }
