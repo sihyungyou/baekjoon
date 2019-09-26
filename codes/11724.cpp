@@ -16,10 +16,7 @@ bool vi[1001] = { false, };
 void dfs(int s) {
 
   int i = 0;
-
-  printf("%d ", s);
   vi[s] = true;
-
   for(i = 1; i <= N; i++) if (arr[s][i] && !vi[i]) dfs(i);
   if (i == N) return;
 }
@@ -35,8 +32,14 @@ int main() {
     arr[dest][src] = 1;
   }
 
-  dfs(V);
+  for (i = 1; i <= N; i++) {
+    if (!vi[i]) {
+      dfs(i);
+      cnt++;
+    }
+  }
 
+  printf("%d\n", cnt);
 
   return 0;
 }
