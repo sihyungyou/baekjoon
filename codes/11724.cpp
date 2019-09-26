@@ -6,12 +6,36 @@
 (1 ≤ u, v ≤ N, u ≠ v) 같은 간선은 한 번만 주어진다.
 */
 
-//in progress
-#include <iostream>
+#include <cstdio>
 using namespace std;
 
-int main(){
+int N, M, cnt = 0;
+int arr[1001][1001] = { 0, };
+bool vi[1001] = { false, };
 
+void dfs(int s) {
+
+  int i = 0;
+
+  printf("%d ", s);
+  vi[s] = true;
+
+  for(i = 1; i <= N; i++) if (arr[s][i] && !vi[i]) dfs(i);
+  if (i == N) return;
+}
+
+int main() {
+  int i, j, src, dest;
+
+  scanf("%d %d", &N, &M);
+
+  for (i = 1; i <= M; i++) {
+    scanf("%d %d", &src, &dest);
+    arr[src][dest] = 1;
+    arr[dest][src] = 1;
+  }
+
+  dfs(V);
 
 
   return 0;
