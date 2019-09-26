@@ -17,31 +17,30 @@
 using namespace std;
 
 int N, M, cnt = 0;
-int arr[51][51] = { 0, };
-bool vi[51][51] = { false, };
+int arr[50][50] = { 0, };
+bool vi[50][50] = { false, };
 int dy[4] = { 1, -1, 0, 0 };
 int dx[4] = { 0, 0, 1, -1 };
 
 void init() {
-  for (int i = 1; i <= 50; i++) {
-    for (int j = 1; j <= 50; j++) {
+  for (int i = 0; i < 50; i++) {
+    for (int j = 0; j < 50; j++) {
       vi[i][j] = false;
       arr[i][j] = 0;
     }
   }
 }
 
-void dfs(int r, int c) {
-  vi[r][c] = true;
-  int i = 0;
+void dfs(int x, int y) {
+  vi[x][y] = true;
 
-  for (i = 0; i < 4; i++) {
-    int nr = r + dx[i];
-    int nc = c + dy[i];
+  for (int i = 0; i < 4; i++) {
+    int nx = x + dx[i];
+    int ny = y + dy[i];
 
-    if (nc < 1 || nc > M || nr < 1 || nr > N) continue;
-    if (arr[nr][nc] && !vi[nr][nc]){
-      dfs(nr, nc);
+    if (ny < 0 || ny >= M || nx < 0 || nx >= N) continue;
+    if (arr[nx][ny] && !vi[nx][ny]){
+      dfs(nx, ny);
     }
   }
 
@@ -55,18 +54,16 @@ int main() {
 
   for (t = 0; t < T; t++) {
     cnt = 0;
-    init();
-
     scanf("%d %d %d", &M, &N, &K);
 
     for (k = 0; k < K; k++) {
       scanf("%d %d", &row, &col);
-      arr[row][col] = 1;
+      arr[col][row] = 1;
     }
 
     // dfs
-    for (i = 1; i <= N; i++) {
-      for (j = 1; j <= M; j++) {
+    for (i = 0; i < N; i++) {
+      for (j = 0; j < M; j++) {
         if(arr[i][j] && !vi[i][j]) {
           dfs(i, j);
           cnt++;
@@ -74,6 +71,7 @@ int main() {
       }
     }
     printf("%d\n", cnt);
+    init();
   }
 
 
