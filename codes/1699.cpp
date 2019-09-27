@@ -25,7 +25,7 @@ int main() {
     scanf("%d", &n);
     int dp[n+1];
     
-    for (i = 1; i <= n; i++) dp[i] = pow(i, 2);
+    for (i = 1; i <= sqrt(n); i++) dp[i] = pow(i, 2);
 
     j = sqrt(n);
     printf("j : %d\n", j);
