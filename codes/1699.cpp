@@ -21,22 +21,15 @@ using namespace std;
 int main() {
 
     int n, i, j, cnt = 0;
+    int dp[100001] = { 0, };
 
     scanf("%d", &n);
-    int dp[n+1];
     
-    for (i = 1; i <= sqrt(n); i++) dp[i] = pow(i, 2);
-
-    j = sqrt(n);
-    printf("j : %d\n", j);
-
-    while(n != 0) {
-        if( n - dp[j] >= 0) {
-            n -= dp[j];
-            cnt++;
-        }
-        else {
-            j--;
+    for (i = 1; i <= n; i++) {
+        for (j = 1; j*j <= i; j++) {
+            if (dp[i-j*j+1] < dp[i] || dp[i] == 0) {
+                dp[i] = dp[i - j*j + 1]++;
+            }
         }
     }
 
