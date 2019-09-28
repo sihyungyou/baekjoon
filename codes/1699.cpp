@@ -14,26 +14,29 @@
 */
 
 #include <cstdio>
-#include <cmath>
 
 using namespace std;
 
+int min(int a, int b) { return a < b ? a : b; }
 int main() {
 
-    int n, i, j, cnt = 0;
-    int dp[100001] = { 0, };
+    int N, i, j;
+    int dp[100001] = { 0 };
+    int a[317] = { 0 };
+    scanf("%d", &N);
 
-    scanf("%d", &n);
+    for (i = 0; i <= N; i++) a[i] = i*i;
+
+    for (i = 0; i <= N; i++) dp[i] = __INT_MAX__;
     
-    for (i = 1; i <= n; i++) {
-        for (j = 1; j*j <= i; j++) {
-            if (dp[i-j*j+1] < dp[i] || dp[i] == 0) {
-                dp[i] = dp[i - j*j + 1]++;
-            }
+    dp[0] = 0;
+    for (i = 1; i*i <= N; i++) {
+        for (j = a[i]; j <= N; j++) {
+            dp[j] = min(dp[j], dp[j - a[i]] + 1);
         }
     }
 
-    printf("%d\n", cnt);
+    printf("%d\n", dp[N]);
 
     return 0;
 }

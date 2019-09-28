@@ -16,31 +16,59 @@ N이 주어질 때, 길이가 N인 계단 수가 총 몇 개 있는지 구하는
 */
 
 
-#include <cstdio>
+// #include <cstdio>
+
+// using namespace std;
+
+// int main() {
+//     int ans = 0;
+//     int N, i, j;
+//     int dp[100][12] = { 0 };
+//     scanf("%d", &N);
+
+//     for (i = 2; i < 11; i++) dp[0][i] = 1;
+
+//     for (i = 1; i < N; i++) {
+//         dp[i][0] = 0;
+//         dp[i][11] = 0;
+//         for (j = 1; j < 11; j++) {
+//             dp[i][j] = (dp[i-1][j-1] + dp[i-1][j+1]) % 1000000000;
+//         }
+//     }
+
+//     for (i = 1; i < 11; i++) {
+//         ans = (ans + dp[N-1][i]) % 1000000000;
+//     }
+
+//     printf("%d\n", ans);
+
+//     return 0;
+// }
+
+#include <bits/stdc++.h>
+#define MOD 1000000000
 
 using namespace std;
 
+int a[2][12];
+
 int main() {
-    int ans = 0;
-    int N, i, j;
-    int dp[100][12] = { 0 };
-    scanf("%d", &N);
-
-    for (i = 2; i < 11; i++) dp[0][i] = 1;
-
-    for (i = 1; i < N; i++) {
-        dp[i][0] = 0;
-        dp[i][11] = 0;
-        for (j = 1; j < 11; j++) {
-            dp[i][j] = (dp[i-1][j-1] + dp[i-1][j+1]) % 1000000000;
+    int n, ans = 9;
+    
+    scanf("%d", &n);
+    
+    for(int i = 2; i < 11; i++)
+        a[1][i] = 1;
+    
+    for(int i = 2; i <= n; i++) {
+        ans = 0;
+        for(int j = 1; j < 11; j++) {
+            a[i%2][j] = (a[(i-1)%2][j-1] + a[(i-1)%2][j+1]) % MOD;
+            ans = (ans + a[i%2][j]) % MOD;
         }
     }
-
-    for (i = 1; i < 11; i++) {
-        ans = (ans + dp[N-1][i]) % 1000000000;
-    }
-
-    printf("%d\n", ans);
-
+    
+    printf("%d", ans);
+    
     return 0;
 }
