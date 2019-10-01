@@ -11,63 +11,30 @@ n개의 정수로 이루어진 임의의 수열이 주어진다.
 첫째 줄에 답을 출력한다.  
 */
 
-// #include <cstdio>
-// #include <algorithm>
-
-// using namespace std;
-
-// int main() {
-//     int n, i;
-//     long long ans = 0;
-
-//     scanf("%d", &n);
-//     long long arr[n];
-//     long long dp[n];
-
-//     for (i = 0; i < n; i++) scanf("%lld", &arr[i]);
-    
-//     dp[0] = arr[0];
-//     ans = dp[0];
-
-//     for (i = 1; i < n; i++) {
-//         dp[i] = max(dp[i-1] + arr[i], arr[i]);
-//         ans = max(ans, dp[i]);
-//     }
-    
-//     printf("%lld", ans);
-
-//     return 0;
-// }
-
 #include <cstdio>
+#include <algorithm>
 
 using namespace std;
-int max(long long a, long long b) { return a > b ? a : b; }
 
 int main() {
-
-    long long dp[100000] = { 0 };
-    int arr[100000];
+    int n, i;
     long long ans = 0;
-    int i, n;
 
     scanf("%d", &n);
+    long long arr[n];
+    long long dp[n];
 
-
-    for (i = 0; i < n; i++) scanf("%d", &arr[i]);
+    for (i = 0; i < n; i++) scanf("%lld", &arr[i]);
+    
     dp[0] = arr[0];
+    ans = dp[0];
 
     for (i = 1; i < n; i++) {
-        if (dp[i-1] > arr[i]) dp[i] = arr[i] + dp[i-1];
-        else dp[i] = arr[i];
-    }
-
-
-    for (i = 0; i < n; i++) {
-        printf("%lld ", dp[i]);
+        dp[i] = max(dp[i-1] + arr[i], arr[i]);
         ans = max(ans, dp[i]);
     }
-    printf("\n%lld\n", ans);
+    
+    printf("%lld", ans);
 
     return 0;
 }
