@@ -23,18 +23,14 @@ using namespace std;
 
 int main() {
 
-    int t, i, n;
-    long long sum = 0;
+    long long t, i, n;
 
-    scanf("%d", &n);
+    scanf("%lld", &n);
 
-    for (t = 1; t <= n; t++) {
-        sum = 0;
-        
-        for (i = 0; i <= t; i++) sum += (t+1)*pow(2, i);
-        sum += t;
-        if (n <= sum) {
-            printf("%d\n", t);
+    for (i = 1; i <= n; i++) {
+        long long sum = (i+1LL)*((1LL<<(i+1))-1) + i;
+        if (sum >= n) {
+            printf("%lld\n", i);
             break;
         }
     }
