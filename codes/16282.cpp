@@ -29,6 +29,7 @@ int main() {
 
     for (i = 1; i <= n; i++) {
         long long sum = (i+1LL)*((1LL<<(i+1))-1) + i;
+        // long long sum = (i+1) * (pow(2, i+1)-1) + i;
         if (sum >= n) {
             printf("%lld\n", i);
             break;
