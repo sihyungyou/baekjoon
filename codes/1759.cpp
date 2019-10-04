@@ -17,7 +17,6 @@ C개의 문자들이 모두 주어졌을 때, 가능성 있는 암호들을 모�
 */
 
 #include <cstdio>
-// #include <algorithm>
 #include <queue>
 
 using namespace std;
@@ -25,54 +24,14 @@ using namespace std;
 bool isVowel(char ch) { return (ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u'); }
 
 int main() {
-    
-    int L, C, i, cnt_c, cnt_v, tempc, tempv, pos;
-    cnt_c = 0, cnt_v = 0;
-    char arr[15];
-    queue <char> q;
+
+    int L, C, i;
 
     scanf("%d %d", &L, &C);
 
     for (i = 0; i < C; i++) {
-        scanf(" %c", &arr[i]);
-    }
-    sort(arr, arr+C);
-    i = 0;
-    pos = i;
-
-    while(C - pos >= L && i < C) {
-        // printf("%c\n", arr[i]);
-
-        if (q.size() == L) {
-            // printf("q.size == L\n");
-            while(!q.empty()) { 
-                printf("%c", q.front()); 
-                q.pop();
-            }
-            printf("\n");
-            pos++;
-        }
-        else if (q.size()+1 == L) {
-            // printf("q.size + 1 == L\n");
-            tempv = cnt_v;
-            tempc = cnt_c;
-            if(isVowel(arr[i])) tempv++;
-            else tempc++;
-            if (tempc >= 2 && tempv >= 1) {
-                q.push(arr[i]);
-                cnt_v = 0, cnt_c = 0;
-            }
-            i++;
-        }
-        else {
-            // printf("else\n");
-            q.push(arr[i]);
-            if(isVowel(arr[i])) cnt_v++;
-            else cnt_c++;
-            i++;
-        }
     }
 
-    // printf("end\n");
+
     return 0;
 }
