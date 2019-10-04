@@ -20,26 +20,23 @@
 */
 
 #include <cstdio>
-#include <string>
 
 using namespace std;
 
 int k, cnt;
 int arr[12];
-string str;
+int lotto[6];
 
-void dfs(int v, string s) {
+void lotto(int arridx, int lottoidx) {
     if (cnt == 6) {
-        s.append("\n");
+        for (int i = 0; i < 6; i++) printf("%d ", lotto[i]);
+        printf("\n");
     }
     else {
-        printf("%s", s);
-        cnt++;
-        for (int i = v+1; i < k; i++) {
-            dfs(i);
-        }
+        lotto[lottoidx] = arr[arridx];
+        for (int i = arridx; i < k; i++) lotto( )
+        } 
     }
-    cnt--;
 }
 
 int main() {
@@ -51,7 +48,7 @@ int main() {
         scanf("%d", &k);
         for (i = 0; i < k; i++) scanf("%d", &arr[i]);
         for (i = 0; i < k-5; i++) {
-            dfs(i, str.append(arr[i]));
+            lotto(i);
         }
     }
     
