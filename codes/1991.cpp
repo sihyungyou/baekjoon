@@ -20,52 +20,37 @@
 
 using namespace std;
 
-char arr[54];
-int len;
+typedef struct node * treeptr;
+struct node {
+    char val;
+    treeptr left;
+    treeptr right;
+};
 
-void pre(int v) {
-    if (arr[v] != '.') printf("%c", arr[v]);
-    if (v*2 < len) pre(v*2);
-    if (v*2+1 < len) pre(v*2+1);
-}
+struct node tree[26];
 
-void mid(int v) {
-    if (v*2 < len) mid(v*2);
-    if (arr[v] != '.') printf("%c", arr[v]);
-    if (v*2+1 < len) mid(v*2+1);
-}
-
-void post(int v) {
-    if (v*2 < len) post(v*2);
-    if (v*2+1 < len) post(v*2+1);
-    if (arr[v] != '.') printf("%c", arr[v]);
+void preorder(node t) {
+    if (t.val != '.') printf("%c", t.val);
+    if (t.left != NULL) preorder(*t.left);
+    if (t.right != NULL) preorder(*t.right);
 }
 
 int main() {
-    int n, i, j;
-    char r, lc, rc;
+
+    int n, i;
+    char r, left, right;
+
     scanf("%d", &n);
 
-    len = n*2+2;
-    for (i = 0 ; i < len; i++) arr[i] = '.';
-    arr[1] = 'A';
+    for (i = 0; i < n; i++) tree[i].val = '.';
 
-    for (i = 0 ; i < n; i++) {
-        scanf(" %c %c %c", &r, &lc, &rc);
-        if (r != '.') { 
-            for (j = 1; j < len; j++) if (arr[j] == r) break; 
-            if (lc != '.') arr[j*2] = lc;
-            if (rc != '.') arr[j*2+1] = rc;
-        }
+    for (i = 0; i < n; i++) {
+        scanf(" %c %c %c", &r, &left, &right);
+        if (left != '.') tree[r-'A'].left = &tree[left-'A'];
+        if (right != '.') tree[r-'A'].right = &tree[right-'A'];
     }
 
-    pre(1);
-    printf("\n");
-    mid(1);
-    printf("\n");
-    post(1);
-    printf("\n");
-    
+    preorder(tree[0]);
 
     return 0;
 }
