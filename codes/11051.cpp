@@ -13,6 +13,8 @@ nCk를 10007로 나눈 나머지를 출력한다.
 
 using namespace std;
 
+#define MOD 10007
+
 int main() {
 
     int N, K, i, j;
@@ -23,7 +25,10 @@ int main() {
     for (i = 0; i <= N; i++) {
         for (j = 0; j <= K; j++) {
             if (i == j || j == 0) dp[i][j] = 1;
-            else dp[i][j] = dp[i-1][j-1] + dp[i-1][j];
+            else {
+                dp[i][j] = (dp[i-1][j-1] % MOD) + (dp[i-1][j] % MOD);
+                dp[i][j] %= MOD;
+            }
         }
     }
 
