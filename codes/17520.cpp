@@ -19,6 +19,7 @@
 #include <cmath>
 using namespace std;
 #define MOD 16769023
+
 int main() {
     long n, ans = 1;
     scanf("%ld", &n);
