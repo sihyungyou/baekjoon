@@ -35,9 +35,10 @@ void sell(int price) {
 
 int main() {
 
-    int n, w, i;
-
-    scanf("%d %d", &n, &w);
+    int n, i;
+    long long w;
+    
+    scanf("%d %lld", &n, &w);
 
     int arr[n];
 
@@ -56,7 +57,5 @@ int main() {
     sell(arr[n-1]);
 
     printf("%lld\n", money);
-
-
     return 0;
 }
