@@ -32,6 +32,7 @@ int main () {
 
     for (i = 3; i < n+3; i++) {
         dp[i] = get_max(dp[i-3] + arr[i-1] + arr[i], dp[i-2] + arr[i]);
+        dp[i] = get_max(dp[i-1], dp[i]);
         ans = get_max(ans, dp[i]);
     }
 
