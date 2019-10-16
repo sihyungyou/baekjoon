@@ -21,47 +21,38 @@
 
 using namespace std;
 
-long long money;
-int coins;
+long long money, coins;
 
 void buy(int price) {
-    if (money >= coins*price) {
-        coins += money/price;
-        money -= coins*price;
-    }
-    // printf("price : %d, buy, money : %lld\n", price, money);
+    coins += money/price;
+    money %= price;
 }
 
 void sell(int price) {
     money += coins*price;
     coins -= coins;
-    // printf("price : %d, sell, money : %lld\n", price, money);
 }
 
 int main() {
 
-    int n, i, w;
+    int n, i;
+    long long w;
     
-    scanf("%d %d", &n, &w);
+    scanf("%d %lld", &n, &w);
 
-    int arr[n];
+    int arr[n+1];
 
     money = w;
     coins = 0;
 
     for (i = 0; i < n; i++) scanf("%d", &arr[i]);
+    arr[n] = 0;
 
-    // if (arr[0] < arr[1]) buy(arr[0]);
-    
-    for (i = 0; i < n-1; i++) {
+    for (i = 0; i < n; i++) {
         if (arr[i] < arr[i+1]) buy(arr[i]);
         else if (arr[i] > arr[i+1]) sell(arr[i]);
-        // if (arr[i-1] >= arr[i] && arr[i] < arr[i+1]) buy(arr[i]);
-        // else if (arr[i-1] <= arr[i] && arr[i] > arr[i+1]) sell(arr[i]);
     }
-
-    sell(arr[n-1]);
-
+    
     printf("%lld\n", money);
     return 0;
 }
