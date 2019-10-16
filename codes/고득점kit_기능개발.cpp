@@ -27,12 +27,12 @@ vector<int> solution(vector<int> progresses, vector<int> speeds) {
             q.pop();
         }
         else {
-            bound = q.front();
             answer.push_back(cnt);
+            bound = q.front();
             cnt = 0;
         }
     }
-    
+    answer.push_back(cnt);
     return answer;
 }
 
