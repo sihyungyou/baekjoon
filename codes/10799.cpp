@@ -23,39 +23,40 @@
 잘려진 조각의 총 개수를 나타내는 정수를 한 줄에 출력한다.
 */
 
-#include <stack>
-#include <iostream>
-#include <stack>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
-int main() {
-    int i, flag = 0, sum = 0, l = 0, tl = 0;
+int solution(string arrangement) {
+    int answer = 0;
+    int cnt = 0;
+    
+    for (int i = 0; i < arrangement.length(); i++) {
+        if (arrangement[i] == '(') {
+            if (arrangement[i+1] == '(') {
+                cnt++;
+            }
+            else if (arrangement[i+1] == ')') {
+                answer += cnt;
+                i++;
+            }
+        }
+        else if (arrangement[i] == ')') {
+            answer++;
+            cnt--;
+        }
+    }
+    
+    return answer;
+}
+
+int main () {
     string input;
-    stack <char> s;
 
     cin >> input;
-    
-    for(i = 0; i < input.length(); i++) {
-       if (input[i] == '(') {
-           s.push(input[i]);
-           flag = 1;
-       }
-       if (input[i] == ')' && s.top() == '(' && flag == 1) {
-           l++;
-           tl++;
-           flag = 0;
-           s.pop();
-       }
-       if (input[i] == ')' && s.top() == '(' && flag == 0) {
-           sum = sum + l + 1;
-           l = 0;
-       }
-    }
-
-
-    
+    int ans = solution(input);
+    printf("%d\n", ans);
 
     return 0;
 }
