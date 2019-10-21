@@ -29,5 +29,6 @@ int main() {
     for (i = 0; i < n; i++) for (j = coins[i]; j <= k; j++) if (j - coins[i] >= 0) dp[j] += dp[j - coins[i]];
 
     printf("%d\n", dp[k]);
+    
     return 0;
 }
