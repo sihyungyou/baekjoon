@@ -1,24 +1,30 @@
 #include <cstdio>
 using namespace std;
 
+int get_max(int a, int b) { return a > b ? a : b; }
 int main() {
-    int k, n, i, j;
-    scanf("%d %d", &k, &n);
 
-    int coins[k];
-    int dp[n+1];
+    int T[16] = { 0, };
+    int P[16] = { 0, };
+    int dp[17] = { 0, };
+    int N, i, day;
 
-    dp[0] = 1;
-    for (i = 1; i <= n; i++) dp[i] = 0;
-    for (i = 0; i < k; i++) scanf("%d", &coins[i]);
+    scanf("%d", &N);
 
-    for (i = 0; i < k; i++) {
-        for (j = coins[i]; j <= n; j++) {
-            dp[j] += dp[j - coins[i]];
-        }
+    for(i = 1; i <= N; i++) {
+        scanf("%d %d", &T[i], &P[i]);
+        if (T[i] + i > N + 1) dp[i] = 0;
+        else dp[i] = P[i];
     }
 
-    printf("%d\n", dp[n]);
+    for (i = N; i > 0; i--) {
+        day = i + T[i];
+        if ( day > N + 1) dp[i] = dp[i+1];
+        else dp[i] = get_max(P[i] + dp[day], dp[i+1]);
+
+    }
+
+    printf("%d\n", dp[1]);
 
     return 0;
 }
