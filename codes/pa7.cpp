@@ -38,9 +38,9 @@ int main() {
                     ans = get_max(ans, dp[i][j]);
                 }
             }
-            printf("%d ", dp[i][j]);
+            // printf("%d ", dp[i][j]);
         }
-        printf("\n");
+        // printf("\n");
     }
 
     printf("%d\n", ans);
