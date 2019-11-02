@@ -9,7 +9,7 @@ int solution(vector<int> people, int limit) {
     int i, w = 0;
     sort(people.begin(), people.end());
     
-    for (i = 0; i < people.size(); i++) {
+    for (i = 0; i < people.size()-1; i++) {
         if (w + people[i] <= limit) {
             w += people[i];
         }
