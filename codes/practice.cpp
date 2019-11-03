@@ -1,27 +1,24 @@
 #include <cstdio>
 using namespace std;
- 
-long long get_max (long long a, long long b) { return a > b ? a : b; }
 
 int main() {
 
-    int n, i;
-    long long ans = 0;
+    int n, k, i, j;
+    int dp[10001] = { 0, };
+
+    scanf("%d %d", &n, &k);
+    int coins[n];
+
+    for (i = 0; i < n; i++) scanf("%d", &coins[i]);
     
-    scanf("%d", &n);
-    long long arr[n];
-    long long dp[n];
-
-    for (i = 0; i < n; i++) scanf("%lld", &arr[i]);
-    dp[0] = arr[0];
-    ans = dp[0];
-
-    for (i = 1; i < n; i++) {
-        dp[i] = get_max(arr[i], dp[i-1] + arr[i]);
-        ans = get_max(ans, dp[i]);
+    dp[0] = 1;
+    for (i = 0; i < n; i++) {
+        for (j = coins[i]; j <= k; j++) {
+            dp[j] += dp[j - coins[i]];
+        }
     }
 
-    printf("%lld\n", ans);
+    printf("%d\n", dp[k]);
 
     return 0;
 }
