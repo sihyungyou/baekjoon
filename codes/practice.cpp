@@ -1,24 +1,26 @@
 #include <cstdio>
-#include <vector>
-#include <climits>
 using namespace std;
+
+#define MOD 1000000000
 
 int main() {
 
-    int N, i, temp, cnt = 0;
-    vector <int> v;
-    v.push_back(INT_MIN);
+    int i, j, N, ans = 9;
+    int dp[2][12] = { 0, };
+
+    for (i = 2; i <= 10; i++) dp[1][i] = 1;
 
     scanf("%d", &N);
-    for (i = 0; i < N; i++) {
-        scanf("%d", &temp);
-        if (v.back() < temp) { cnt++; v.push_back(temp);
-        } else {
-            vector<int>::iterator low = lower_bound(v.begin(), v.end(), temp);
-            *low = temp;
+
+    for (i = 2; i <= N; i++) {
+        ans = 0;
+        for (j = 1; j < 11; j++) {
+            dp[i%2][j] = (dp[(i-1)%2][j-1] + dp[(i-1)%2][j+1]) % MOD;
+            ans = (ans + dp[i%2][j]) % MOD;
         }
     }
 
-    printf("%d\n", cnt);
+    printf("%d\n", ans);
+
     return 0;
 }
