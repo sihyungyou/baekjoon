@@ -1,24 +1,24 @@
 #include <cstdio>
+#include <vector>
+#include <climits>
 using namespace std;
 
 int main() {
 
-    int n, k, i, j;
-    int dp[10001] = { 0, };
+    int N, i, temp, cnt = 0;
+    vector <int> v;
+    v.push_back(INT_MIN);
 
-    scanf("%d %d", &n, &k);
-    int coins[n];
-
-    for (i = 0; i < n; i++) scanf("%d", &coins[i]);
-    
-    dp[0] = 1;
-    for (i = 0; i < n; i++) {
-        for (j = coins[i]; j <= k; j++) {
-            dp[j] += dp[j - coins[i]];
+    scanf("%d", &N);
+    for (i = 0; i < N; i++) {
+        scanf("%d", &temp);
+        if (v.back() < temp) { cnt++; v.push_back(temp);
+        } else {
+            vector<int>::iterator low = lower_bound(v.begin(), v.end(), temp);
+            *low = temp;
         }
     }
 
-    printf("%d\n", dp[k]);
-
+    printf("%d\n", cnt);
     return 0;
 }
