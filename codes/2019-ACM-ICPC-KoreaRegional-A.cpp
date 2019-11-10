@@ -1,8 +1,6 @@
 #include <cstdio>
-#include <climits>
 using namespace std;
 
-int get_min (int a, int b) { return a < b ? a : b; }
 int main() {
 
     int n, i, j, k, t1, t2, t3;
