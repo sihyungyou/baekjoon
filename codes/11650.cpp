@@ -16,12 +16,8 @@
 
 using namespace std;
 bool comp(pair<int, int> a, pair <int, int>b) {
-    if (a.first == b.first) {
-        return a.second < b.second;
-    }
-    else {
-        return a.first < b.first;
-    }
+    if (a.first == b.first) return a.second < b.second;
+    return a.first < b.first;
 }
 
 int main() {
@@ -30,19 +26,16 @@ int main() {
 
     scanf("%d", &N);
 
-    int arr[N][2];
     for (i = 0; i < N; i++) {
         scanf("%d %d", &x, &y);
         v.push_back(make_pair(x, y));
     }
 
-    printf("===\n");
     sort(v.begin(), v.end(), comp);
     
-    for (i = 0; i < N; i++) {
-        printf("%d %d\n", v[i].first, v[i].second);   
+    for (vector<pair<int, int> >::iterator it = v.begin(); it != v.end(); it++) {
+        printf("%d %d\n", it->first, it->second);
     }
-    
 
     return 0;
 }
