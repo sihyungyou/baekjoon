@@ -21,14 +21,14 @@
 
 using namespace std;
 
+int get_max(int a, int b) { return a > b ? a : b; }
 int main() {
     
-    int N, K, i, w, v;
+    int N, K, i, j, w, v;
     vector<pair<int ,int> > wv;
-    int arr[N][K+1];
 
     scanf("%d %d", &N, &K);
-    
+    int arr[N][K+1];
 
     for (i = 0; i < N; i++) for (j = 0; j <= K; j++) arr[i][j] = 0;
 
@@ -43,12 +43,12 @@ int main() {
                 if (wv[i].first <= j) arr[i][j] = wv[i].second;
                 continue;
             }
-            if ()
+            if (wv[i].first <= j) arr[i][j] = get_max(arr[i-1][j], wv[i].second + arr[i-1][j-wv[i].first]);
+            else arr[i][j] = arr[i-1][j];
         }
     }
 
-
-
+    printf("%d\n", arr[N-1][K]);
 
     return 0;
 }
