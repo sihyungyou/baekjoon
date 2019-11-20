@@ -13,15 +13,21 @@ int main() {
         cin.getline(input, 100);
         if (!strcmp(input, ".")) break;
         flag = 0;
-        
+
         for (int i = 0; i < strlen(input); i++) {
             if (input[i] == '(') small.push('(');
             else if (input[i] == '[') big.push('[');
+
             else if (input[i] == ')') {
+                if (!big.empty()) { cout << "no\n"; flag = 1; break; }
+
                 if (!small.empty()) small.pop();
                 else { cout << "NO\n"; flag = 1; break; }
             }
+
             else if (input[i] == ']') {
+                if (!small.empty()) { cout << "no\n"; flag = 1; break; }
+
                 if (!big.empty()) big.pop();
                 else { cout << "NO\n"; flag = 1; break; }
             }
