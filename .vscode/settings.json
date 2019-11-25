@@ -67,7 +67,8 @@
         "complex": "cpp",
         "sstream": "cpp",
         "unordered_map": "cpp",
-        "bit": "cpp"
+        "bit": "cpp",
+        "random": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

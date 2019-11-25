@@ -10,58 +10,42 @@
 출력
 첫 번째 줄에는 총 단지수를 출력하시오. 그리고 각 단지내 집의 수를 오름차순으로 정렬하여 한 줄에 하나씩 출력하시오.
 */
-#include <iostream>
-#include <algorithm>
-#include <cstdio>
-#include <queue>
-#include <utility>
 
+#include <cstdio>
 using namespace std;
 
-int N, cnt;
-int map[25][25];
+int dx[4] = { 0, 1, 0, -1};
+int dy[4] = { -1, 0, 1, 0};
+int arr[26][26] = { 0, };
+bool vi[26][26] = { false, };
+int cnt;
 
-int main() {
-  //input
-  cin >> N;
-  for(i = 0; i < N; i++){
-    for(j = 0; j < N; j++){
-      scanf("%1d", &map[i][j]);   //get one digit input
-    }
+void dfs(int i, int j) {
+  cnt++;
+  v[i][j] = true;
+
+  int k; 
+  
+  for (k = 0; k < 4; k++) {
+
   }
-
-  //algorithm for BFS
-  solution(N);
-
-  //sort
-
-  //print
-
-  return 0;
 }
 
-void solution(int n){
-  int i, j = 0;
-  //apartment
-  for(i = 0; i < n; i++){
-    for(j = 0; j < n; j++){
-      if(map[i][j]==1){
-        do_bfs(i,j,cnt+2);
-        cnt++;
+int main() {
+  int i, j, N;
+  scanf("%d", &N);
+
+  for (i = 1; i < N; i++) for (j = 1; j < N; j++) scanf("%d", &arr[i][j]);
+
+  for (i = 1; i < N; i++) {
+    for (j = 1; j < N; j++) {
+      if (arr[i][j] && !vi[i][j]) {
+        cnt = 0;
+        dfs(i, j);
       }
     }
   }
-  //house
-}
-void do_bfs(int x, int y, int mark){
 
-  queue<pair<int><int>> q;
-  q.push(pair<int,int> (x,y));
-  map[x][y] = mark;
-  while(!q.qempty()){
-    pair<int, int> p;
-    int y = p.first = q.front().first;
-    int x = p.second = q.front().second;
-    q.pop();
-  }
+
+  return 0;
 }
