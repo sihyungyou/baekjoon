@@ -59,12 +59,19 @@ void bfs(int i, int j) {
 
 int main() {
 
-    int i;
+    int i, j;
 
     cin >> N >> M;
     for (i = 0; i < N; i++) cin >> arr[i];
 
     bfs(0, 0);
+    printf("\n");
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < M; j++)  {
+            printf("%d ", check[i][j]);
+        }
+        printf("\n");
+    }
     printf("%d\n", check[N-1][M-1]+1);
 
     return 0;
