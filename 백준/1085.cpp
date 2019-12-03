@@ -16,6 +16,7 @@ using namespace std;
 
 int main() {
 
+    int x, y, w, h;
     int arr[4];
     scanf("%d %d %d %d", &x, &y, &w, &h);
 
@@ -25,7 +26,6 @@ int main() {
     arr[3] = w-x;
 
     sort(arr, arr+4);
-
     printf("%d\n", arr[0]);
 
     return 0;
