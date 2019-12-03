@@ -18,30 +18,46 @@ N개의 수가 주어졌을 때, 가능한 M을 모두 찾는 프로그램을 �
 출력
 첫째 줄에 가능한 M을 공백으로 구분하여 모두 출력한다. 이때, M은 증가하는 순서이어야 한다.
 */
+
 #include <cstdio>
 #include <algorithm>
 #include <vector>
 
 using namespace std;
 
-int gcd(int a, int b) {
-    return b ? gcd(b, a % b) : a;
+int gcd(long long a, long long b) {
+    return b ? gcd(b, a%b) : a;
 }
 
 int main() {
 
-    int N, i, t, temp, ans;
+    int N, i, t;
+    long long n;
     vector<int> v;
 
     scanf("%d", &N);
     long long arr[N];
     for (i = 0; i < N; i++) scanf("%lld", &arr[i]);
 
-    sort(arr + 0, arr + N);
-    
-    for(i = N-1; i > 0; i--) v.push_back(arr[i] - arr[i-1]);
+    sort(arr, arr + N);
 
-    printf("ans : %d\n", ans);
-    
+    n = arr[1] - arr[0];
+    for (i = 2; i < N; i++) {
+        n = gcd(n, arr[i] - arr[i-1]);
+    }
+
+    for (i = 2; i*i <= n; i++) {
+        if (n % i == 0) {
+            v.push_back(i);
+            v.push_back(n/i);
+        }           
+    }
+
+    v.push_back(n);
+    sort(v.begin(), v.end());
+    v.erase(unique(v.begin(), v.end()), v.end());
+
+    for(i = 0; i < v.size(); i++) printf("%d ", v[i]);
+    printf("\n");
     return 0;
 }
