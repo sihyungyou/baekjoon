@@ -8,3 +8,25 @@
 출력
 첫째 줄에 문제의 정답을 출력한다.
 */
+
+#include <cstdio>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+
+    int arr[4];
+    scanf("%d %d %d %d", &x, &y, &w, &h);
+
+    arr[0] = x;
+    arr[1] = y;
+    arr[2] = h-y;
+    arr[3] = w-x;
+
+    sort(arr, arr+4);
+
+    printf("%d\n", arr[0]);
+
+    return 0;
+}
