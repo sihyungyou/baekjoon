@@ -24,7 +24,6 @@ int main() {
 
     for (i = 0; i < N; i++) scanf("%lld", &arr[i]);
     sort(arr, arr+N);
-    // for (i = 0; i < N; i++) printf("%lld ", arr[i]);
 
     printf("%lld\n", arr[0] * arr[N-1]);
     return 0;
