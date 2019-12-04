@@ -20,24 +20,14 @@ D(T1,T2) = |x1-x2| + |y1-y2|
 출력
 첫째 줄에는 유클리드 기하학에서 반지름이 R인 원의 넓이를, 둘째 줄에는 택시 기하학에서 반지름이 R인 원의 넓이를 출력한다. 정답과의 오차는 0.0001까지 허용한다.
 */
-
 #include <cstdio>
 #include <cmath>
 using namespace std;
 
 int main() {
-
-    double u, t;
-    int i, r, j = 1;
-
+    int r;
     scanf("%d", &r);
-
-    for (i = 0; i < r; i++) {
-        t += j;
-        j += 2;
-    }
-
-    printf("%f\n%f\n", (M_PI * pow(r, 2)), t*2);
+    printf("%f\n%f\n", (M_PI * pow(r, 2)), 2*(pow(r,2)));
 
     return 0;
 }
