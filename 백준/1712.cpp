@@ -21,24 +21,10 @@ using namespace std;
 int main() {
 
     int a, b, c;
-    long long i = 1;
+
     scanf("%d %d %d", &a, &b, &c);
 
-    long long in = i * c;
-    long long out = a + (b * i);
-
-    if (b >= c) {
-        printf("-1\n");
-        return 0;
-    } else {
-        while(in <= out) {
-            // printf("%lld laptops, in : %lld, out : %lld\n", i, in, out);
-            in += c;
-            out += b;
-            i++;
-        }
-
-        printf("%lld\n", i);
-        return 0;
-    }
+    if (b >= c) printf("-1\n");
+    else printf("%d\n", a/(c-b) + 1);
+    return 0;
 }
