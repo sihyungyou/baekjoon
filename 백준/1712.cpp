@@ -20,21 +20,25 @@ using namespace std;
 
 int main() {
 
-    int a, b, c, i = 1;
+    int a, b, c;
+    long long i = 1;
     scanf("%d %d %d", &a, &b, &c);
 
-    // 수입 : i * c
-    // 지출 : a + (b * i)
     long long in = i * c;
     long long out = a + (b * i);
 
-    while(in <= out) {
-        printf("%d laptops, in : %lld, out : %lld\n", i, in, out);
-        in += c;
-        out += b;
-        i++;
-    }
+    if (b >= c) {
+        printf("-1\n");
+        return 0;
+    } else {
+        while(in <= out) {
+            // printf("%lld laptops, in : %lld, out : %lld\n", i, in, out);
+            in += c;
+            out += b;
+            i++;
+        }
 
-    printf("%d\n", i);
-    return 0;
+        printf("%lld\n", i);
+        return 0;
+    }
 }
