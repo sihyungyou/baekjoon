@@ -20,20 +20,26 @@ using namespace std;
 
 int main() {
     
-    int n, i, j;
-    int arr[10] = { -1, };
+    int n, i, j, left;
+    int arr[10] = { 0, };
 
     scanf("%d", &n);
-    int memory[n];
-
-    for (i = 0; i < n; i++) arr[i] = -1;
-    for (i = 0; i < n; i++) scanf("%d", &memory[i]);
-
+    
     for (i = 0; i < n; i++) {
-        for (j = i + memory[i]; j >= memory[i]; j--) {
-            if (arr[j] == -1) {
-                arr[j] = i+1;
+        // 왼쪽에 몇 명이 있는가
+        scanf("%d", &left);
+
+        for (j = 0; j < n; j++) {
+            if (!left && arr[j] == 0) {
+                // 키큰 사람들은 다 지나쳤고 (left == 0)
+                // 작은 사람들이 이미 자리를 차지하고있지 않은지 체크 (arr[j] == 0)
+                // 전자는 만족했는데 후자는 만족 못했다면 어떤 if문에도 들어가지 않으므로 다음자리로 (j++)
+                arr[j] = i + 1;
                 break;
+            }
+            else if (arr[j] == 0) {
+                // 자기보다 왼쪽의 키큰 사람을 (기억하는 수 만큼) 지나침
+                left--;
             }
         }
     }
