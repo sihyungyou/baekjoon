@@ -11,33 +11,29 @@
 */
 
 #include <cstdio>
+#include <algorithm>
 #include <vector>
-#include <utility>
-#include <cmath>
 
 using namespace std;
 
 int main() {
 
-    int n, i, in, diff, cnt = 0;
-    vector<pair<int, int> > v;
-    // v.push_back(0);
-
+    int n, i, temp;
     scanf("%d", &n);
-
-    for (i = 1; i <= n; i++) {
-        scanf("%d", &in);
-        diff = abs(i - in);
-        v.push_back(make_pair(in, diff));
-    }
+    // int arr[n];
+    vector<int> dp;
+    dp.push_back(0);
 
     for (i = 0; i < n; i++) {
-        // if (v[i-1] < v[i] && v[i] < v[i+1]) cnt++;
-        if (v[i].first > v[i+1].first && v[i].second < v[i+1].second) cnt++;
-        else if (v[i].first < v[i+1].first && v[i].second < v[i+1].second) cnt++;
+        scanf("%d", &temp);
+        if (dp.back() < temp) dp.push_back(temp);
+        else {
+            vector<int>::iterator it = lower_bound(dp.begin(), dp.end(), temp);
+            *it = temp;
+        }
     }
-    printf("%d\n", cnt);
 
+    printf("%lu\n", dp.size() - 1);
 
     return 0;
 }
