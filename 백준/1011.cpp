@@ -21,25 +21,21 @@ using namespace std;
 
 int main() {
 
-    int t, i, x, y, cnt = 0;
-    int a = 0, b = 1, c = 2;
+    int x, y, diff, ans, t, i, j = 2, k = 3; 
     scanf("%d", &t);
-
+    
     for (i = 0; i < t; i++) {
         scanf("%d %d", &x, &y);
-        cnt = 0;
-        x++;
-        while(x < y) {
-            if (x + c + 1 <= y) { b = c; printf(">> c\n"); }
-            else if (x + b + 1<= y) { b = b; printf(">> b\n"); }
-            else if (x + a + 1<= y) { a = b; printf(">> a\n"); }
-            else break;
-            a = b - 1;
-            c = b + 1;
-            x += b;
-            cnt++;
+        diff = y - x;
+        if (diff == 1) printf("1\n");
+        else if (diff == 2) printf("2\n");
+        else {
+            while (k < diff) {
+                k += j;
+                j++;
+            }
+            printf("%d\n", j+1);
         }
-        printf("%d\n", cnt);
     }
 
     return 0;
