@@ -21,7 +21,8 @@ using namespace std;
 
 int main() {
 
-    int x, y, diff, ans, t, i, k;
+    int x, y, diff, ans, t, i;
+    long long k;
     scanf("%d", &t);
     
     for (i = 0; i < t; i++) {
@@ -29,12 +30,12 @@ int main() {
         k = 1;
         diff = y - x;
         while(1) {
-            int powk = k * k;
-            int mink = powk - k + 1;
-            int maxk = powk + k;
+            long long powk = k * k;
+            long long mink = powk - k + 1;
+            long long maxk = powk + k;
             if (mink <= diff && diff <= maxk) {
-                if (diff <= powk) printf("%d\n", 2*k-1);
-                else printf("%d\n", 2*k);
+                if (diff <= powk) printf("%d\n", (k<<1)-1);
+                else printf("%d\n", k<<1);
                 break;
             }
             k++;
