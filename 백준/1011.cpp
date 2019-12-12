@@ -15,26 +15,29 @@
 출력
 각 테스트 케이스에 대해 x지점으로부터 y지점까지 정확히 도달하는데 필요한 최소한의 공간이동 장치 작동 회수를 출력한다.
 */
-#include <cstdio>
 
+#include <cstdio>
 using namespace std;
 
 int main() {
 
-    int x, y, diff, ans, t, i, j = 2, k = 3; 
+    int x, y, diff, ans, t, i, k;
     scanf("%d", &t);
     
     for (i = 0; i < t; i++) {
         scanf("%d %d", &x, &y);
+        k = 1;
         diff = y - x;
-        if (diff == 1) printf("1\n");
-        else if (diff == 2) printf("2\n");
-        else {
-            while (k < diff) {
-                k += j;
-                j++;
+        while(1) {
+            int powk = k * k;
+            int mink = powk - k + 1;
+            int maxk = powk + k;
+            if (mink <= diff && diff <= maxk) {
+                if (diff <= powk) printf("%d\n", 2*k-1);
+                else printf("%d\n", 2*k);
+                break;
             }
-            printf("%d\n", j+1);
+            k++;
         }
     }
 
