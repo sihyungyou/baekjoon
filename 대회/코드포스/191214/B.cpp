@@ -21,7 +21,7 @@ Output
 For 𝑡 test cases print the answers in the order of test cases in the input. The answer for the test case is the minimal number of moves needed to make all numbers in the test case odd (i.e. not divisible by 2).
 
 Example
-inputCopy
+input
 4
 6
 40 6 40 3 20 1
@@ -31,7 +31,8 @@ inputCopy
 2 4 8 16
 3
 3 1 7
-outputCopy
+
+output
 4
 10
 4
@@ -43,14 +44,39 @@ using namespace std;
 
 int main() {
 
-    set<int> s;
-    int t, i, temp;
+    int t, n, i, j, temp, a, cnt = 0;
 
     scanf("%d", &t);
 
     for (i = 0; i < t; i++) {
+        set<int> s;
+        cnt = 0;
+        scanf("%d", &n);
 
+        for (j = 0; j < n; j++) {
+            scanf("%d", &temp);
+            if (temp % 2 == 0) s.insert(temp);
+        }
+
+        set<int>::iterator k;
+        while(!s.empty()) {
+            k = s.end();
+            k--;
+
+            a = *k;
+            while(a % 2 == 0) {
+                // int temp = (*k) / 2;
+                s.erase(a);
+                a /= 2;
+                if (a % 2 == 0)s.insert(a);
+                cnt++;
+            }
+        }
+
+        printf("%d\n", cnt);
+        
     }
+
 
     return 0;
 }
