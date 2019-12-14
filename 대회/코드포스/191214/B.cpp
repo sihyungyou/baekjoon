@@ -66,7 +66,6 @@ int main() {
 
             a = *k;
             while(a % 2 == 0) {
-                // int temp = (*k) / 2;
                 s.erase(a);
                 a /= 2;
                 if (a % 2 == 0)s.insert(a);
