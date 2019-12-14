@@ -40,6 +40,7 @@ output
 12
 81
 */
+
 #include <cstdio>
 #include <cstring>
 
