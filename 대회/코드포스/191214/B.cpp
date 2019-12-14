@@ -38,6 +38,7 @@ output
 4
 0
 */
+
 #include <cstdio>
 #include <set>
 using namespace std;
