@@ -16,7 +16,6 @@ i행 j열에 당근이 심어졌다면 i번째 줄 j번째 문자를 'v' 로 표
 */
 
 #include <cstdio>
-
 using namespace std;
 
 int main() {
