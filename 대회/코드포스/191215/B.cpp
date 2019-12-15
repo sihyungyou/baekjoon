@@ -40,6 +40,7 @@ int main() {
                 }
             }
         }
+        
         if (slen < clen && cnt == len) printf("%s\n", s);
         if (!flag || strcmp(s, c) >= 0) printf("---\n");
 
