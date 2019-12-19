@@ -11,7 +11,7 @@ int main() {
     while(cnt != n) {
         int temp = i;
         flag = false;
-
+        
         while(temp != 0) {
             if (temp % 1000 == 666) {
                 flag = true;
