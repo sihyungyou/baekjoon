@@ -30,6 +30,7 @@ i\j	1	2	3	4
 
 #include <cstdio>
 #include <climits>
+#include <cstdlib>
 
 using namespace std;
 
@@ -42,18 +43,17 @@ int ans = INT_MAX;
 
 int get_min(int a, int b) { return a < b ? a : b; }
 
-void dfs(int cnt) {
-    int i, j, k;
+void dfs(int cur, int cnt) {
+    int i;
     if (cnt == n/2) {
+        int j, k;
         int start = 0;
         int link = 0;
-        int diff;
 
         k = 0;
         for (i = 1; i <= n; i++) {
             if (!check[i]) {
                 list2[k] = i;
-                // printf("link team : %d\n", list2[k]);
                 k++;
             }
         }
@@ -69,18 +69,15 @@ void dfs(int cnt) {
             }
         }
         
-        if (start > link) diff = start - link;
-        else diff = link - start;
-
-        ans = get_min(ans, diff);
-
+        ans = get_min(ans, abs(link - start));
+        return ;
     }
 
-    for (i = 1; i <= n; i++) {
+    for (i = cur + 1; i <= n; i++) {
         if (!check[i]) {
             check[i] = true;
             list[cnt] = i;
-            dfs(cnt+1);
+            dfs(i, cnt+1);
             check[i] = false;
         }
     }
@@ -97,7 +94,7 @@ int main() {
         }
     }
 
-    dfs(0);
+    dfs(0, 0);
     printf("%d\n", ans);
 
     return 0;
