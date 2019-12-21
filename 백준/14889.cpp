@@ -35,10 +35,9 @@ using namespace std;
 
 int grid[21][21];
 int n;
-// int sum = 0;
 bool check[21] = { false, };
-int list[21];
-int list2[21];
+int list[10];
+int list2[10];
 int ans = INT_MAX;
 
 int get_min(int a, int b) { return a < b ? a : b; }
@@ -59,34 +58,17 @@ void dfs(int cnt) {
             }
         }
 
-        k = 0;
-        for (i = 1; i <= n; i++) {
-            if (check[i]) {
-                // printf("start team : %d\n", list[k]);
-                k++;
-            }
-        }
-
         for (j = 0; j < n/2; j++) {
             for (k = 1; k <= n; k++) {
                 if (list[j] != k && check[k]) {
-                    // printf(">> start += grid[%d][%d] %d\n", list[j], k, grid[list[j]][k]);
                     start += grid[list[j]][k];
                 }
-            }
-        }
-
-        for (j = 0; j <= n/2; j++) {
-            for (k = 1; k <= n; k++) {
                 if (list2[j] != k && !check[k]) {
-                    // printf(" >> link : grid[%d][%d] + grid[%d][%d] = %d\n", list2[j], k, k, list2[j], grid[list2[j]][k] + grid[k][list2[j]]);
-                    // printf(">> link += grid[%d][%d] %d\n", list2[j], k, grid[list2[j]][k]);
                     link += grid[list2[j]][k];
                 }
             }
         }
         
-        // printf("start : %d, link : %d\n", start, link);
         if (start > link) diff = start - link;
         else diff = link - start;
 
@@ -112,11 +94,9 @@ int main() {
     for (i = 1; i <= n; i++) {
         for (j = 1; j <= n; j++) {
             scanf("%d", &grid[i][j]);
-            // sum += grid[i][j];
         }
     }
-    // printf("sum : %d\n", sum);
-    // ans = sum;
+
     dfs(0);
     printf("%d\n", ans);
 
