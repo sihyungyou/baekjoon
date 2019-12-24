@@ -1,26 +1,38 @@
 #include <cstdio>
 
 using namespace std;
-int get_min(int a, int b) { return a < b ? a : b; }
+int get_max(int a, int b) { return a > b ? a : b; }
+
 int main() {
 
-    int i, j, n, ans;
-
-    int dp[1000][3];
+    int i, j, n, t;
+    long long ans = 0;
+    long long dp[500][500];
 
     scanf("%d", &n);
-    for (i = 0; i < n; i++) scanf("%d %d %d", &dp[i][0], &dp[i][1], &dp[i][2]);
 
-    for (i = 1; i < n; i++) {
-        dp[i][0] += get_min(dp[i-1][1], dp[i-1][2]);
-        dp[i][1] += get_min(dp[i-1][0], dp[i-1][2]);
-        dp[i][2] += get_min(dp[i-1][1], dp[i-1][0]);
+    for (t = 0; t < n; t++) {
+        for (i = 0; i <= t; i++) {
+            scanf("%lld", &dp[t][i]);
+        }
     }
-    
-    ans = get_min(dp[n-1][0], dp[n-1][1]);
-    ans = get_min(ans, dp[n-1][2]);
 
-    printf("%d\n", ans);
+    dp[1][0] += dp[0][0];
+    dp[1][1] += dp[0][0];
+
+    for (i = 2; i < n; i++) {
+        dp[i][0] += dp[i-1][0];
+        dp[i][i] += dp[i-1][i-1];
+        for (j = 1; j < i; j++) {
+            dp[i][j] += get_max(dp[i-1][j-1], dp[i-1][j]);
+        }
+    }
+
+    for (i = 0; i < n; i++) {
+        ans = get_max(dp[n-1][i], ans);
+    }
+
+    printf("%lld\n", ans);
 
     return 0;
 }
