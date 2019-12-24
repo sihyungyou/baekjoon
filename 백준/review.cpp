@@ -4,17 +4,23 @@ using namespace std;
 
 int main() {
 
-    int n, i;
+    long long dp[101] = {0, };
+    int t, i, n;
 
-    long long dp[1000001];
-
-    dp[0] = 0;
     dp[1] = 1;
-    dp[2] = 2;
+    dp[2] = 1;
+    dp[3] = 1;
+    dp[4] = 2;
+    dp[5] = 2;
 
-    scanf("%d", &n);
-    for (i = 3; i <= n; i++) dp[i] = (dp[i-1] + dp[i-2]) % 15746;
-    printf("%lld\n", dp[n] % 15746);
+    for (i = 6; i < 101; i++) dp[i] = dp[i-1] + dp[i-5];
+
+    scanf("%d", &t);
+
+    for (i = 0; i < t; i++) {
+        scanf("%d", &n);
+        printf("%lld\n", dp[n]);
+    }
 
     return 0;
 }
