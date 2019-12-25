@@ -21,7 +21,7 @@ int get_max(int a, int b) { return a > b ? a : b; }
 
 int main() {
 
-    int n, m, i, j, k, ans, cnt;
+    int n, m, i, j, k, t, l, ans, cnt;
 
     int dx[4] = { 1, 0, -1, 0};
     int dy[4] = { 0, 1, 0, -1};
@@ -38,18 +38,20 @@ int main() {
             for (k = 0; k < 4; k++) {
                 if (arr[i][j] > arr[i+dy[k]][j+dx[k]]) {
                     cnt++;
-                    dp[i+dy[k]][j+dx[k]] = get_max(dp[i+dy[k]][j+dx[k]], dp[i][j] + cnt - 1);
+                    dp[i+dy[k]][j+dx[k]] = get_max(dp[i+dy[k]][j+dx[k]], dp[i][j] + cnt);
+                    printf("===============\n");
+                    for (t = 1; t <= m; t++) {
+                        for (l = 1; l <= n; l++) {
+                            printf("%d ", dp[t][l]);
+                        }
+                        printf("\n");
+                    }
+                    printf("===============\n");
                 }
             }
         }
     }
 
-    for (i = 1; i <= m; i++) {
-        for (j = 1; j <= n; j++) {
-            printf("%d ", dp[i][j]);
-        }
-        printf("\n");
-    }
 
     printf("%d\n", dp[m][n]);
     return 0;
