@@ -1,27 +1,35 @@
 #include <cstdio>
 
 using namespace std;
-int get_max(int a, int b) { return a > b ? a : b; }
+
+int get_min(int a, int b) { return a < b ? a : b; }
 
 int main() {
-    
+
     int n, i;
-    int arr[300];
-    long long dp[300];
+    int dp[1000001] = { 0, };
+
+    dp[2] = 1;
+    dp[3] = 1;
 
     scanf("%d", &n);
 
-    for (i = 0; i < n; i++) scanf("%d", &arr[i]);
-
-    dp[0] = arr[0];
-    dp[1] = get_max(arr[1], arr[0] + arr[1]);
-    dp[2] = get_max(arr[0] + arr[2], arr[1] + arr[2]);
-
-    for (i = 3; i < n; i++) {
-        dp[i] = get_max(dp[i-2] + arr[i], dp[i-3] + arr[i-1] + arr[i]);
+    for (i = 4; i <= n; i++) {
+        if (i % 2 == 0 && i % 3 == 0) {
+            dp[i] = get_min(dp[i/2], dp[i/3]) + 1;
+        }
+        else if (i % 2 == 0) {
+            dp[i] = get_min(dp[i/2], dp[i-1]) + 1;
+        }
+        else if (i % 3 == 0) {
+            dp[i] = get_min(dp[i/3], dp[i-1]) + 1;
+        }
+        else {
+            dp[i] = dp[i-1] + 1;
+        }
     }
-
-    printf("%lld\n", dp[n-1]);
+    
+    printf("%d\n", dp[n]);
     
     return 0;
 }
