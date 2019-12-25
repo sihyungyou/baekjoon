@@ -16,7 +16,6 @@
 */
 
 #include <cstdio>
-#include <vector>
 #include <queue>
 #include <utility>
 
@@ -24,85 +23,42 @@ using namespace std;
 
 int main() {
 
-    int T, t, N, n, M, i, j, cnt, tmp;
+    int N, M, n, T, t, i, cnt, temp;
 
     scanf("%d", &T);
 
     for (t = 0; t < T; t++) {
-        vector<int> v;
-        queue<int> q;
+        deque<pair<int, int> > dq;
         scanf("%d %d", &N, &M);
+
         for (n = 0; n < N; n++) {
-            scanf("%d", &tmp);
-            v.push_back(tmp);
-            q.push(n);
+            scanf("%d", &temp);
+            dq.push_back(make_pair(temp, n));
         }
-        i = 0;
+
         cnt = 0;
-        while(1) {
-            for (j = i + 1; j < v.size(); j++) {
-                if (v[i] < v[j]) {
-                    // 우선순위 높은게 있을 때
-                    v.push_back(v[i]);
-                    q.push(q.front());
-                    q.pop();
+
+        while(!dq.empty()) {
+            for (i = 1; i < dq.size(); i++) {
+                if (dq[0].first < dq[i].first) {
+                    // push to back
+                    dq.push_back(dq.front());
+                    dq.pop_front();
                     break;
                 }
             }
-            if (j == v.size()) {
-                // 우선순위 높은게 없을 때 pop
+            if (i == dq.size()) {
+                // print
                 cnt++;
-                tmp = q.front();
-                q.pop();
-                if (tmp == M) {
+                if (dq.front().second == M) {
                     printf("%d\n", cnt);
                     break;
                 }
+                dq.pop_front();
             }
-            else i++;
         }
     }
 
 
-
-
     return 0;
 }
-
-// int main() {
-
-//     int t, n, m, i, j, tmp, k, cnt;
-//     scanf("%d", &t);
-
-//     for (i = 0; i < t; i++) {
-//         vector<pair<int, int> > v;
-//         cnt = 0;
-
-//         scanf("%d %d", &n, &m);
-//         for (j = 0; j < n; j++) {
-//             scanf("%d", &tmp);
-//             v.push_back(make_pair(j, tmp));
-//         }
-
-//         while(!v.empty()) {
-//             for (k = 1; k < n; k++) {
-//                 if (v[0].second < v[k].second) {
-//                     v.push_back(make_pair(v[0].first, v[0].second));
-//                     v.erase(v.begin());
-//                     break;
-//                 }
-//             }
-//             if (k == n) {
-//                 cnt++;
-//                 if (v[0].first == m) {
-//                     printf("%d\n", cnt);
-//                     break;
-//                 }
-//                 v.erase(v.begin());
-//             }
-//         }
-//     }
-
-
-//     return 0;
-// }
