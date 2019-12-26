@@ -16,62 +16,43 @@ C개의 문자들이 모두 주어졌을 때, 가능성 있는 암호들을 모�
 각 줄에 하나씩, 사전식으로 가능성 있는 암호를 모두 출력한다.
 */
 
-#include <cstdio>
-#include <vector>
+#include <iostream>
+#include <string>
 #include <algorithm>
 
 using namespace std;
 
 bool isVowel(char ch) { return (ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u'); }
-// bool isValid()
 
-vector<char> v;
-vector<char> ans;
-bool visited[15] = { false, };
+char arr[15];
 int L, C;
 
-void dfs(int cnt) {
+void dfs(int pos, string str, int vo, int con) {
     int i;
-    if (cnt == L) {
+
+    if (str.length() == L) {
         // valid check
-        for (i = 0; i < L; i++) {
-            printf("%c", ans[i]);
-        }
-        printf("\n");
-        ans.clear();
+        if (vo < 1 || con < 2) return;
+        else cout << str << endl;
+        
     }
-    for (i = 0; i < C; i++) {
-        if (!visited[i]) {
-            visited[i] = true;
-            ans.push_back(v[i]);
-            dfs(cnt+1);
-            visited[i] = false;
-            ans.pop_back();
-        }
+
+    for (i = pos; i < C; i++) {
+        if (isVowel(arr[i])) dfs(i + 1, str + arr[i], vo + 1, con);
+        else dfs(i + 1, str + arr[i], vo, con + 1);
     }
 }
 
-
-
 int main() {
-    scanf("%d %d", &L, &C);
+
+    cin >> L >> C;
     int i;
     for (i = 0; i < C; i++) {
-        char temp;
-        scanf(" %c", &temp);
-        v.push_back(temp);
+        cin >> arr[i];
     }
 
-    // for (i = 0; i < C; i++) {
-    //     printf("%c", v[i]);
-    // }
-    // printf("\n");
-
-    sort(v.begin(), v.end());
-
-    
-    dfs(0);
-
+    sort(arr + 0, arr + C);
+    dfs(0, "", 0, 0);
 
     return 0;
 }
