@@ -17,20 +17,60 @@ C개의 문자들이 모두 주어졌을 때, 가능성 있는 암호들을 모�
 */
 
 #include <cstdio>
-#include <queue>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
 bool isVowel(char ch) { return (ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u'); }
+// bool isValid()
+
+vector<char> v;
+vector<char> ans;
+bool visited[15] = { false, };
+int L, C;
+
+void dfs(int cnt) {
+    int i;
+    if (cnt == L) {
+        // valid check
+        for (i = 0; i < L; i++) {
+            printf("%c", ans[i]);
+        }
+        printf("\n");
+        ans.clear();
+    }
+    for (i = 0; i < C; i++) {
+        if (!visited[i]) {
+            visited[i] = true;
+            ans.push_back(v[i]);
+            dfs(cnt+1);
+            visited[i] = false;
+            ans.pop_back();
+        }
+    }
+}
+
+
 
 int main() {
-
-    int L, C, i;
-
     scanf("%d %d", &L, &C);
-
+    int i;
     for (i = 0; i < C; i++) {
+        char temp;
+        scanf(" %c", &temp);
+        v.push_back(temp);
     }
+
+    // for (i = 0; i < C; i++) {
+    //     printf("%c", v[i]);
+    // }
+    // printf("\n");
+
+    sort(v.begin(), v.end());
+
+    
+    dfs(0);
 
 
     return 0;
