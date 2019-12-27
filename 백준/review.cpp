@@ -2,25 +2,27 @@
 
 using namespace std;
 
-int get_max(int a, int b) { return a > b ? a : b; }
+#define MOD 1000000000
+
 int main() {
 
-    int n, i, ans = 0;
+    int n, i, j;
+    long long ans = 9;
+    long long dp[2][12] = { 0, };
 
-    int arr[10003] = { 0, };
-    int dp[10003] = { 0, };
+    for (i = 2; i < 11; i++) dp[1][i] = 1;
+
     scanf("%d", &n);
 
-    for (i = 3; i < n + 3; i++) scanf("%d", &arr[i]);
-
-
-    for (i = 3; i < n + 3; i++) {
-        dp[i] = get_max(arr[i-1] + arr[i] + dp[i-3], arr[i] + dp[i-2]);
-        dp[i] = get_max(dp[i], dp[i-1]);
-        ans = get_max(ans, dp[i]);
+    for (i = 2; i <= n; i++) {
+        ans = 0;
+        for (j = 1; j < 11; j++) {
+            dp[i%2][j] = (dp[(i-1)%2][j-1] + dp[(i-1)%2][j+1]) % MOD;
+            ans = (ans + dp[i%2][j]) % MOD;
+        }
     }
-    
-    printf("%d\n", ans);    
+
+    printf("%lld\n", ans);
 
     return 0;
 }
