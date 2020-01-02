@@ -1,31 +1,37 @@
-#include <cstdio>
+#include <iostream>
+#include <string>
+#include <map>
+#include <algorithm>
+#include <vector>
 
 using namespace std;
-int get_max(int a, int b) { return a > b ? a : b; }
+
+bool desc(string a, string b) {
+    return a > b;
+}
+
 int main() {
 
-    int n, i, j, ans = 0;
+    map<string, bool> m;
+    vector<string> v;
 
-    scanf("%d", &n);
-    int dp[n];
-    int dp2[n];
-    int arr[n];
-    for (i = 0; i < n; i++) scanf("%d", &arr[i]);
+    int n, i;
+    cin >> n;
 
     for (i = 0; i < n; i++) {
-        dp[i] = 1;
-        for (j = 0; j < i; j++) if (dp[j] + 1 > dp[i] && arr[j] < arr[i]) dp[i] = dp[j] + 1;
+        string name;
+        string status;
+        cin >> name >> status;
+        if (status == "enter") {
+            if (m.find(name) == m.end()) m.insert(make_pair(name, true));
+            else m[name] = true;
+        }
+        else m[name] = false;
     }
 
-    for (i = n-1; i >= 0; i--) {
-        dp2[i] = 1;
-        for (j = n-1; j > i; j--) if(dp2[j] + 1 > dp2[i] && arr[j] < arr[i]) dp2[i] = dp2[j] + 1;
-    }
+    for (map<string, bool>::iterator it = m.begin(); it != m.end(); it++) if (it->second) v.push_back(it->first);
 
-    for (i = 0; i < n; i++) {
-        ans = get_max(ans, dp[i] + dp2[i]);
-    }
-
-    printf("%d\n", ans-1);
+    sort(v.begin(), v.end(), desc);
+    for (vector<string>::iterator it = v.begin(); it != v.end(); it++) cout << *it << "\n";
     return 0;
 }
