@@ -1,37 +1,35 @@
-#include <iostream>
-#include <string>
-#include <map>
-#include <algorithm>
-#include <vector>
+#include <cstdio>
 
 using namespace std;
 
-bool desc(string a, string b) {
-    return a > b;
+bool graph[101][101] = { 0, };
+bool v[101] = { false, };
+int n, m, i, src, dest, cnt = 0;
+
+void dfs(int s) {
+    int i;
+    v[s] = true;
+
+    for (i = 1; i <= n; i++) {
+        if (graph[s][i] && !v[i]) {
+            cnt++;
+            dfs(i);
+        }
+    }
 }
 
 int main() {
 
-    map<string, bool> m;
-    vector<string> v;
+    scanf("%d %d", &n, &m);
 
-    int n, i;
-    cin >> n;
-
-    for (i = 0; i < n; i++) {
-        string name;
-        string status;
-        cin >> name >> status;
-        if (status == "enter") {
-            if (m.find(name) == m.end()) m.insert(make_pair(name, true));
-            else m[name] = true;
-        }
-        else m[name] = false;
+    for (i = 0; i < m; i++) {
+        scanf("%d %d", &src, &dest);
+        graph[src][dest] = true;
+        graph[dest][src] = true;
     }
 
-    for (map<string, bool>::iterator it = m.begin(); it != m.end(); it++) if (it->second) v.push_back(it->first);
+    dfs(1);
+    printf("%d\n", cnt);
 
-    sort(v.begin(), v.end(), desc);
-    for (vector<string>::iterator it = v.begin(); it != v.end(); it++) cout << *it << "\n";
     return 0;
 }
