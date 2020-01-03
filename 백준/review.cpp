@@ -1,44 +1,36 @@
 #include <cstdio>
-#include <vector>
-#include <queue>
+#include <climits>
 
 using namespace std;
 
+int get_min(int a, int b) { return a < b ? a : b; }
+
 int main() {
 
-    int n, m, i, first, second, temp;
+    int n, k, i, j;
 
-    vector<int> v[32001];
-    queue<int> q;
+    scanf("%d %d", &n, &k);
 
-    scanf("%d %d", &n, &m);
-    int degree[n+1];
+    int dp[100001];
+    int coins[100];
 
-    for (i = 0; i <= n; i++) degree[i] = 0;
+    dp[0] = 0;
+    for (i = 1; i <= k; i++) dp[i] = INT_MAX;
 
-    for (i = 0; i < m; i++) {
-        scanf("%d %d", &first, &second);
-        degree[second]++;
-        v[first].push_back(second);
+    for (i = 0; i < n; i++) {
+        scanf("%d", &coins[i]);
+        dp[coins[i]] = 1;
     }
 
-
-    for (i = 1; i <= n; i++) {
-        if (!degree[i]) q.push(i);
-    }
-
-    while (!q.empty()) {
-        temp = q.front();
-        q.pop();
-        printf("%d ", temp);
-
-        for (i = 0; i < v[temp].size(); i++) {
-            degree[v[temp][i]]--;
-            if (!degree[v[temp][i]]) q.push(v[temp][i]);
+    for (i = 1; i <= k; i++) {
+        for (j = 0; j < n; j++) {
+            if (dp[i] == 1) break;
+            else if (i - coins[j] < 0 || dp[i - coins[j]] == INT_MAX) continue;
+            else dp[i] = get_min(dp[i], 1 + dp[i - coins[j]]);
         }
     }
 
-    printf("\n");
-
+    if (dp[k] == INT_MAX) printf("-1\n");
+    else printf("%d\n", dp[k]);
     return 0;
 }
