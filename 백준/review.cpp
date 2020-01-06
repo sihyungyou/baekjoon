@@ -1,28 +1,33 @@
 #include <cstdio>
 #include <cmath>
-#include <queue>
-#include <utility>
 
 using namespace std;
 
 int main() {
 
-    priority_queue<pair <int, int>, vector<pair<int, int> >, greater<pair<int, int> > >pq;    
-    int n, i, temp;
+    int n, n2, cnt, i, j;
+    bool prime[246913];
 
-    scanf("%d", &n);
+    while(1) {
+        cnt = 0;
+        scanf("%d", &n);
+        if (n == 0) break;
 
-    for (i = 0; i < n; i++) {
-        scanf("%d", &temp);
-        if (temp == 0) {
-            if (pq.empty()) printf("0\n");
-            else {
-                printf("%d\n", pq.top().second);
-                pq.pop();
+        n2 = n * 2;
+
+        for (i = 2; i <= n2; i++) prime[i] = true;
+
+        for (i = 2; i <= sqrt(n2); i++) {
+            if (prime[i]) {
+                for (j = i+i; j <= n2; j+=i) {
+                    prime[j] = false;
+                }
             }
         }
-        else pq.push(make_pair(abs(temp), temp));
-        
+
+        for (i = n + 1; i <= n2; i++) if (prime[i]) cnt++;
+
+        printf("%d\n", cnt);
     }
 
     return 0;
