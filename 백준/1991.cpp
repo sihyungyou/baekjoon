@@ -18,41 +18,54 @@
 
 #include <cstdio>
 
-using namespace std;
+char tree[26][2] = { '.', };
 
-typedef struct node * treeptr;
-struct node {
-    char val;
-    treeptr left;
-    treeptr right;
-};
+void preorder(char root) {
+    if (root == '.') return;
+    else {
+        printf("%c", root);
+        preorder(tree[root-'A'][0]);
+        preorder(tree[root-'A'][1]);
+    }
+}
 
-struct node tree[26];
+void inorder(char root) {
+    if (root == '.') return;
+    else {
+        inorder(tree[root-'A'][0]);
+        printf("%c", root);
+        inorder(tree[root-'A'][1]);
+    }
+}
 
-void preorder(node t) {
-    if (t.val != '.') printf("%c", t.val);
-    if (t.left != NULL) preorder(*t.left);
-    if (t.right != NULL) preorder(*t.right);
+void postorder(char root) {
+    if (root == '.') return;
+    else {
+        postorder(tree[root-'A'][0]);
+        postorder(tree[root-'A'][1]);
+        printf("%c", root);
+    }
 }
 
 int main() {
 
     int n, i;
-    char r, left, right;
-
+    char root, left, right;
 
     scanf("%d", &n);
-    int arr[n];
-    
-    for (i = 0; i < n; i++) tree[i].val = '.';
 
     for (i = 0; i < n; i++) {
-        scanf(" %c %c %c", &r, &left, &right);
-        if (left != '.') tree[r-'A'].left = &tree[left-'A'];
-        if (right != '.') tree[r-'A'].right = &tree[right-'A'];
+        scanf(" %c %c %c", &root, &left, &right);
+        tree[root-'A'][0] = left;
+        tree[root-'A'][1] = right;
     }
 
-    preorder(tree[0]);
+    preorder('A');
+    printf("\n");
+    inorder('A');
+    printf("\n");
+    postorder('A');
+    printf("\n");
 
     return 0;
 }
