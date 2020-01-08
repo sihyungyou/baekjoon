@@ -1,44 +1,21 @@
 #include <cstdio>
-#include <cmath>
-#include <climits>
 
 using namespace std;
-#define MAX 10000
 
 int main() {
 
-    int n, t, T, i, j, diff, ans, ans2;
-    bool prime[MAX+1];
+    int n, i, j;
+    scanf("%d", &n);
 
-
-    for (i = 2; i <= MAX; i++) prime[i] = true;
-
-    for (i = 2; i <= sqrt(MAX); i++) {
-        if (prime[i]) {
-            for (j = i+i; j <= MAX; j+=i) {
-                prime[j] = false;
-            }
-        }
-    }
+    i = 2;
     
-    scanf("%d", &T);
-    
-    for (t = 0; t < T; t++) {
-        diff = INT_MAX;
-        scanf("%d", &n);
-
-        for (i = 2; i <= n/2; i++) {
-            if (prime[i] && prime[n-i]) {
-                int temp = (n - i) - i;
-                if (temp < diff) {
-                    ans = i;
-                    ans2 = n - i;
-                }
-            }
+    while(n != 1) {
+        if (n % i == 0) {
+            printf("%d\n", i);
+            n /= i;
+            i = 2;
         }
-
-        printf("%d %d\n", ans, ans2);
-
+        else i++;
     }
 
     return 0;
