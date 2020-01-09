@@ -1,31 +1,26 @@
 #include <cstdio>
-#include <map>
+#include <stack>
 
 using namespace std;
 
 int main() {
+    int n, b;
+    stack<int> s;
 
-    int t, T, n, i;
+    scanf("%d %d", &n, &b);
 
-    scanf("%d", &T);
-
-    for (t = 0; t < T; t++) {
-        scanf("%d", &n);
-        map<int, int> m;
-
-        i = 2;
-        while(n != 1) {
-            if (n % i == 0) {
-                m[i]++;
-                n /= i;
-                i = 2;
-            }
-            else i++;
-        }
-
-        for(map<int, int>::iterator it = m.begin(); it != m.end(); it++) printf("%d %d\n", it->first, it->second);
-
+    while(n != 0) {
+        s.push(n % b);
+        n /= b;
     }
+
+    while(!s.empty()) {
+        if (s.top() > 9) printf("%c", s.top() + 55);
+        else printf("%d", s.top());
+        s.pop();
+    }
+    
+    printf("\n");
 
     return 0;
 }
