@@ -23,22 +23,23 @@ N개의 수가 주어졌을 때, 네 가지 기본 통계값을 구하는 프로
 
 #include <cstdio>
 #include <algorithm>
-#include <vector>
 #include <map>
-
+#include <utility>
+#include <vector>
 
 using namespace std;
 
-bool sortby(pair<int, int> &a, pair<int, int> &b) {
+bool sortbysec(pair <int, int> &a, pair <int, int> &b) {
     return a.second > b.second;
 }
 
 int main() {
 
-    int n, i, temp;
+    int n, i, temp, a, b, c, d;
     float sum = 0;
-    vector<int> v;
     map<int, int> m;
+    vector<int> v;
+    vector<pair<int, int> > v2;
 
     scanf("%d", &n);
     
@@ -50,9 +51,25 @@ int main() {
     }
 
     sort(v.begin(), v.end());
-    sort(m.begin(), m.end(), sortby);
 
-    printf("%.0f\n%d\n%d\n", sum/n, v[n/2], v[n-1] - v[0]);
+    for (map<int, int>::iterator it = m.begin(); it != m.end(); it++) {
+        v2.push_back(make_pair(it->first, it->second));
+    }
+
+    sort(v2.begin(), v2.end(), sortbysec);
+    if (v2[0].second == v2[1].second) {
+        c = v2[1].first;
+    } else {
+        c = v2[0].first;
+    }
+
+    a = sum / n;
+    if (a < 0) a = int(a - 0.5);
+    else a = int(a + 0.5);
+    b = v[n/2];
+    d = v[n-1] - v[0];
+
+    printf("%d\n%d\n%d\n%d\n", a, b, c, d);
 
 
     return 0;

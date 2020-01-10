@@ -1,26 +1,30 @@
 #include <cstdio>
-#include <stack>
 
 using namespace std;
-
+int get_min(int a, int b) { return a < b ? a : b; }
 int main() {
-    int n, b;
-    stack<int> s;
 
-    scanf("%d %d", &n, &b);
+    int n, i, j, two, five;
 
-    while(n != 0) {
-        s.push(n % b);
-        n /= b;
+    scanf("%d", &n);
+
+    i = n/2;
+    j = n/5;
+
+    two += i;
+    five += j;
+
+    while(i != 0) {
+        two += i/2;
+        i/=2;
     }
-
-    while(!s.empty()) {
-        if (s.top() > 9) printf("%c", s.top() + 55);
-        else printf("%d", s.top());
-        s.pop();
+    while(j != 0) {
+        five += j/5;
+        j/=5;
     }
     
-    printf("\n");
+    printf("%d\n", get_min(two, five));
+    
 
     return 0;
 }
