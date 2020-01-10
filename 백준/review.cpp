@@ -1,7 +1,9 @@
 #include <cstdio>
 
 using namespace std;
+
 int get_min(int a, int b) { return a < b ? a : b; }
+
 int main() {
 
     int n, i, j, two, five;
