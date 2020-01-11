@@ -4,8 +4,7 @@
 using namespace std;
 
 pair<long long, long long> cal(long long r) {
-    long long two = 0, five = 0;
-    int i;
+    long long two = 0, five = 0, i;
     for (i = 2; i <= r; i *= 2) two += r/i;
     for (i = 5; i <= r; i *= 5) five += r/i;
     return pair<long long, long long> (two, five);
