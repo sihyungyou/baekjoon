@@ -1,32 +1,35 @@
 #include <cstdio>
+#include <utility>
 
 using namespace std;
 
-int get_min(int a, int b) { return a < b ? a : b; }
+pair<long long, long long> cal(long long r) {
+    long long two = 0, five = 0;
+    int i;
+    for (i = 2; i <= r; i *= 2) two += r/i;
+    for (i = 5; i <= r; i *= 5) five += r/i;
+    return pair<long long, long long> (two, five);
+}
+
+long long get_min(long long a, long long b) { return a < b ? a : b; }
 
 int main() {
 
-    int n, i, j, two, five;
+    int n, m;
 
-    scanf("%d", &n);
+    scanf("%d %d", &n, &m);
 
-    i = n/2;
-    j = n/5;
+    pair<long long, long long> ansn;
+    pair<long long, long long> ansm;
+    pair<long long, long long> ansnm;
 
-    two += i;
-    five += j;
+    ansn = cal(n);
+    ansm = cal(m);
+    ansnm = cal(n-m);
 
-    while(i != 0) {
-        two += i/2;
-        i/=2;
-    }
-    while(j != 0) {
-        five += j/5;
-        j/=5;
-    }
-    
-    printf("%d\n", get_min(two, five));
-    
+    long long t = ansn.first - ansm.first - ansnm.first;
+    long long f = ansn.second - ansm.second - ansnm.second;
+    printf("%lld\n", get_min(t, f));
 
     return 0;
 }
