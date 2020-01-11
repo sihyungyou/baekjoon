@@ -23,53 +23,53 @@ N개의 수가 주어졌을 때, 네 가지 기본 통계값을 구하는 프로
 
 #include <cstdio>
 #include <algorithm>
-#include <map>
-#include <utility>
 #include <vector>
 
 using namespace std;
 
-bool sortbysec(pair <int, int> &a, pair <int, int> &b) {
-    return a.second > b.second;
-}
-
 int main() {
 
-    int n, i, temp, a, b, c, d;
-    float sum = 0;
-    map<int, int> m;
+    int n, i, temp, b, c, d, maxnum = -4000, minnum = 4000;
+    double sum = 0, a;
     vector<int> v;
-    vector<pair<int, int> > v2;
+    int visited[8001] = { 0, } ;
 
     scanf("%d", &n);
     
     for (i = 0; i < n; i++) {
         scanf("%d", &temp);
         v.push_back(temp);
-        m[temp]++;
+        maxnum = max(maxnum, temp);
+        minnum = min(minnum, temp);
+        visited[temp+4000]++;
         sum += temp;
     }
 
     sort(v.begin(), v.end());
 
-    for (map<int, int>::iterator it = m.begin(); it != m.end(); it++) {
-        v2.push_back(make_pair(it->first, it->second));
-    }
+    int cur = 0;
+    bool second = false;
 
-    sort(v2.begin(), v2.end(), sortbysec);
-    if (v2[0].second == v2[1].second) {
-        c = v2[1].first;
-    } else {
-        c = v2[0].first;
+    for (i = 0; i <= 8000; i++) {
+        if (cur < visited[i]) { 
+            cur = visited[i];
+            c = i;
+            second = false;
+        }
+        else if (cur == visited[i] && !second) {
+            c = i;
+            second = true;
+        }
     }
 
     a = sum / n;
     if (a < 0) a = int(a - 0.5);
     else a = int(a + 0.5);
+    
     b = v[n/2];
     d = v[n-1] - v[0];
 
-    printf("%d\n%d\n%d\n%d\n", a, b, c, d);
+    printf("%.0f\n%d\n%d\n%d\n", a, b, c - 4000, maxnum - minnum);
 
 
     return 0;
