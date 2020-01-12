@@ -1,0 +1,67 @@
+/*
+문제
+가중치 없는 방향 그래프 G가 주어졌을 때, 모든 정점 (i, j)에 대해서, i에서 j로 가는 경로가 있는지 없는지 구하는 프로그램을 작성하시오.
+
+입력
+첫째 줄에 정점의 개수 N (1 ≤ N ≤ 100)이 주어진다. 둘째 줄부터 N개 줄에는 그래프의 인접 행렬이 주어진다. i번째 줄의 j번째 숫자가 1인 경우에는 i에서 j로 가는 간선이 존재한다는 뜻이고, 0인 경우는 없다는 뜻이다. i번째 줄의 i번째 숫자는 항상 0이다.
+
+출력
+총 N개의 줄에 걸쳐서 문제의 정답을 인접행렬 형식으로 출력한다. 정점 i에서 j로 가는 경로가 있으면 i번째 줄의 j번째 숫자를 1로, 없으면 0으로 출력해야 한다.
+*/
+
+#include <cstdio>
+#include <vector>
+
+using namespace std;
+
+int N, i, j;
+int map[100][100];
+int ans[100][100] = { 0, };
+
+void dfs(int src) {
+    int k;
+
+    for (k = 0; k < N; k++) {
+        if (map[src][k] == 1) {
+            printf("traverse [%d, %d]\n", src, k);
+            ans[src][k] = 1;
+            dfs(k);
+        }
+    }
+    return;
+}
+
+int main() {
+
+    int prev = -1;
+    scanf("%d", &N);
+    vector<int> v;
+
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < N; j++) {
+            scanf("%d", &map[i][j]);
+            if (map[i][j] == 1) {
+                ans[i][j] = 1;
+                if (prev != i) {
+                    v.push_back(i);
+                    prev = i;
+                }
+            }
+        }
+    }
+
+    for (i = 0; i < N; i++) {
+        dfs(v[i]);
+    }
+    // for (i = 0; i < v.size(); i++) printf(">> %d\n", v[i]);
+
+
+    // for (i = 0; i < N; i++)  {
+    //     for (j = 0; j < N; j++) {
+    //         printf("%d ", ans[i][j]);
+    //     }
+    //     printf("\n");
+    // }
+
+    return 0;
+}
