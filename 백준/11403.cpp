@@ -10,58 +10,42 @@
 */
 
 #include <cstdio>
-#include <vector>
 
 using namespace std;
 
-int N, i, j;
-int map[100][100];
-int ans[100][100] = { 0, };
-
-void dfs(int src) {
-    int k;
-
-    for (k = 0; k < N; k++) {
-        if (map[src][k] == 1) {
-            printf("traverse [%d, %d]\n", src, k);
-            ans[src][k] = 1;
-            dfs(k);
-        }
-    }
-    return;
-}
-
 int main() {
 
-    int prev = -1;
+    int N, i, j, k;
     scanf("%d", &N);
-    vector<int> v;
+
+    int map[100][100] = { 0, };
+    int ans[100][100] = { 0, };
 
     for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
             scanf("%d", &map[i][j]);
-            if (map[i][j] == 1) {
-                ans[i][j] = 1;
-                if (prev != i) {
-                    v.push_back(i);
-                    prev = i;
+            // ans[i][j] = 0;
+        }
+    }
+
+    for (k = 0; k < N; k++) {
+        for (i = 0; i < N; i++) {
+            for (j = 0; j < N; j++) {
+                if (map[i][j] == 1)  {
+                    ans[i][j] = 1;
+                    continue;
                 }
+                else if (map[i][k] == 1 && map[k][j] == 1) ans[i][j] = 1;
             }
         }
     }
 
+
     for (i = 0; i < N; i++) {
-        dfs(v[i]);
+        for (j = 0; j < N; j++) {
+            printf("%d ", ans[i][j]);
+        }
+        printf("\n");
     }
-    // for (i = 0; i < v.size(); i++) printf(">> %d\n", v[i]);
-
-
-    // for (i = 0; i < N; i++)  {
-    //     for (j = 0; j < N; j++) {
-    //         printf("%d ", ans[i][j]);
-    //     }
-    //     printf("\n");
-    // }
-
-    return 0;
+    return 0;   
 }
