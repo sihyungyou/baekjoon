@@ -18,34 +18,53 @@ int main() {
     int N, i, j, k;
     scanf("%d", &N);
 
-    int map[100][100] = { 0, };
-    int ans[100][100] = { 0, };
+    int map[101][101] = { 0, };
+    int ans[101][101] = { 0, };
 
-    for (i = 0; i < N; i++) {
-        for (j = 0; j < N; j++) {
+    for (i = 1; i <= N; i++) {
+        for (j = 1; j <= N; j++) {
             scanf("%d", &map[i][j]);
-            // ans[i][j] = 0;
         }
     }
 
-    for (k = 0; k < N; k++) {
-        for (i = 0; i < N; i++) {
-            for (j = 0; j < N; j++) {
-                if (map[i][j] == 1)  {
-                    ans[i][j] = 1;
-                    continue;
+    for (k = 1; k <= N; k++) {
+        for (i = 1; i <= N; i++) {
+            for (j = 1; j <= N; j++) {
+                if (k % 2 != 0) {
+                    if (map[i][j] == 1) {
+                        ans[i][j] = 1;
+                        continue;
+                    }
+                    else if (map[i][k] == 1 && map[k][j] == 1) ans[i][j] = 1;
                 }
-                else if (map[i][k] == 1 && map[k][j] == 1) ans[i][j] = 1;
+                else {
+                    if (ans[i][j] == 1) {
+                        map[i][j] = 1;
+                        continue;
+                    }
+                    else if (ans[i][k] == 1 && ans[k][j] == 1) map[i][j] = 1;
+                }
             }
         }
     }
 
-
-    for (i = 0; i < N; i++) {
-        for (j = 0; j < N; j++) {
-            printf("%d ", ans[i][j]);
+    if (N % 2 != 0) {
+        for (i = 1; i <= N; i++) {
+            for (j = 1; j <= N; j++) {
+                printf("%d ", ans[i][j]);
+            }
+            printf("\n");
         }
-        printf("\n");
+        return 0;
     }
-    return 0;   
+    else {
+        for (i = 1; i <= N; i++) {
+            for (j = 1; j <= N; j++) {
+                printf("%d ", map[i][j]);
+            }
+            printf("\n");
+        }
+        return 0;        
+    }
+
 }
