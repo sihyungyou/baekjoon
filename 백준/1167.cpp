@@ -12,13 +12,36 @@
 */
 
 #include <cstdio>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
+int V;
+int distances;
+int tree[100001][100001];
+bool visited[100001] = { false, };
+vector<int> v;
+
+void dfs(int src) {
+    int k;
+
+    visited[src] = true;
+
+    for (k = 1; k <= V; k++) {
+        if (!visited[k] && tree[src][k] > 0) {
+            distances += tree[src][k];
+            dfs(k);
+            v.push_back(distances);
+            distances -= tree[src][k];
+        }
+    }
+    return;
+}
+
 int main() {
     
-    int V, i, j, s, d, dist;
-    tree[100001][100001] = { 0, };
+    int i, s, d, dist;
 
     scanf("%d", &V);
 
@@ -34,13 +57,11 @@ int main() {
         }
     }
 
-    for (i = 1; i <= V; i++) {
-        for (j = 1; j <= V; j++) {
-            printf("%d ", tree[i][j]);
-        }
-        printf("\n");
-    }
+    dfs(1);
+    int ans = 0;
+    for (vector<int>::iterator it = v.begin(); it != v.end(); it++) ans = max(ans, *it);
 
+    printf("%d\n", ans);
 
     return 0;
 }
