@@ -17,12 +17,28 @@ using namespace std;
 
 int main() {
     
-    int V, i;
+    int V, i, j, s, d, dist;
+    tree[100001][100001] = { 0, };
 
     scanf("%d", &V);
 
     for (i = 0; i < V; i++) {
-        
+        scanf("%d", &s);
+        while(1) {
+            scanf("%d", &d);
+            if (d != -1) {
+                scanf("%d", &dist);
+                tree[s][d] = dist;
+            }
+            else break;
+        }
+    }
+
+    for (i = 1; i <= V; i++) {
+        for (j = 1; j <= V; j++) {
+            printf("%d ", tree[i][j]);
+        }
+        printf("\n");
     }
 
 
