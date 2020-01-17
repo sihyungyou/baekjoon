@@ -12,31 +12,26 @@
 */
 
 #include <cstdio>
-#include <vector>
-#include <algorithm>
-
 using namespace std;
 
 int V;
-int distances;
+int dist;
+int farnode;
 int tree[100001][100001];
 bool visited[100001] = { false, };
-vector<int> v;
 
-void dfs(int src) {
-    int k;
+void dfs(int src, int cost) {
 
     visited[src] = true;
 
-    for (k = 1; k <= V; k++) {
-        if (!visited[k] && tree[src][k] > 0) {
-            distances += tree[src][k];
-            dfs(k);
-            v.push_back(distances);
-            distances -= tree[src][k];
-        }
+    if (dist < cost) {
+        dist = cost;
+        farnode = src;
     }
-    return;
+
+    for (int k = 1; k <= V; k++) {
+        if (!visited[src] && tree[src][k] > 0) dfs(k, cost + tree[src][k]);
+    }
 }
 
 int main() {
@@ -57,11 +52,15 @@ int main() {
         }
     }
 
-    dfs(1);
-    int ans = 0;
-    for (vector<int>::iterator it = v.begin(); it != v.end(); it++) ans = max(ans, *it);
+    dfs(1, 0);
+    for (i = 0; i <= V; i++) visited[i] = false;
+    
+    printf("farthest node : %d\ndistance : %d\n", farnode, dist);
 
-    printf("%d\n", ans);
+    dist = 0;
+    dfs(farnode, 0);
+    
+    printf("%d\n", dist);
 
     return 0;
 }
