@@ -18,6 +18,45 @@
 각 테스트 케이스마다, n을 1, 2, 3의 합으로 나타내는 방법의 수를 출력한다.
 */
 
+
+// Recursion
+#include <cstdio>
+using namespace std;
+
+int cnt = 0;
+
+void add(int sum, int goal) {
+  if (sum > goal) return;
+  else if (sum == goal) {
+    cnt++;
+    return;
+  }
+  else {
+    for (int i = 1; i <= 3; i++) {
+      add(sum+i, goal);
+    }
+  }
+}
+
+int main() {
+
+  int t, n;
+
+  scanf("%d", &t);₩
+
+  for (int i = 0; i < t; i++) {
+      cnt = 0;
+      scanf("%d", &n);
+      add(0, n);
+      printf("%d\n", cnt);
+  }
+
+  return 0;
+}
+
+
+/*
+// DP
 #include <cstdio>
 using namespace std;
 
@@ -43,9 +82,11 @@ int main() {
 
   return 0;
 }
+*/
 
 
 /*
+// FOR
 #include <cstdio>
 int main() {
     int t;
