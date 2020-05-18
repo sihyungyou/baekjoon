@@ -18,3 +18,24 @@ N = 3인 경우에 사전순으로 순열을 나열하면 다음과 같다.
 출력
 첫째 줄에 입력으로 주어진 순열의 다음에 오는 순열을 출력한다. 만약, 사전순으로 마지막에 오는 순열인 경우에는 -1을 출력한다.
 */
+
+#include <cstdio>
+#include <algorithm>
+using namespace std;
+
+int main() {
+
+  int n, i;
+
+  scanf("%d", &n);
+  int arr[10000] = { 0, };
+
+  for(i = 0; i < n; i++) scanf("%d", &arr[i]);
+
+  if (next_permutation(arr, arr+n)) for(i = 0; i < n; i++) printf("%d ", arr[i]);
+  else printf("-1");
+
+  printf("\n");
+
+  return 0;
+}

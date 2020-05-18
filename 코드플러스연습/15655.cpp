@@ -2,6 +2,7 @@
 문제
 N개의 자연수와 자연수 M이 주어졌을 때, 아래 조건을 만족하는 길이가 M인 수열을 모두 구하는 프로그램을 작성하시오. N개의 자연수는 모두 다른 수이다.
 N개의 자연수 중에서 M개를 고른 수열
+고른 수열은 오름차순이어야 한다.
 
 입력
 첫째 줄에 N과 M이 주어진다. (1 ≤ M ≤ N ≤ 8)
@@ -13,6 +14,7 @@ N개의 자연수 중에서 M개를 고른 수열
 
 수열은 사전 순으로 증가하는 순서로 출력해야 한다.
 */
+
 
 #include <cstdio>
 #include <algorithm>
@@ -43,11 +45,19 @@ int main() {
   sort(arr, arr+n);
 
   do {
+    bool flag = true;
     vector<int> v;
+
     for (i = 0; i < m; i++) {
+      if (i < m - 1 && arr[i] > arr[i+1]) {
+        flag = false;
+        break;
+      }
       v.push_back(arr[i]);
     }
-    s.insert(v);
+
+    if (flag) s.insert(v);
+
   } while(next_permutation(arr, arr+n));
 
   for (set<vector<int> >::iterator it = s.begin(); it != s.end(); it++) {

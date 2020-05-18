@@ -1,10 +1,11 @@
 /*
 문제
 N개의 자연수와 자연수 M이 주어졌을 때, 아래 조건을 만족하는 길이가 M인 수열을 모두 구하는 프로그램을 작성하시오. N개의 자연수는 모두 다른 수이다.
-N개의 자연수 중에서 M개를 고른 수열
 
+N개의 자연수 중에서 M개를 고른 수열
+같은 수를 여러 번 골라도 된다.
 입력
-첫째 줄에 N과 M이 주어진다. (1 ≤ M ≤ N ≤ 8)
+첫째 줄에 N과 M이 주어진다. (1 ≤ M ≤ N ≤ 7)
 
 둘째 줄에 N개의 수가 주어진다. 입력으로 주어지는 수는 10,000보다 작거나 같은 자연수이다.
 
@@ -33,14 +34,19 @@ void Print_Vector(vector<int> v)
 int main() {
 
   set< vector<int> > s;
-  int arr[8];
-  int n, m, i;
+  vector <int> arr;
+  int n, m, i, j, temp;
 
   scanf("%d %d", &n, &m);
 
-  for (i = 0; i < n; i++) scanf("%d", &arr[i]);
+  for (i = 0; i < n; i++) {
+    scanf("%d", &temp);
+    for (j = 0; j < m; j++) {
+      arr.push_back(temp);
+    }
+  }
 
-  sort(arr, arr+n);
+  sort(arr.begin(), arr.end());
 
   do {
     vector<int> v;
@@ -48,7 +54,7 @@ int main() {
       v.push_back(arr[i]);
     }
     s.insert(v);
-  } while(next_permutation(arr, arr+n));
+  } while(next_permutation(arr.begin(), arr.end()));
 
   for (set<vector<int> >::iterator it = s.begin(); it != s.end(); it++) {
       Print_Vector(*it);
