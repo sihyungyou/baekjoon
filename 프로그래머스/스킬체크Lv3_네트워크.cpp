@@ -18,10 +18,11 @@ int solution(int n, vector<vector<int>> computers) {
             while(!q.empty()) {
                 int temp = q.front();
                 q.pop();
-                visit[temp] = true;
+                /* visit[temp] = true; */
                 for (j = 0; j < n; j++) {
                     if (temp != j && computers[temp][j] == 1 && !visit[j]) {
                         q.push(j);
+                        /* visit[temp] = true;를 여기서 하면 queue push되는 횟수가 훨씬 적어진다. */
                     }
                 }
             }
