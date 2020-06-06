@@ -64,21 +64,30 @@ int n = 0;
 int m = 0;
 int orig[9][9];
 int temp_map[9][9];
+int virus_map[9][9];
 int dy[4] = { -1, 0, 1, 0 };
 int dx[4] = { 0, 1, 0, -1 };
 
-void copymap(int (*a)[9], int (*b)[9]) {
-    int i, j;
-    for (i = 1; i <= n; i++) {
-        for (j = 1; j <= m; j++) {
-            a[i][j] = b[i][j];
-        }
-    }
+void copymap() {
+  int i, j;
+  for (i = 1; i <= n; i++) {
+      for (j = 1; j <= m; j++) {
+          temp_map[i][j] = orig[i][j];
+      }
+  }
+}
+
+void copymap_virus() {
+  int i, j;
+  for (i = 1; i <= n; i++) {
+      for (j = 1; j <= m; j++) {
+          virus_map[i][j] = temp_map[i][j];
+      }
+  }
 }
 
 void bfs() {
-    int virus_map[9][9];
-    copymap(virus_map, temp_map);
+    copymap_virus();
 
     int i, j, k;
     queue<pair<int, int> > q;
@@ -152,7 +161,7 @@ int main() {
     for (i = 1; i <= n; i++) {
         for (j = 1; j<= m; j++) {
             if (orig[i][j] == 0) {
-              copymap(temp_map, orig);
+              copymap();
               temp_map[i][j] = 1;
               dfs(1);
               temp_map[i][j] = 0;
