@@ -114,9 +114,6 @@ bool in_range(int y, int x) {
       else return false;
 }
 
-int dx[4] = { 0, 1, 0, -1};
-int dy[4] = { -1, 0, 1, 0 };
-
 int main() {
 
     int cnt = 0;
@@ -151,7 +148,7 @@ int main() {
             cnt++;
         }
 
-        printf("now : %d %d, cnt : %d\n", now.first, now.second, cnt);
+        // printf("now : %d %d, cnt : %d\n", now.first, now.second, cnt);
         // 현재 위치에서 현재 방향을 기준으로 왼쪽방향부터 차례대로 탐색을 진행한다.
         for (k = 0; k < 4; k++) {
             left = left_cord(now.first, now.second, d);
@@ -165,12 +162,11 @@ int main() {
                 // 왼쪽 방향에 청소할 공간이 없다면, 그 방향으로 회전하고 2번으로 돌아간다.
                 d = turn_left(d);
                 sr++;
-                continue;
             }
         } // for
 
         if (sr == 4) {
-            printf("sr == 4\n");
+            // printf("sr == 4\n");
 
             // 네 방향 모두 청소가 이미 되어있거나 벽이면서, 뒤쪽 방향이 벽이라 후진도 할 수 없는 경우에는 작동을 멈춘다.
             back = go_back(now.first, now.second, d);
