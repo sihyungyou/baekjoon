@@ -10,7 +10,9 @@ vector<vector<string> > t;
 vector<string> answer;
 int len;
 
-void dfs(int idx) {
+void dfs(int idx, int cnt) {
+    if (cnt == len) return;
+
     cout << "visiting " << t[idx][0] << endl;
     int i;
     bool flag = false;
@@ -22,7 +24,7 @@ void dfs(int idx) {
         if (t[i][0].compare(t[idx][1]) == 0 && !used[i]) {
             cout << "going to " << t[i][0] << endl;
             flag = true;
-            dfs(i);
+            dfs(i, cnt+1);
         }
     }
     if (!flag) {
@@ -55,7 +57,7 @@ vector<string> solution(vector<vector<string>> tickets) {
 
     // 0 -> t.size() dfs 시작
     for (i = 0; i < len; i++) {
-        if (!used[i]) dfs(i);
+        if (!used[i]) dfs(i, 0);
     }
 
     return answer;
