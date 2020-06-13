@@ -3,7 +3,6 @@ using namespace std;
 
 int n, m, cnt = 0;
 int map[50][50];
-bool flag = true;
 
 int nexty[4] = {-1, 0, 1, 0};
 int nextx[4] = {0, 1, 0, -1};
@@ -33,9 +32,8 @@ void dfs(int y, int x, int d) {
         }
     }
 
-    if (map[y+backy[d]][x+backx[d]] == 1) flag = false;
-    else if (flag) dfs(y+backy[d], x+backx[d], d);
-
+    if (map[y+backy[d]][x+backx[d]] == 1) return;
+    else dfs(y+backy[d], x+backx[d], d);
 }
 
 int main() {
