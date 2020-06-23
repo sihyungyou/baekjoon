@@ -7,16 +7,50 @@
 
 출력
 첫째 줄에 x월 y일이 무슨 요일인지에 따라 SUN, MON, TUE, WED, THU, FRI, SAT중 하나를 출력한다.
-*/
+ */
 
-#include <cstdio>
+#include <string>
+#include <iostream>
 
 using namespace std;
 
 int main() {
 
-    int x, y, month, day;
-    scanf("%d %d", &x, &y);
+    string week[7] = { "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN" };
+    int x, y, month, day, cnt = 0;
+    cin >> x >> y;
+
+    month = 1;
+    day = 1;
+
+    while(1) {
+        if (month == x && day == y) break;
+
+        if (month == 2 && day > 28) {
+            // up to 28
+            day = 1;
+            month++;
+            continue;
+        }
+        else if ( (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) && (day > 31) ) {
+            // up to 31
+            day = 1;
+            month++;
+            continue;
+        }
+        else if ( (month == 4 || month == 6 || month == 9 || month == 11) && (day > 30) ) {
+            // up to 30
+            day = 1;
+            month++;
+            continue;
+        }
+        day++;
+        cnt++;
+    }
+
+
+    int idx = cnt % 7;
+    cout << week[idx] << endl;
 
     return 0;
 }
