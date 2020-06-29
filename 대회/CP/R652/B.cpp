@@ -57,123 +57,12 @@ outputCopy
 #include <string>
 using namespace std;
 
-string compare;
-
-bool comp(string a, string b) {
-    if (a.size() == b.size()) return a < b;
-    return a.size() < b.size();
-}
-
-void dfs(string s, int len) {
-
-    if (comp(s, compare)) {
-        compare = s;
-    }
-
-    // cout << "compare : " << compare << endl;
-
-    int i;
-    string str;
-
-    for (i = 0; i < len - 1; i++) {
-      str = s;
-        if (s[i] == '1' && s[i+1] == '0') {
-            if (i + 2 < len && s[i+2] == '0') {
-                dfs(str.erase(i + 1, 1), len - 1);
-            }
-            else if (i + 2 < len && s[i+2] == '1') {
-                dfs(str.erase(i, 1), len - 1);
-            }
-            else if (i - 1 >= 0 && s[i-1] == '0') {
-                dfs(str.erase(i + 1, 1), len - 1);
-            }
-            else if (i - 1 >= 0 && s[i-1] == '1') {
-                dfs(str.erase(i, 1), len - 1);
-            }
-            else {
-                dfs(str.erase(i + 1, 1), len - 1);
-                str = s;
-                dfs(str.erase(i, 1), len - 1);
-            }
-            i++;
-        }
-    }
-
-}
-
 int main() {
 
-    int t, i, n;
 
-    cin >> t;
 
-    for (i = 0; i < t; i++) {
-        string temp;
-        cin >> n;
-        cin >> temp;
-        compare = temp;
-        dfs(temp, n);
-        cout << compare << endl;
-    }
+
+
 
     return 0;
 }
-
-/*
-#include <iostream>
-#include <string>
-#include <vector>
-#include <algorithm>
-using namespace std;
-
-string compare;
-
-bool comp(string a, string b) {
-    if (a.size() == b.size()) return a < b;
-    return a.size() < b.size();
-}
-
-void dfs(string s, int len) {
-
-    if (comp(s, compare)) {
-        compare = s;
-    }
-    // cout << "compare : " << compare << endl;
-
-    int i;
-    string str;
-
-    for (i = 0; i < len - 1; i++) {
-      str = s;
-        if (s[i] == '1' && s[i+1] == '0') {
-            // dfs erasing 1
-            dfs(str.erase(i, 1), len - 1);
-
-            str = s;
-            // dfs erasing 0
-            dfs(str.erase(i + 1, 1), len - 1);
-        }
-    }
-
-
-}
-
-int main() {
-
-    int t, i, n;
-
-    cin >> t;
-
-    for (i = 0; i < t; i++) {
-        string temp;
-        cin >> n;
-        cin >> temp;
-        compare = temp;
-        dfs(temp, n);
-        cout << compare << endl;
-    }
-
-    return 0;
-}
-
-*/
