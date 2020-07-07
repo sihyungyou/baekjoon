@@ -13,46 +13,57 @@
 첫째 줄에 이동 가능한 경로의 수 H를 출력한다. 모든 입력에 대하여 H는 10억 이하의 음이 아닌 정수이다.
 */
 
-#include <cstdio>
+// dfs로만 하면 안됨 -> 시간초과!!
+// 그래서 dfs + dp를 써야하는 거구나!
 
+#include <cstdio>
 using namespace std;
 
-int get_max(int a, int b) { return a > b ? a : b; }
+int dx[4] = { 1, 0, -1, 0};
+int dy[4] = { 0, 1, 0, -1};
+int arr[501][501];
+int dp[501][501];
+int n, m, cnt;
 
-int main() {
+int dfs(int y, int x) {
+    int i, j, k;
 
-    int n, m, i, j, k, t, l, ans, cnt;
-
-    int dx[4] = { 1, 0, -1, 0};
-    int dy[4] = { 0, 1, 0, -1};
-    int arr[501][501] = { 10001, };
-    int dp[501][501] = { 0, };
-
-    scanf("%d %d", &m, &n);
-
-    for (i = 1; i <= m; i++) for (j = 1; j <= n; j++) scanf("%d", &arr[i][j]);
-
-    for (i = 1; i <= m; i++) {
-        for (j = 1; j <= n; j++) {
-            cnt = 0; 
-            for (k = 0; k < 4; k++) {
-                if (arr[i][j] > arr[i+dy[k]][j+dx[k]]) {
-                    cnt++;
-                    dp[i+dy[k]][j+dx[k]] = get_max(dp[i+dy[k]][j+dx[k]], dp[i][j] + cnt);
-                    printf("===============\n");
-                    for (t = 1; t <= m; t++) {
-                        for (l = 1; l <= n; l++) {
-                            printf("%d ", dp[t][l]);
-                        }
-                        printf("\n");
-                    }
-                    printf("===============\n");
-                }
+    if (y == m && x == n) {
+        return 1;
+    }
+    else if (dp[y][x] == -1) {
+        dp[y][x] = 0;
+        for (k = 0; k < 4; k++) {
+            int newy = y + dy[k];
+            int newx = x + dx[k];
+            if (newx > 0 && newx <= n && newy > 0 && newy <= m && arr[y][x] > arr[newy][newx]) {
+                dp[y][x] += dfs(newy, newx);
             }
         }
     }
+    return dp[y][x];
+}
 
+int main() {
 
-    printf("%d\n", dp[m][n]);
+    scanf("%d %d", &m, &n);
+
+    int i, j, k;
+
+    for (i = 0; i <= m; i++) {
+        for (j = 0; j <= n; j++)  {
+            dp[i][j] = -1;
+            arr[i][j] = 10001;
+        }
+    }
+
+    for (i = 1; i <= m; i++) {
+        for (j = 1; j <= n; j++) {
+            scanf("%d", &arr[i][j]);
+        }
+    }
+
+    printf("%d\n", dfs(1,1));
+
     return 0;
 }
