@@ -13,25 +13,25 @@ N개의 정수로 이루어진 수열이 있을 때, 크기가 양수인 부분�
 
 using namespace std;
 
-int n, s, sum, cnt;
+int n, s, cnt;
 int arr[20];
 
-void bfs(int i, int sum) {
+void dfs(int i, int sum) {
     if (i == n) return;
     if (sum+arr[i] == s) cnt++;
-    
-    bfs(i+1, sum);
-    bfs(i+1, sum + arr[i]);
+
+    dfs(i+1, sum);
+    dfs(i+1, sum + arr[i]);
 }
 
 int main() {
-    
+
     scanf("%d %d", &n, &s);
     for (int i = 0; i < n; i++) scanf("%d", &arr[i]);
-    
+
     cnt = 0;
-    bfs(0, 0);
-    
+    dfs(0, 0);
+
     printf("%d\n", cnt);
 
     return 0;
