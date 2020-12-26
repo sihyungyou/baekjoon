@@ -4,7 +4,7 @@
 
 using namespace std;
 
-#define MAX_DIST 100001
+#define MAX_DIST 10000000
 
 int main() {
     int cities[101][101];
@@ -26,7 +26,7 @@ int main() {
 
     // 플로이드 와샬 알고리즘
     for (int i = 1; i <= n; i++) {
-        // i를 거쳐가는데
+        // i를 거쳐가는 경우
         for (int j = 1; j <= n; j++) {
             // j 노드들에 대해
             if (i != j) {
