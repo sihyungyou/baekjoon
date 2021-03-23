@@ -13,23 +13,31 @@ N개의 수가 주어졌을 때, 이를 오름차순으로 정렬하는 프로�
 
 using namespace std;
 
-int C[10001] = {0, };
-int main () {
+#define MAXN 10000000
 
-    int N, i, j, temp, max;
+int counting[10001] = { 0, };
 
-    scanf("%d", &N);
+int main() {
+    int n;
+    scanf("%d", &n);
 
-    max = 0;
-    for(i = 0; i < N; i++) {
+    int max = 0;
+    for (int i = 0; i < n; i++) {
+        int temp;
         scanf("%d", &temp);
-        C[temp]++;
-        if (temp > max) max = temp;
+
+        // 최대값을 미리 구하고,
+        if (max < temp) max = temp;
+        // 계수 카운트
+        counting[temp]++;
     }
 
-    for (i = 0; i <= max; i++) {
-        for(j = 0; j < C[i]; j++) { printf("%d ", i); }
+    for (int i = 0; i <= max; i++) {
+        // 메모리 효율을 위해 배열을 선언하기보다 counting 개수만큼 출력
+        for (int j = 0; j < counting[i]; j++) {
+            printf("%d\n", i);
+        }
     }
-    printf("\n");
+
     return 0;
 }

@@ -10,25 +10,73 @@ N개의 수가 주어졌을 때, 이를 오름차순으로 정렬하는 프로�
 */
 
 #include <cstdio>
-#include <algorithm>
-#include <vector>
 
 using namespace std;
 
+#define MAXN 1000
+
+int n;
+int arr[MAXN];
+
+void swap(int * a, int * b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void bubble_sort() {
+    // 인접한 두 수를 비교하여 swap 하는 과정 한 번을 할 때마다 가장 큰 수가 특정된다.
+    // 그러므로 이 과정을 n번 반복하면 정렬이 완성된다.
+
+    for (int i = 0; i < n; i++) {
+        // 인접한 두 수를 0부터 끝까지 비교하며 위치를 바꾼다 (거품처럼 swapping이 일어날 것)
+        for (int j = 0; j < n - 1; j++) {
+            if (arr[j] > arr[j + 1]) swap(&arr[j], &arr[j + 1]);
+        }
+    }
+}
+
+void selection_sort() {
+    for (int i = 0; i < n; i++) {
+        int idx = i;
+        for (int j = i; j < n; j++) {
+            // 가장 작은 수를 "선택"한다
+            if (arr[j] < arr[idx]) {
+                idx = j;
+            }
+        }
+        // 선택한 가장 작은 수를 i자리(가장 앞 자리)에 갖다 놓는다
+        swap(&arr[i], &arr[idx]);
+    }
+}
+
+void insertion_sort() {
+    for (int i = 0; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+
+        while(j >= 0 && key < arr[j]) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+void print_arr() {
+    for (int i = 0; i < n; i++) printf("%d\n", arr[i]);
+}
+
 int main() {
 
-    int n, i, temp;
-    vector<int> v;
     scanf("%d", &n);
+    for (int i = 0; i < n; i++) scanf("%d", &arr[i]);
 
-    for (i = 0; i < n; i++) {
-        scanf("%d", &temp);
-        v.push_back(temp);
-    }
+    // bubble_sort();
+    // selection_sort();
+    insertion_sort();
 
-    sort(v.begin(), v.end());
-
-    for (i = 0; i < v.size(); i++) printf("%d\n", v[i]);
+    print_arr();
 
     return 0;
 }
